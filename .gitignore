@@ -7,5 +7,7 @@ logs/
 .project
 .externalToolBuilders
 *~
+.recommenders/
+
 .idea
 *.iml
