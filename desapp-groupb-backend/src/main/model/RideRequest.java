@@ -3,18 +3,24 @@ package model;
 import org.joda.time.DateTime;
 
 public class RideRequest {
-    private User userCreated;
+    private User user;
     private DateTime requestDate;
     private Ride ride;
-    private boolean status;
+    private static String ACCEPTED = "accepted";
+    private static String REJECTED = "rejected";
+    private static String PENDING = "pending";
+    private String status;
 
-
-    public User getUserCreated(){
-        return userCreated;
+    public RideRequest(){
+        status = PENDING;
     }
 
-    public void setUserCreated(User userCreated) {
-        this.userCreated = userCreated;
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setRequestDate(DateTime requestDate) {
@@ -25,14 +31,6 @@ public class RideRequest {
         return requestDate;
     }
 
-    public int getHour() {
-        return requestDate.getHourOfDay();
-    }
-
-    public int getDay() {
-        return requestDate.getDayOfMonth();
-    }
-
     public void setRide(Ride ride) {
         this.ride = ride;
     }
@@ -41,15 +39,23 @@ public class RideRequest {
         return ride;
     }
 
-    public void accept() {
-        status = true;
+    public void accepted() {
+        status = ACCEPTED;
     }
 
-    public boolean getStatus() {
-        return status;
+    public void rejected() {
+        status = REJECTED;
     }
 
-    public void reject() {
-        status = false;
+    public boolean isAccepted() {
+        return status.equals(ACCEPTED);
+    }
+
+    public boolean isRejected() {
+        return status.equals(REJECTED);
+    }
+
+    public boolean isPending() {
+        return status.equals(PENDING);
     }
 }

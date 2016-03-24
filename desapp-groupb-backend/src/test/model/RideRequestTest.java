@@ -5,10 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-
 
 public class RideRequestTest {
     RideRequest rideRequest;
@@ -21,8 +19,8 @@ public class RideRequestTest {
     @Test
     public void itShouldAssertTheRideRequestHasUserRequest(){
         User user = mock(User.class);
-        rideRequest.setUserCreated(user);
-        assertEquals(rideRequest.getUserCreated(), user);
+        rideRequest.setUser(user);
+        assertEquals(rideRequest.getUser(), user);
     }
 
     @Test
@@ -30,8 +28,6 @@ public class RideRequestTest {
         DateTime requestDate = new DateTime(2016, 4, 25, 12, 0);
         rideRequest.setRequestDate(requestDate);
         assertEquals(rideRequest.getRequestDate(), requestDate);
-        assertEquals(rideRequest.getHour(), requestDate.getHourOfDay());
-        assertEquals(rideRequest.getDay(), requestDate.getDayOfMonth());
     }
 
     @Test
@@ -42,14 +38,19 @@ public class RideRequestTest {
     }
 
     @Test
+    public void itShouldAssertTheInitialRideRequestIsPending(){
+        assertTrue(rideRequest.isPending());
+    }
+
+    @Test
     public void itShouldAssertTheRideRequestIsAccept(){
-        rideRequest.accept();
-        assertTrue(rideRequest.getStatus());
+        rideRequest.accepted();
+        assertTrue(rideRequest.isAccepted());
     }
 
     @Test
     public void itShouldAssertTheRideRequestIsReject(){
-        rideRequest.reject();
-        assertFalse(rideRequest.getStatus());
+        rideRequest.rejected();
+        assertTrue(rideRequest.isRejected());
     }
 }
