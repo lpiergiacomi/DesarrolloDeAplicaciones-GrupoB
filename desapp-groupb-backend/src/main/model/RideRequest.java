@@ -39,11 +39,11 @@ public class RideRequest {
         return ride;
     }
 
-    public void accepted() {
+    public void accept() {
         status = ACCEPTED;
     }
 
-    public void rejected() {
+    public void reject() {
         status = REJECTED;
     }
 
