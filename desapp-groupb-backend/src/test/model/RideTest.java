@@ -9,7 +9,7 @@ import static org.mockito.Mockito.mock;
 public class RideTest {
 
     @Test
-    public void shouldAssertTheRideisCreatedWithUser(){
+    public void testItShouldAssertTheRideIsCreatedWithUser(){
         User drive = mock(User.class);
         Route route = mock(Route.class);
         DateTime date = new DateTime();
