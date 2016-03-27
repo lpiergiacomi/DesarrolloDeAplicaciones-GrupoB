@@ -44,13 +44,13 @@ public class RideRequestTest {
 
     @Test
     public void itShouldAssertTheRideRequestIsAccept(){
-        rideRequest.accepted();
+        rideRequest.accept();
         assertTrue(rideRequest.isAccepted());
     }
 
     @Test
     public void itShouldAssertTheRideRequestIsReject(){
-        rideRequest.rejected();
+        rideRequest.reject();
         assertTrue(rideRequest.isRejected());
     }
 }

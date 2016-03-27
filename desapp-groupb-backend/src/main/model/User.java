@@ -6,14 +6,16 @@ import java.util.List;
 public class User {
 
 	private Vehicle vehicle;
-	private List<Route> routes = new ArrayList<Route>();
-	private List<RideRequest> rideRequests = new ArrayList<RideRequest>();
-	private int rate;
 	private boolean hasOneBadRate;
+	public Role currentRole;
+	public Driver driverRole;
+	public Passenger passengerRole;
 
 	public User(){
-		rate = 0;
 		hasOneBadRate = false;
+		driverRole = new Driver();
+		passengerRole = new Passenger();
+		currentRole = passengerRole;
 	}
 
 	public void setVehicle(Vehicle vehicle) {
@@ -21,15 +23,15 @@ public class User {
 	}
 
 	public List<Route> getRoutes(){
-		return routes;
+		return driverRole.getRoutes();
 	}
 
 	public List<RideRequest> getRideRequests(){
-		return rideRequests;
+		return currentRole.getRideRequests();
 	}
 
 	public int getRate(){
-		return rate;
+		return currentRole.getRate();
 	}
 
 	public boolean hasVehicle() {
@@ -37,11 +39,11 @@ public class User {
 	}
 
 	public void addRoute(Route route){
-		routes.add(route);
+		driverRole.addRoute(route);
 	}
 
 	public void addRideRequest(RideRequest rideRequest){
-		rideRequests.add(rideRequest);
+		currentRole.addRideRequest(rideRequest);
 	}
 
 	public void acceptRequest(RideRequest rideRequest) throws Exception{
@@ -69,14 +71,26 @@ public class User {
 	}
 
 	public void receiveGoodRate() {
-		rate += 500;
+		currentRole.receiveGoodRate();
 	}
 
 	public void receiveBadRate(){
-		if(hasOneBadRate){
-			rate -=1000;
-		}else{
-			hasOneBadRate = true;
-		}
+		currentRole.receiveBadRate();
+	}
+
+	public boolean isPassengerRoleActivated() {
+		return currentRole.isPassenger();
+	}
+
+	public boolean isDriverRoleActivated() {
+		return currentRole.isDriver();
+	}
+
+	public void switchToDriver(){
+		currentRole = driverRole;
+	}
+
+	public void switchToPassenger(){
+		currentRole = passengerRole;
 	}
 }
