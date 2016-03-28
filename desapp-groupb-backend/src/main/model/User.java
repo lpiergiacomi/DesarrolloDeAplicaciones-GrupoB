@@ -6,20 +6,34 @@ import java.util.List;
 public class User {
 
 	private Vehicle vehicle;
-	private List<Route> routes = new ArrayList<Route>();
-	private List<RideRequest> rideRequests = new ArrayList<RideRequest>();
-	private TalkManager manargerTalk = new TalkManager(this);
+	private boolean hasOneBadRate;
+	public Role currentRole;
+	public Driver driverRole;
+	public Passenger passengerRole;
+	private TalkManager managerTalk 
+
+	public User(){
+		hasOneBadRate = false;
+		driverRole = new Driver();
+		passengerRole = new Passenger();
+		currentRole = passengerRole;
+		managerTalk= new TalkManager(this);
+	}
 
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
 
 	public List<Route> getRoutes(){
-		return routes;
+		return driverRole.getRoutes();
 	}
 
 	public List<RideRequest> getRideRequests(){
-		return rideRequests;
+		return currentRole.getRideRequests();
+	}
+
+	public int getRate(){
+		return currentRole.getRate();
 	}
 
 	public boolean hasVehicle() {
@@ -27,24 +41,71 @@ public class User {
 	}
 
 	public void addRoute(Route route){
-		routes.add(route);
+		driverRole.addRoute(route);
 	}
 
 	public void addRideRequest(RideRequest rideRequest){
-		rideRequests.add(rideRequest);
+		currentRole.addRideRequest(rideRequest);
 	}
 
 	public void sendMenssageTo(User user, String message) {
-		manargerTalk.sendMessageTo(user, message);
+		managerTalk.sendMessageTo(user, message);
 	}
 
 	public void addTalk(Talk talk) {
-		manargerTalk.addTalk(talk);
+		managerTalk.addTalk(talk);
 	}
 
 	public List<Talk> getTalks(){
-		return manargerTalk.getTalks();
+		return managerTalk.getTalks();
 	}
 
 
+	public void acceptRequest(RideRequest rideRequest) throws Exception{
+		this.handleRequest(rideRequest);
+		rideRequest.accept();
+	}
+
+	public void rejectRequest(RideRequest rideRequest) throws Exception{
+		this.handleRequest(rideRequest);
+		rideRequest.reject();
+	}
+
+	private void handleRequest(RideRequest rideRequest) throws Exception {
+		if(!getRideRequests().contains(rideRequest)){
+			throw new Exception("This ride request does not belong to this user");
+		}
+	}
+
+	public void giveGoodRate(User user) {
+		user.receiveGoodRate();
+	}
+
+	public void giveBadRate(User user) {
+		user.receiveBadRate();
+	}
+
+	public void receiveGoodRate() {
+		currentRole.receiveGoodRate();
+	}
+
+	public void receiveBadRate(){
+		currentRole.receiveBadRate();
+	}
+
+	public boolean isPassengerRoleActivated() {
+		return currentRole.isPassenger();
+	}
+
+	public boolean isDriverRoleActivated() {
+		return currentRole.isDriver();
+	}
+
+	public void switchToDriver(){
+		currentRole = driverRole;
+	}
+
+	public void switchToPassenger(){
+		currentRole = passengerRole;
+	}
 }
