@@ -15,8 +15,5 @@ public class PrivateTalk extends Talk{
         return conversation;
     }
 
-    private boolean isUserInConversation(User user) {
-        return userTransmitter.equals(user) || userReceiver.equals(user);
-    }
 
 }

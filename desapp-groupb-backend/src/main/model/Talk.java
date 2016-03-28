@@ -1,5 +1,6 @@
 package model;
 
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,4 +21,7 @@ public abstract class Talk {
 
     public abstract List<String> getConversation(User user) throws Exception;
 
+    public boolean isUserInConversation(User user) {
+        return userTransmitter.equals(user) || userReceiver.equals(user);
+    }
 }
