@@ -10,7 +10,7 @@ public class User {
 	public Role currentRole;
 	public Driver driverRole;
 	public Passenger passengerRole;
-	private TalkManager managerTalk 
+	private TalkManager managerTalk;
 
 	public User(){
 		hasOneBadRate = false;
