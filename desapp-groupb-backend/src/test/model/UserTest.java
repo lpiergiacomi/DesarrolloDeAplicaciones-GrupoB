@@ -42,29 +42,4 @@ public class UserTest {
         assertEquals(user.getRideRequests().size(), 1);
     }
 
-    @Test
-    public void itShouldSendFirstMessageForAnotherUser() {
-        User anotherUser = new User();
-        user.sendMenssageTo(anotherUser, "Hello World");
-        assertEquals(user.getConversation().size(), 1);
-        assertEquals(anotherUser.getConversation().size(), 1);
-    }
-
-    @Test
-    public void itShouldSendMessageForAnotherUserWithConversationStarted() {
-        User anotherUser = new User();
-        user.sendMenssageTo(anotherUser, "Hello World");
-        user.sendMenssageTo(anotherUser, "Bye World");
-        assertEquals(user.getConversation().size(), 1);
-        assertEquals(anotherUser.getConversation().size(), 1);
-    }
-
-    @Test
-    public void itShouldSSendTwoMessageUsers() {
-        User anotherUser = new User();
-        User otherUser = new User();
-        user.sendMenssageTo(anotherUser, "Hello World");
-        user.sendMenssageTo(otherUser, "Bye World");
-        assertEquals(user.getConversation().size(), 2);
-    }
 }
