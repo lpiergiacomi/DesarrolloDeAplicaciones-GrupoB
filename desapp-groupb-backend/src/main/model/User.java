@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -48,8 +47,12 @@ public class User {
 		currentRole.addRideRequest(rideRequest);
 	}
 
-	public void sendMenssageTo(User user, String message) {
-		managerTalk.sendMessageTo(user, message);
+	public void sendPublicMenssageTo(User user, String message) {
+		managerTalk.sendMessageTo(user, message, false);
+	}
+
+	public void sendPrivateMenssageTo(User user, String message) {
+		managerTalk.sendMessageTo(user, message, true);
 	}
 
 	public void addTalk(Talk talk) {
@@ -59,7 +62,6 @@ public class User {
 	public List<Talk> getTalks(){
 		return managerTalk.getTalks();
 	}
-
 
 	public void acceptRequest(RideRequest rideRequest) throws Exception{
 		this.handleRequest(rideRequest);

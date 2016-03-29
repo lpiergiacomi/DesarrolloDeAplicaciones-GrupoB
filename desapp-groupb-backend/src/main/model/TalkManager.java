@@ -12,10 +12,10 @@ public class TalkManager {
         this.owner = owner;
     }
 
-    public void sendMessageTo(User user, String message) {
+    public void sendMessageTo(User user, String message, boolean isPrivate) {
         Talk talk;
         if(!hasConversationForUser(user)) {
-            talk = createNewTalk(user);
+            talk = createNewTalk(user, isPrivate);
         }else {
             talk = getMyConversationFor(user).get(0);
         }
@@ -27,8 +27,13 @@ public class TalkManager {
                 .collect(Collectors.toList());
     }
 
-    private Talk createNewTalk(User user) {
-        Talk talk = new PublicTalk(owner, user);
+    private Talk createNewTalk(User user, boolean isPrivate) {
+        Talk talk;
+        if (isPrivate){
+            talk = new PublicTalk(owner, user);
+        }else{
+            talk = new PrivateTalk(owner, user);
+        }
         user.addTalk(talk);
         addTalk(talk);
         return talk;
