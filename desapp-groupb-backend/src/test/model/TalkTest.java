@@ -12,7 +12,6 @@ public class TalkTest {
     PublicTalk publicTalk;
     PrivateTalk privateTalk;
 
-
     @Before
     public void setUp() {
         userTransmitter = mock(User.class);
@@ -33,20 +32,20 @@ public class TalkTest {
     }
 
     @Test
-    public void itShouldAssertPublicTalkGetConversacionForAllUser(){
+    public void itShouldAssertPublicTalkGetConversationForAllUser(){
         User anotherUser = mock(User.class);
         publicTalk.addMessage("My First Message");
         assertEquals(publicTalk.getConversation(anotherUser).size(), 1);
     }
 
     @Test
-    public void itShouldAssertPrivateTalkGetConversacionOnlyForUsersWhoAreInsideIt()throws Exception{
+    public void itShouldAssertPrivateTalkGetConversationOnlyForUsersWhoAreInsideIt()throws Exception{
         privateTalk.addMessage("My First Message");
         assertEquals(privateTalk.getConversation(userReceiver).size(), 1);
     }
 
     @Test(expected=Exception.class)
-    public void itShouldAssertExceptionPrivateTalkGetConversacionOnlyForUsersWhoAreInsideIt()throws Exception{
+    public void itShouldAssertExceptionPrivateTalkGetConversationOnlyForUsersWhoAreInsideIt()throws Exception{
         User anotherUser = mock(User.class);
         privateTalk.addMessage("My First Message");
         privateTalk.getConversation(anotherUser);

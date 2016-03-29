@@ -15,5 +15,4 @@ public class PrivateTalk extends Talk{
         return conversation;
     }
 
-
 }

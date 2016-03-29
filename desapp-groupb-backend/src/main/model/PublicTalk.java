@@ -11,4 +11,5 @@ public class PublicTalk extends Talk{
     public List<String> getConversation(User user) {
         return conversation;
     }
+
 }

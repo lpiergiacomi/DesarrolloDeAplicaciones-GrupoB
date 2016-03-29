@@ -112,4 +112,22 @@ public class UserTest {
 		assertFalse(user.isDriverRoleActivated());
 		assertTrue(user.isPassengerRoleActivated());
 	}
+
+	@Test
+	public void itShouldSendPrivateMessageForAnotherUser() {
+		User anotherUser = new User();
+		String message = "Hello World";
+		user.sendPrivateMenssageTo(anotherUser, message);
+		assertEquals(user.getTalks().size(), 1);
+		assertEquals(anotherUser.getTalks().size(), 1);
+	}
+
+	@Test
+	public void itShouldSendPublicMessageForAnotherUser() {
+		User anotherUser = new User();
+		String message = "Hello World";
+		user.sendPublicMenssageTo(anotherUser, message);
+		assertEquals(user.getTalks().size(), 1);
+		assertEquals(anotherUser.getTalks().size(), 1);
+	}
 }
