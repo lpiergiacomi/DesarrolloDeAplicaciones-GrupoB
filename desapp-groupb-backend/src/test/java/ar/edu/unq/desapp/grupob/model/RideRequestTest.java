@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupob.model;
+package model;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -43,14 +43,14 @@ public class RideRequestTest {
     }
 
     @Test
-    public void itShouldAssertTheRideRequestIsAccept(){
-        rideRequest.accept();
+    public void itShouldAssertTheRideRequestIsAccepted(){
+        rideRequest.accepted();
         assertTrue(rideRequest.isAccepted());
     }
 
     @Test
-    public void itShouldAssertTheRideRequestIsReject(){
-        rideRequest.reject();
+    public void itShouldAssertTheRideRequestIsRejected(){
+        rideRequest.rejected();
         assertTrue(rideRequest.isRejected());
     }
 }
