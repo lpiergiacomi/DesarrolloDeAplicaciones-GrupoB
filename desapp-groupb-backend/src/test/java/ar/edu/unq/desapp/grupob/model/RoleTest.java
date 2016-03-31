@@ -1,4 +1,4 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
