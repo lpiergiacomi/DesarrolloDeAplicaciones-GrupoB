@@ -9,14 +9,14 @@ public class User {
 	public Role currentRole;
 	public Driver driverRole;
 	public Passenger passengerRole;
-	private TalkManager managerTalk;
+	private TalkManager talkManager;
 
 	public User(){
 		hasOneBadRate = false;
 		driverRole = new Driver();
 		passengerRole = new Passenger();
 		currentRole = passengerRole;
-		managerTalk= new TalkManager(this);
+		talkManager = new TalkManager(this);
 	}
 
 	public void setVehicle(Vehicle vehicle) {
@@ -48,19 +48,19 @@ public class User {
 	}
 
 	public void sendPublicMenssageTo(User user, String message) {
-		managerTalk.sendMessageTo(user, message, false);
+		talkManager.sendMessageTo(user, message, false);
 	}
 
 	public void sendPrivateMenssageTo(User user, String message) {
-		managerTalk.sendMessageTo(user, message, true);
+		talkManager.sendMessageTo(user, message, true);
 	}
 
 	public void addTalk(Talk talk) {
-		managerTalk.addTalk(talk);
+		talkManager.addTalk(talk);
 	}
 
 	public List<Talk> getTalks(){
-		return managerTalk.getTalks();
+		return talkManager.getTalks();
 	}
 
 	public void acceptRequest(RideRequest rideRequest) throws Exception{

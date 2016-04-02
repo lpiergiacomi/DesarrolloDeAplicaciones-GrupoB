@@ -18,11 +18,12 @@ public class TalkManagerTest {
     }
 
     @Test
-    public void itShouldSendFirstMessageForAnotherUser() {
+    public void itShouldCreateATalkForUser() {
         User anotherUser = mock(User.class);
-        String message = "Hello World";
-        talkManager.sendMessageTo(anotherUser, message, isPrivate);
-        assertEquals(talkManager.getTalks().size(), 1);
+        User otherUser = mock(User.class);
+        talkManager.sendMessageTo(anotherUser, "Hello World", isPrivate);
+        talkManager.sendMessageTo(otherUser, "Bye World", isPrivate);
+        assertEquals(talkManager.getTalks().size(), 2);
     }
 
     @Test
@@ -33,12 +34,4 @@ public class TalkManagerTest {
         assertEquals(talkManager.getTalks().size(), 1);
     }
 
-    @Test
-    public void itShouldSendTwoMessageUsers() {
-        User anotherUser = mock(User.class);
-        User otherUser = mock(User.class);
-        talkManager.sendMessageTo(anotherUser, "Hello World", isPrivate);
-        talkManager.sendMessageTo(otherUser, "Bye World", isPrivate);
-        assertEquals(talkManager.getTalks().size(), 2);
-    }
 }

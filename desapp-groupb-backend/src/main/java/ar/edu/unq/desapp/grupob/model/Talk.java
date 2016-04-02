@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Talk {
-    protected final User userReceiver;
-    protected final User userTransmitter;
+    protected final User receiver;
+    protected final User sender;
     protected List<String> conversation = new ArrayList<String>();
 
-    public Talk(User userTransmitter, User userReceiver){
-        this.userTransmitter = userTransmitter;
-        this.userReceiver = userReceiver;
+    public Talk(User sender, User receiver){
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
     public void addMessage(String message) {
@@ -21,6 +21,6 @@ public abstract class Talk {
     public abstract List<String> getConversation(User user) throws Exception;
 
     public boolean isUserInConversation(User user) {
-        return userTransmitter.equals(user) || userReceiver.equals(user);
+        return sender.equals(user) || receiver.equals(user);
     }
 }
