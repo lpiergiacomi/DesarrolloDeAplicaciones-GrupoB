@@ -1,6 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
-public abstract class  Exchangeable {
+public class Exchangeable {
     private String name;
     private int stock;
     private int cost;
@@ -23,6 +23,4 @@ public abstract class  Exchangeable {
         stock -= subtractNumber;
     }
 
-    public abstract boolean isProduct();
-    public abstract boolean isVoucher();
 }
