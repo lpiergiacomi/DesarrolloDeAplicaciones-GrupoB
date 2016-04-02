@@ -32,7 +32,7 @@ public class ExchangeableTest {
     @Test
     public void itShouldAssertProductSubtractAStock(){
         product.subtractStock(1);
-        assertEquals(product.getStock(), 99);
+        assertEquals(99, product.getStock());
     }
 
     @Test
