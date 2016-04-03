@@ -1,6 +1,5 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {

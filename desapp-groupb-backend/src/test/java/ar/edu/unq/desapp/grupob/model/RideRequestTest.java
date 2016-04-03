@@ -1,4 +1,4 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
