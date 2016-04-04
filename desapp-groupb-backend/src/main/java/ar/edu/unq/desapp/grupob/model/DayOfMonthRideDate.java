@@ -1,9 +1,9 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 import org.joda.time.MonthDay;
 
-public class DayOfMonthRideDate {
+public class DayOfMonthRideDate extends RideDate {
 
     private MonthDay monthDay;
 

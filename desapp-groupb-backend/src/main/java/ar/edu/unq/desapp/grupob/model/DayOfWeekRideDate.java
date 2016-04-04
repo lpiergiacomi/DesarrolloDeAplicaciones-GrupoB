@@ -1,8 +1,8 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 
-public class DayOfWeekRideDate {
+public class DayOfWeekRideDate extends RideDate {
 
     private int day;
 
@@ -13,4 +13,8 @@ public class DayOfWeekRideDate {
     public boolean isRideDay(DateTime dateTime){
         return dateTime.dayOfWeek().get() == day;
     }
+
+//    public boolean isMatchingRideDate(RideDate rideDate){
+//        return
+//    }
 }
