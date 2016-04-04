@@ -1,8 +1,8 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 
-public class DayOfWeekRideDate {
+public class DayOfWeekRideDate extends RideDate {
 
     private int day;
 

@@ -1,4 +1,4 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -9,10 +9,10 @@ import static org.mockito.Mockito.mock;
 public class RideTest {
 
     @Test
-    public void shouldAssertTheRideisCreatedWithUser(){
+    public void itShouldAssertTheRideIsCreatedWithUser(){
         User drive = mock(User.class);
         Route route = mock(Route.class);
-        DateTime date = new DateTime();
+        RideDate date = mock(RideDate.class);
         Ride ride = new Ride(drive, route, date);
         assertEquals(ride.getDrive(), drive);
         assertEquals(ride.getRoute(), route);

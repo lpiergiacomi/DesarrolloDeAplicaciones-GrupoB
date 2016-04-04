@@ -2,8 +2,11 @@ package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 
+import java.util.Date;
+
 public class RideRequest {
     private User user;
+    private RideDate requestRideDate;
     private DateTime requestDate;
     private Ride ride;
     private static String ACCEPTED = "accepted";
@@ -11,7 +14,11 @@ public class RideRequest {
     private static String PENDING = "pending";
     private String status;
 
-    public RideRequest(){
+    public RideRequest(User user, Ride ride, RideDate requestRideDate) throws Exception {
+        this.user = user;
+        this.ride = ride;
+        this.requestDate = DateTime.now();
+        this.requestRideDate = requestRideDate;
         status = PENDING;
     }
 
@@ -19,20 +26,12 @@ public class RideRequest {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public RideDate getRequestRideDate() {
+        return requestRideDate;
     }
 
-    public void setRequestDate(DateTime requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public DateTime getRequestDate() {
+    public DateTime getRequestDate(){
         return requestDate;
-    }
-
-    public void setRide(Ride ride) {
-        this.ride = ride;
     }
 
     public Ride getRide() {

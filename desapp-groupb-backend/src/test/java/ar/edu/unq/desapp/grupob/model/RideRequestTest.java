@@ -1,40 +1,45 @@
-package model;
+package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RideRequestTest {
     RideRequest rideRequest;
+    RideDate rideDate;
 
     @Before
-    public void setUp(){
-        rideRequest = new RideRequest();
+    public void setUp() throws Exception {
+        Ride ride = mock(Ride.class);
+        rideDate = mock(DayOfWeekRideDate.class);
+        rideRequest = new RideRequest(mock(User.class), ride, rideDate);
     }
 
     @Test
     public void itShouldAssertTheRideRequestHasUserRequest(){
-        User user = mock(User.class);
-        rideRequest.setUser(user);
-        assertEquals(rideRequest.getUser(), user);
+        assertNotNull(rideRequest.getUser());
     }
 
     @Test
-    public void itShouldAssertTheRideRequestHasInitialDate(){
-        DateTime requestDate = new DateTime(2016, 4, 25, 12, 0);
-        rideRequest.setRequestDate(requestDate);
-        assertEquals(rideRequest.getRequestDate(), requestDate);
+    public void itShouldAssertTheRideRequestHasARequestDate(){
+        assertEquals(rideRequest.getRequestDate().getDayOfYear(), DateTime.now().getDayOfYear());
+    }
+
+    @Test
+    public void itShouldAssertTheRideRequestHasARequestRideDate(){
+        assertNotNull(rideRequest.getRequestRideDate());
     }
 
     @Test
     public void itShouldAssertTheRideRequestHasRide(){
-        Ride ride = mock(Ride.class);
-        rideRequest.setRide(ride);
-        assertEquals(rideRequest.getRide(), ride);
+        assertNotNull(rideRequest.getRide());
     }
 
     @Test
@@ -44,13 +49,13 @@ public class RideRequestTest {
 
     @Test
     public void itShouldAssertTheRideRequestIsAccepted(){
-        rideRequest.accepted();
+        rideRequest.accept();
         assertTrue(rideRequest.isAccepted());
     }
 
     @Test
     public void itShouldAssertTheRideRequestIsRejected(){
-        rideRequest.rejected();
+        rideRequest.reject();
         assertTrue(rideRequest.isRejected());
     }
 }
