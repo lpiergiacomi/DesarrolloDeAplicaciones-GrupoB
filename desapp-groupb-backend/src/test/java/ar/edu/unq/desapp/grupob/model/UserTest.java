@@ -2,8 +2,11 @@ package ar.edu.unq.desapp.grupob.model;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
 
 public class UserTest {
 
@@ -43,21 +46,21 @@ public class UserTest {
 	}
 
 	@Test
-	public void itShouldAcceptARideRequest() throws Exception{
+	public void itShouldAcceptARideRequest() throws RideRequestException{
 		user.addRideRequest(rideRequest);
 		user.acceptRequest(rideRequest);
 		verify(rideRequest, times(1)).accept();
 	}
 
 	@Test
-	public void itShouldRejectARideRequest() throws Exception{
+	public void itShouldRejectARideRequest() throws RideRequestException{
 		user.addRideRequest(rideRequest);
 		user.rejectRequest(rideRequest);
 		verify(rideRequest, times(1)).reject();
 	}
 
-	@Test(expected=Exception.class)
-	public void itShouldntHandleAnUnknownRideRequest() throws Exception{
+	@Test(expected=RideRequestException.class)
+	public void itShouldntHandleAnUnknownRideRequest() throws RideRequestException{
 		RideRequest anotherRideRequest = mock(RideRequest.class);
 
 		user.rejectRequest(anotherRideRequest);
