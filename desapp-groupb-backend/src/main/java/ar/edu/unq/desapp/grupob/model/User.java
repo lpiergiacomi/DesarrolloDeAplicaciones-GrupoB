@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
@@ -11,12 +12,14 @@ public class User {
 	public Role currentRole;
 	public Driver driverRole;
 	public Passenger passengerRole;
+	public List<Message> messages;
 
 	public User(){
 		hasOneBadRate = false;
 		driverRole = new Driver();
 		passengerRole = new Passenger();
 		currentRole = passengerRole;
+		messages = new ArrayList<Message>();
 	}
 
 	public void setVehicle(Vehicle vehicle) {
@@ -45,6 +48,25 @@ public class User {
 
 	public void addRideRequest(RideRequest rideRequest){
 		currentRole.addRideRequest(rideRequest);
+	}
+
+	public void sendPublicMessageTo(User receiver, String message) {
+		PublicMessage publicMessage = new PublicMessage(this, receiver, message);
+        receiver.receiveMessage(publicMessage);
+	}
+
+    public void sendPrivateMessageTo(User receiver, String message) {
+        PrivateMessage privateMessage = new PrivateMessage(this, receiver, message);
+        receiver.receiveMessage(privateMessage);
+    }
+
+    public void receiveMessage(Message message){
+        messages.add(message);
+    }
+
+
+	public List<Message> getMessages(){
+		return messages;
 	}
 
 	public void acceptRequest(RideRequest rideRequest) throws RideRequestException{

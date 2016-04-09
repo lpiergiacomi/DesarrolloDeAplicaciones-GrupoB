@@ -3,8 +3,7 @@ package ar.edu.unq.desapp.grupob.model;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
 
@@ -114,5 +113,19 @@ public class UserTest {
 		user.switchToPassenger();
 		assertFalse(user.isDriverRoleActivated());
 		assertTrue(user.isPassengerRoleActivated());
+	}
+
+	@Test
+	public void itShouldSendAPrivateMessageToAnotherUser() {
+		User anotherUser = new User();
+		user.sendPrivateMessageTo(anotherUser, "Hello World");
+		assertEquals(anotherUser.getMessages().size(), 1);
+	}
+
+	@Test
+	public void itShouldSendAPublicMessageToAnotherUser() {
+		User anotherUser = new User();
+		user.sendPublicMessageTo(anotherUser, "Hello World");
+		assertEquals(anotherUser.getMessages().size(), 1);
 	}
 }
