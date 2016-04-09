@@ -2,8 +2,6 @@ package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 
-import java.util.Date;
-
 public class RideRequest {
     private User user;
     private RideDate requestRideDate;
@@ -15,8 +13,6 @@ public class RideRequest {
     private String status;
 
     public RideRequest(User user, Ride ride, RideDate requestRideDate) throws Exception {
-//        if(!ride.date.isMatchingRideDate(requestRideDate)) throw new Exception("Chosen ride date is not valid for this ride");
-
         this.user = user;
         this.ride = ride;
         this.requestDate = DateTime.now();

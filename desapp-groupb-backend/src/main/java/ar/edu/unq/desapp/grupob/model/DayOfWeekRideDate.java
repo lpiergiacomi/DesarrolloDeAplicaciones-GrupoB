@@ -13,8 +13,4 @@ public class DayOfWeekRideDate extends RideDate {
     public boolean isRideDay(DateTime dateTime){
         return dateTime.dayOfWeek().get() == day;
     }
-
-//    public boolean isMatchingRideDate(RideDate rideDate){
-//        return
-//    }
 }

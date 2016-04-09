@@ -1,14 +1,8 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import ar.edu.unq.desapp.grupob.model.DayOfWeekRideDate;
-import ar.edu.unq.desapp.grupob.model.RangeWithDayOfWeekRideDate;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.junit.Before;
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.joda.time.*;
+import org.junit.*;
+import static org.junit.Assert.*;
 
 public class RangeWithDayOfWeekRideDateTest {
 
@@ -46,9 +40,4 @@ public class RangeWithDayOfWeekRideDateTest {
 
         assertFalse(rideDate.isRideDay(aWednesday));
     }
-
-//    @Test
-//    public void itShouldAssertAnotherRideDateHasADateInCommon(){
-//        assertTrue(rideDate.isMatchingRideDate(anotherRideDate));
-//    }
 }

@@ -1,7 +1,5 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import ar.edu.unq.desapp.grupob.model.DayOfMonthRideDate;
-import ar.edu.unq.desapp.grupob.model.RangeWithDayOfMonthRideDate;
 import org.joda.time.DateTime;
 import org.joda.time.MonthDay;
 import org.junit.Before;

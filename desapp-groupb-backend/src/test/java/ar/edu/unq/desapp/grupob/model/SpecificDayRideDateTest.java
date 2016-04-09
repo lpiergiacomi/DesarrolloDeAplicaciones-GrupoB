@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import ar.edu.unq.desapp.grupob.model.SpecificDayRideDate;
 import org.joda.time.DateTime;
 import org.junit.Test;
 

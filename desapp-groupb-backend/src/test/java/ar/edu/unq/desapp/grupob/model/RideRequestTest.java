@@ -1,15 +1,9 @@
 package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import org.junit.*;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class RideRequestTest {
     RideRequest rideRequest;
@@ -19,7 +13,6 @@ public class RideRequestTest {
     public void setUp() throws Exception {
         Ride ride = mock(Ride.class);
         rideDate = mock(DayOfWeekRideDate.class);
-//        when(rideDate.isMatchingRideDate(any(RideDate.class))).thenReturn(true);
         rideRequest = new RideRequest(mock(User.class), ride, rideDate);
     }
 
@@ -59,11 +52,4 @@ public class RideRequestTest {
         rideRequest.reject();
         assertTrue(rideRequest.isRejected());
     }
-
-//    @Test(expected = Exception.class)
-//    public void itShouldNotAcceptARideRequestWihRideDateNotValidForTheRide() throws Exception {
-//        rideDate = mock(DayOfWeekRideDate.class);
-//        when(rideDate.isMatchingRideDate(any(RideRequest.class))).thenReturn(false);
-//        rideRequest = new RideRequest(mock(User.class), mock(Ride.class), rideDate);
-//    }
 }
