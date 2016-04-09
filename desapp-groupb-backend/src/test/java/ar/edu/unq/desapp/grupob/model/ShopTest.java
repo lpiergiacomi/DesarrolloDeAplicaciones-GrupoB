@@ -18,35 +18,10 @@ public class ShopTest {
     }
 
     @Test
-    public void itGetExchangeables(){
-        assertEquals(shop.getExchangeables().size(), 0);
+    public void itShouldRegisterAnExchangeForAProduct() {
+        Product product = mock(Product.class);
+        User user = mock(User.class);
+        shop.registerExchange(user, product);
+        assertEquals(shop.getExchangeRegisters().size(), 1);
     }
-
-    @Test
-    public void itAssertAddAExchangeable(){
-        Exchangeable exchangeable = mock(Exchangeable.class);
-        shop.addExchangeable(exchangeable);
-
-        assertEquals(shop.getExchangeables().size(), 1);
-    }
-
-    @Test
-    public void itAssertAddAListExchangeables(){
-        Exchangeable product = mock(Exchangeable.class);
-        List<Exchangeable> listExangeables = new ArrayList<Exchangeable>();
-        listExangeables.add(product);
-        listExangeables.add(product);
-        shop.addListExchangeables(listExangeables);
-
-        assertEquals(2, shop.getExchangeables().size());
-    }
-
-    /*
-    @Test
-    public void itAssertSellExchangeableToUser(){
-        assertEquals(shop.getExchangeables().size(), 0);
-    }
-    */
-
-
 }

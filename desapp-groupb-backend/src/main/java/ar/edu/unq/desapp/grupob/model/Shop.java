@@ -1,29 +1,17 @@
 package ar.edu.unq.desapp.grupob.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Shop {
 
-    private ArrayList<Exchangeable> exchangeables;
+    private ArrayList<ExchangeRegister> exchangeRegisters= new ArrayList<ExchangeRegister>();
 
-    public Shop(){
-        this.exchangeables =  new ArrayList<Exchangeable>();
+    public void registerExchange(User user, Product product) {
+        exchangeRegisters.add(new ExchangeRegister(user, product));
     }
 
-
-    public ArrayList<Exchangeable> getExchangeables() {
-        return exchangeables;
+    public List<ExchangeRegister> getExchangeRegisters() {
+        return exchangeRegisters;
     }
-
-    public void addExchangeable(Exchangeable exchangeable) {
-        exchangeables.add(exchangeable);
-    }
-
-    public void addListExchangeables(List<Exchangeable> listExangeables) {
-        exchangeables.addAll(listExangeables);
-    }
-
 }

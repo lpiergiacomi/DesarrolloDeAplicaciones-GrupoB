@@ -115,6 +115,37 @@ public class UserTest {
 		assertTrue(user.isPassengerRoleActivated());
 	}
 
+    @Test
+    public void itShouldIncreaseItsPointsWhenReceivingAGoodRate(){
+        user.receiveGoodRate();
+        assertEquals(user.getPoints(), 500);
+    }
+
+    @Test
+    public void itShouldntChangeItsPointsWhenReceivingABadRateForTheFirstTime(){
+        user.receiveBadRate();
+        assertEquals(user.getPoints(), 0);
+    }
+
+    @Test
+    public void itShouldDecreaseItsPointsWhenReceivingABadRateForTheSecondTime(){
+        user.receiveBadRate();
+        user.receiveBadRate();
+        assertEquals(user.getPoints(), -1000);
+    }
+
+
+    //@Test
+    public void itShouldExchangePointsForAProduct(){
+        int initialRate = user.getPoints();
+        Product product = mock(Product.class);
+        when(product.getCost()).thenReturn(100);
+        user.exchangeProduct(product);
+        assertEquals(user.getPoints(), initialRate - 1);
+
+    }
+
+
 	@Test
 	public void itShouldSendAPrivateMessageToAnotherUser() {
 		User anotherUser = new User();
@@ -128,4 +159,5 @@ public class UserTest {
 		user.sendPublicMessageTo(anotherUser, "Hello World");
 		assertEquals(anotherUser.getMessages().size(), 1);
 	}
+
 }
