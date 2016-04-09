@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import ar.edu.unq.desapp.grupob.model.exceptions.RouteException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -33,4 +34,10 @@ public class PassengerTest {
         passenger.addRideRequest(rideRequest);
         assertEquals(passenger.getRideRequests().size(), 1);
     }
+
+    @Test(expected = RouteException.class)
+    public void itShouldntBeAbleToAddARoute() throws RouteException {
+        passenger.addRoute(route);
+    }
+
 }

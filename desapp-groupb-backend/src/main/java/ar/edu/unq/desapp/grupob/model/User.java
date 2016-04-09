@@ -127,7 +127,8 @@ public class User {
         return points;
     }
 
-    public void exchangeProduct(Product product) {
-
+    public void exchangeProduct(Product product, int quantity) {
+		points -= product.getCost() * quantity;
+		product.subtractStock(quantity);
     }
 }

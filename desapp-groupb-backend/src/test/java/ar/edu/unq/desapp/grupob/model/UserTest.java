@@ -70,30 +70,17 @@ public class UserTest {
 	}
 
 	@Test
-	public void itShouldRetrieveUsersRate(){
-		assertEquals(user.getRate(), 0);
-	}
-
-	@Test
 	public void itShouldGiveAGoodRateToAnotherUser(){
 		User anotherUser = new User();
 		user.giveGoodRate(anotherUser);
-		assertEquals(anotherUser.getRate(), 500);
+		assertEquals(anotherUser.getGoodRate(), 1);
 	}
 
 	@Test
-	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldntChange(){
+	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldChange(){
 		User anotherUser = new User();
 		user.giveBadRate(anotherUser);
-		assertEquals(anotherUser.getRate(), 0);
-	}
-
-	@Test
-	public void itShouldGiveABadRateToAnotherUserForTheSecondTimeAndItsScoreShouldChange(){
-		User anotherUser = new User();
-		user.giveBadRate(anotherUser);
-		user.giveBadRate(anotherUser);
-		assertEquals(anotherUser.getRate(), -1000);
+		assertEquals(anotherUser.getBadRate(), 1);
 	}
 
 	@Test
@@ -135,16 +122,15 @@ public class UserTest {
     }
 
 
-    //@Test
+    @Test
     public void itShouldExchangePointsForAProduct(){
         int initialRate = user.getPoints();
         Product product = mock(Product.class);
         when(product.getCost()).thenReturn(100);
-        user.exchangeProduct(product);
-        assertEquals(user.getPoints(), initialRate - 1);
+        user.exchangeProduct(product, 1);
+        assertEquals(user.getPoints(), initialRate - 100);
 
     }
-
 
 	@Test
 	public void itShouldSendAPrivateMessageToAnotherUser() {
