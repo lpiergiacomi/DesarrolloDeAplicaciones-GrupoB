@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -9,14 +10,14 @@ public class User {
 	public Role currentRole;
 	public Driver driverRole;
 	public Passenger passengerRole;
-	private TalkManager talkManager;
+	public List<Message> messages;
 
 	public User(){
 		hasOneBadRate = false;
 		driverRole = new Driver();
 		passengerRole = new Passenger();
 		currentRole = passengerRole;
-		talkManager = new TalkManager(this);
+		messages = new ArrayList<Message>();
 	}
 
 	public void setVehicle(Vehicle vehicle) {
@@ -47,20 +48,23 @@ public class User {
 		currentRole.addRideRequest(rideRequest);
 	}
 
-	public void sendPublicMenssageTo(User user, String message) {
-		talkManager.sendMessageTo(user, message, false);
+	public void sendPublicMessageTo(User receiver, String message) {
+		PublicMessage publicMessage = new PublicMessage(this, receiver, message);
+        receiver.receiveMessage(publicMessage);
 	}
 
-	public void sendPrivateMenssageTo(User user, String message) {
-		talkManager.sendMessageTo(user, message, true);
-	}
+    public void sendPrivateMessageTo(User receiver, String message) {
+        PrivateMessage privateMessage = new PrivateMessage(this, receiver, message);
+        receiver.receiveMessage(privateMessage);
+    }
 
-	public void addTalk(Talk talk) {
-		talkManager.addTalk(talk);
-	}
+    public void receiveMessage(Message message){
+        messages.add(message);
+    }
 
-	public List<Talk> getTalks(){
-		return talkManager.getTalks();
+
+	public List<Message> getMessages(){
+		return messages;
 	}
 
 	public void acceptRequest(RideRequest rideRequest) throws Exception{

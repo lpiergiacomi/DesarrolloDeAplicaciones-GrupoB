@@ -114,20 +114,16 @@ public class UserTest {
 	}
 
 	@Test
-	public void itShouldSendPrivateMessageForAnotherUser() {
+	public void itShouldSendAPrivateMessageToAnotherUser() {
 		User anotherUser = new User();
-		String message = "Hello World";
-		user.sendPrivateMenssageTo(anotherUser, message);
-		assertEquals(user.getTalks().size(), 1);
-		assertEquals(anotherUser.getTalks().size(), 1);
+		user.sendPrivateMessageTo(anotherUser, "Hello World");
+		assertEquals(anotherUser.getMessages().size(), 1);
 	}
 
 	@Test
-	public void itShouldSendPublicMessageForAnotherUser() {
+	public void itShouldSendAPublicMessageToAnotherUser() {
 		User anotherUser = new User();
-		String message = "Hello World";
-		user.sendPublicMenssageTo(anotherUser, message);
-		assertEquals(user.getTalks().size(), 1);
-		assertEquals(anotherUser.getTalks().size(), 1);
+		user.sendPublicMessageTo(anotherUser, "Hello World");
+		assertEquals(anotherUser.getMessages().size(), 1);
 	}
 }
