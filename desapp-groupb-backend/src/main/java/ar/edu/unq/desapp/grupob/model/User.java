@@ -3,6 +3,8 @@ package ar.edu.unq.desapp.grupob.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
+
 public class User {
 
 	private Vehicle vehicle;
@@ -67,19 +69,19 @@ public class User {
 		return messages;
 	}
 
-	public void acceptRequest(RideRequest rideRequest) throws Exception{
+	public void acceptRequest(RideRequest rideRequest) throws RideRequestException{
 		this.handleRequest(rideRequest);
 		rideRequest.accept();
 	}
 
-	public void rejectRequest(RideRequest rideRequest) throws Exception{
+	public void rejectRequest(RideRequest rideRequest) throws RideRequestException{
 		this.handleRequest(rideRequest);
 		rideRequest.reject();
 	}
 
-	private void handleRequest(RideRequest rideRequest) throws Exception {
+	private void handleRequest(RideRequest rideRequest) throws RideRequestException {
 		if(!getRideRequests().contains(rideRequest)){
-			throw new Exception("This ride request does not belong to this user");
+			throw new RideRequestException("This ride request does not belong to this user");
 		}
 	}
 
