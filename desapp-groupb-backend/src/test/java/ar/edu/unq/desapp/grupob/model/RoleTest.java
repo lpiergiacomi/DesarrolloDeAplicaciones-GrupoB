@@ -14,26 +14,24 @@ public class RoleTest {
     }
 
     @Test
-    public void itShouldGetItsRates(){
-        assertEquals(driver.getRate(), 0);
+    public void itShouldGetItsGoodRates(){
+        assertEquals(driver.getGoodRate(), 0);
+    }
+
+    @Test
+    public void itShouldGetItsBadRates(){
+        assertEquals(driver.getBadRate(), 0);
     }
 
     @Test
     public void itShouldReceiveAGoodRate(){
         driver.receiveGoodRate();
-        assertEquals(driver.getRate(), 500);
+        assertEquals(driver.getGoodRate(), 1);
     }
 
     @Test
-    public void itShouldReceiveABadRateAndItsScoreShouldntChange(){
+    public void itShouldReceiveABadRateAndItsScoreShouldChange(){
         driver.receiveBadRate();
-        assertEquals(driver.getRate(), 0);
-    }
-
-    @Test
-    public void itShouldGiveABadRateToAnotherUserForTheSecondTimeAndItsScoreShouldChange(){
-        driver.receiveBadRate();
-        driver.receiveBadRate();
-        assertEquals(driver.getRate(), -1000);
+        assertEquals(driver.getBadRate(), 1);
     }
 }

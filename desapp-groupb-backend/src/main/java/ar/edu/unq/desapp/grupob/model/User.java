@@ -9,16 +9,18 @@ public class User {
 
 	private Vehicle vehicle;
 	private boolean hasOneBadRate;
-	public Role currentRole;
-	public Driver driverRole;
-	public Passenger passengerRole;
-	public List<Message> messages;
+	private Role currentRole;
+	private Driver driverRole;
+	private Passenger passengerRole;
+    private int points;
+	private List<Message> messages;
 
 	public User(){
 		hasOneBadRate = false;
 		driverRole = new Driver();
 		passengerRole = new Passenger();
 		currentRole = passengerRole;
+        points = 0;
 		messages = new ArrayList<Message>();
 	}
 
@@ -34,8 +36,12 @@ public class User {
 		return currentRole.getRideRequests();
 	}
 
-	public int getRate(){
-		return currentRole.getRate();
+	public int getGoodRate(){
+		return currentRole.getGoodRate();
+	}
+
+	public int getBadRate(){
+		return currentRole.getBadRate();
 	}
 
 	public boolean hasVehicle() {
@@ -94,11 +100,11 @@ public class User {
 	}
 
 	public void receiveGoodRate() {
-		currentRole.receiveGoodRate();
+		points += currentRole.receiveGoodRate();
 	}
 
 	public void receiveBadRate(){
-		currentRole.receiveBadRate();
+		points -= currentRole.receiveBadRate();
 	}
 
 	public boolean isPassengerRoleActivated() {
@@ -116,4 +122,13 @@ public class User {
 	public void switchToPassenger(){
 		currentRole = passengerRole;
 	}
+
+    public int getPoints(){
+        return points;
+    }
+
+    public void exchangeProduct(Product product, int quantity) {
+		points -= product.getCost() * quantity;
+		product.subtractStock(quantity);
+    }
 }

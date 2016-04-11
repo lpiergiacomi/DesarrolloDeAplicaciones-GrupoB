@@ -70,30 +70,17 @@ public class UserTest {
 	}
 
 	@Test
-	public void itShouldRetrieveUsersRate(){
-		assertEquals(user.getRate(), 0);
-	}
-
-	@Test
 	public void itShouldGiveAGoodRateToAnotherUser(){
 		User anotherUser = new User();
 		user.giveGoodRate(anotherUser);
-		assertEquals(anotherUser.getRate(), 500);
+		assertEquals(anotherUser.getGoodRate(), 1);
 	}
 
 	@Test
-	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldntChange(){
+	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldChange(){
 		User anotherUser = new User();
 		user.giveBadRate(anotherUser);
-		assertEquals(anotherUser.getRate(), 0);
-	}
-
-	@Test
-	public void itShouldGiveABadRateToAnotherUserForTheSecondTimeAndItsScoreShouldChange(){
-		User anotherUser = new User();
-		user.giveBadRate(anotherUser);
-		user.giveBadRate(anotherUser);
-		assertEquals(anotherUser.getRate(), -1000);
+		assertEquals(anotherUser.getBadRate(), 1);
 	}
 
 	@Test
@@ -115,6 +102,36 @@ public class UserTest {
 		assertTrue(user.isPassengerRoleActivated());
 	}
 
+    @Test
+    public void itShouldIncreaseItsPointsWhenReceivingAGoodRate(){
+        user.receiveGoodRate();
+        assertEquals(user.getPoints(), 500);
+    }
+
+    @Test
+    public void itShouldntChangeItsPointsWhenReceivingABadRateForTheFirstTime(){
+        user.receiveBadRate();
+        assertEquals(user.getPoints(), 0);
+    }
+
+    @Test
+    public void itShouldDecreaseItsPointsWhenReceivingABadRateForTheSecondTime(){
+        user.receiveBadRate();
+        user.receiveBadRate();
+        assertEquals(user.getPoints(), -1000);
+    }
+
+
+    @Test
+    public void itShouldExchangePointsForAProduct(){
+        int initialRate = user.getPoints();
+        Product product = mock(Product.class);
+        when(product.getCost()).thenReturn(100);
+        user.exchangeProduct(product, 1);
+        assertEquals(user.getPoints(), initialRate - 100);
+
+    }
+
 	@Test
 	public void itShouldSendAPrivateMessageToAnotherUser() {
 		User anotherUser = new User();
@@ -128,4 +145,5 @@ public class UserTest {
 		user.sendPublicMessageTo(anotherUser, "Hello World");
 		assertEquals(anotherUser.getMessages().size(), 1);
 	}
+
 }
