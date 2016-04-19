@@ -2,8 +2,7 @@ package ar.edu.unq.desapp.grupob.model;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class VehicleTest {
 
@@ -11,7 +10,7 @@ public class VehicleTest {
 
     @Before
     public void setUp() {
-        vehicle = new Vehicle(4);
+        vehicle = new Vehicle(4, 2.50);
     }
 
     @Test
@@ -30,5 +29,10 @@ public class VehicleTest {
     public void itShouldBeAbleToReceiveBadRates() {
         vehicle.receiveBadRate();
         assertEquals(vehicle.getRate(), -1);
+    }
+
+    @Test
+    public void itShouldGetCostToKilometres() {
+        assertEquals(vehicle.getTotalCost(100.0), 250, 0);
     }
 }

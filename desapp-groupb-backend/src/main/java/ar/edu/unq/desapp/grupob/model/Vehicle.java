@@ -3,10 +3,12 @@ package ar.edu.unq.desapp.grupob.model;
 public class Vehicle {
 
     private int capacity, rate;
+    private double costPerKm;
 
-    public Vehicle(int capacity) {
+    public Vehicle(int capacity, double costPerKm) {
         this.capacity = capacity;
-        rate = 0;
+        this.rate = 0;
+        this.costPerKm = costPerKm;
     }
 
     public int getCapacity() {
@@ -23,5 +25,9 @@ public class Vehicle {
 
     public int getRate() {
         return rate;
+    }
+
+    public double getTotalCost(Double kilometres) {
+        return costPerKm * kilometres;
     }
 }

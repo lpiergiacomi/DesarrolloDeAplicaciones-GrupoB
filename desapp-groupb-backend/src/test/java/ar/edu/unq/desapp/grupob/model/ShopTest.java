@@ -1,10 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;

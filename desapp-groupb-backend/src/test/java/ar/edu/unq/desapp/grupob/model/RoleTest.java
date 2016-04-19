@@ -1,8 +1,7 @@
 package ar.edu.unq.desapp.grupob.model;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class RoleTest {
 
@@ -24,13 +23,13 @@ public class RoleTest {
     }
 
     @Test
-    public void itShouldReceiveAGoodRate(){
+    public void itShouldReceiveAGoodRate() {
         driver.receiveGoodRate();
         assertEquals(driver.getGoodRate(), 1);
     }
 
     @Test
-    public void itShouldReceiveABadRateAndItsScoreShouldChange(){
+    public void itShouldReceiveABadRateAndItsScoreShouldChange() {
         driver.receiveBadRate();
         assertEquals(driver.getBadRate(), 1);
     }

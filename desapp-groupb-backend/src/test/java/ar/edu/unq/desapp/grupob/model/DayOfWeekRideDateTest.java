@@ -3,8 +3,7 @@ package ar.edu.unq.desapp.grupob.model;
 import org.joda.time.*;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class DayOfWeekRideDateTest {
 
@@ -12,7 +11,7 @@ public class DayOfWeekRideDateTest {
     DateTime aTuesday = new DateTime(2016, 3, 29, 12, 0);
 
     @Test
-    public void itShouldAssertAWeekDayIsARideDay(){
+    public void itShouldAssertAWeekDayIsARideDay() {
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
 
@@ -20,7 +19,7 @@ public class DayOfWeekRideDateTest {
     }
 
     @Test
-    public void itShouldDenyAWeekDayIsARideDay(){
+    public void itShouldDenyAWeekDayIsARideDay() {
         int wednesday = DateTimeConstants.WEDNESDAY;
         rideDate = new DayOfWeekRideDate(wednesday);
 

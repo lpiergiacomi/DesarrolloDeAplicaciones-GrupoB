@@ -2,19 +2,19 @@ package ar.edu.unq.desapp.grupob.model;
 
 public class Route {
 
-    private double latitude;
-    private double longitude;
+    private double from;
+    private double to;
 
-    public Route(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Route(double from, double to) {
+        this.from = from;
+        this.to = to;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getFrom() {
+        return from;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getTo() {
+        return to;
     }
 }

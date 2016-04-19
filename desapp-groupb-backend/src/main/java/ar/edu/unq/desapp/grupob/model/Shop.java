@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Shop {
 
-    private ArrayList<ExchangeRegister> exchangeRegisters= new ArrayList<ExchangeRegister>();
+    private ArrayList<ExchangeRegister> exchangeRegisters= new ArrayList<>();
 
     public void registerExchange(User user, Product product) {
         exchangeRegisters.add(new ExchangeRegister(user, product));

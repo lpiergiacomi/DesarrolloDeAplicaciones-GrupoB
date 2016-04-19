@@ -12,21 +12,21 @@ public class RangeWithDayOfWeekRideDateTest {
     DateTime to = new DateTime(2016, 4, 29, 12, 0);
 
     @Before
-    public void setUp(){
+    public void setUp() {
         int tuesday = DateTimeConstants.TUESDAY;
         dayOfWeekRideDate = new DayOfWeekRideDate(tuesday);
         rideDate = new RangeWithDayOfWeekRideDate(from, to, dayOfWeekRideDate);
     }
 
     @Test
-    public void itShouldAssertADayOfWeekIsInsideTheRideDatesRange(){
+    public void itShouldAssertADayOfWeekIsInsideTheRideDatesRange() {
         DateTime aTuesday = new DateTime(2016, 4, 5, 12, 0);
 
         assertTrue(rideDate.isRideDay(aTuesday));
     }
 
     @Test
-    public void itShouldDenyADayOfWeekIsInsideTheRideDatesRange(){
+    public void itShouldDenyADayOfWeekIsInsideTheRideDatesRange() {
         DateTime outOfRangeDay = new DateTime(2015, 5, 9, 12, 0);
         rideDate = new RangeWithDayOfWeekRideDate(from, to, dayOfWeekRideDate);
 
@@ -34,7 +34,7 @@ public class RangeWithDayOfWeekRideDateTest {
     }
 
     @Test
-    public void itShouldDenyADayOfWeekIsARideDayDespiteBeingInsideTheRideDatesRange(){
+    public void itShouldDenyADayOfWeekIsARideDayDespiteBeingInsideTheRideDatesRange() {
         DateTime aWednesday = new DateTime(2016, 4, 13, 12, 0);
         rideDate = new RangeWithDayOfWeekRideDate(from, to, dayOfWeekRideDate);
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Driver extends Role {
 
-    protected List<Route> routes = new ArrayList<Route>();
+    protected List<Route> routes = new ArrayList<>();
 
     public boolean isPassenger(){
         return false;
@@ -22,4 +22,5 @@ public class Driver extends Role {
     public List<Route> getRoutes(){
         return routes;
     }
+
 }
