@@ -8,7 +8,6 @@ import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
 public class User {
 
 	private Vehicle vehicle;
-	private boolean hasOneBadRate;
 	private Role currentRole;
 	private Driver driverRole;
 	private Passenger passengerRole;
@@ -16,17 +15,20 @@ public class User {
 	private List<Message> messages;
 
 	public User(){
-		hasOneBadRate = false;
 		driverRole = new Driver();
 		passengerRole = new Passenger();
 		currentRole = passengerRole;
         points = 0;
-		messages = new ArrayList<Message>();
+		messages = new ArrayList<>();
 	}
 
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+
+    public int getCapacityVehicle() {
+        return vehicle.getCapacity();
+    }
 
 	public List<Route> getRoutes(){
 		return driverRole.getRoutes();
@@ -70,17 +72,16 @@ public class User {
         messages.add(message);
     }
 
-
 	public List<Message> getMessages(){
 		return messages;
 	}
 
-	public void acceptRequest(RideRequest rideRequest) throws RideRequestException{
+	public void acceptRequest(RideRequest rideRequest) throws RideRequestException {
 		this.handleRequest(rideRequest);
 		rideRequest.accept();
 	}
 
-	public void rejectRequest(RideRequest rideRequest) throws RideRequestException{
+	public void rejectRequest(RideRequest rideRequest) throws RideRequestException {
 		this.handleRequest(rideRequest);
 		rideRequest.reject();
 	}

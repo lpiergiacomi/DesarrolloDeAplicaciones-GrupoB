@@ -8,7 +8,7 @@ public abstract class Role {
     private int goodRate;
     private int badRate;
     private boolean hasOneBadRate;
-    private List<RideRequest> rideRequests = new ArrayList<RideRequest>();
+    private List<RideRequest> rideRequests = new ArrayList<>();
 
     public Role(){
         goodRate = 0;

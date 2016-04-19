@@ -38,6 +38,7 @@ public class RideRequest {
 
     public void accept() {
         status = ACCEPTED;
+        ride.addPassenger(user);
     }
 
     public void reject() {

@@ -3,15 +3,17 @@ package ar.edu.unq.desapp.grupob.model;
 import org.joda.time.DateTime;
 import org.junit.*;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 public class RideRequestTest {
     RideRequest rideRequest;
     RideDate rideDate;
+    Ride ride;
 
     @Before
     public void setUp() throws Exception {
-        Ride ride = mock(Ride.class);
+        ride = mock(Ride.class);
         rideDate = mock(DayOfWeekRideDate.class);
         rideRequest = new RideRequest(mock(User.class), ride, rideDate);
     }
@@ -22,7 +24,7 @@ public class RideRequestTest {
     }
 
     @Test
-    public void itShouldAssertTheRideRequestHasARequestDate(){
+    public void itShouldAssertTheRideRequestHasARequestDate() {
         assertEquals(rideRequest.getRequestDate().getDayOfYear(), DateTime.now().getDayOfYear());
     }
 
@@ -42,14 +44,16 @@ public class RideRequestTest {
     }
 
     @Test
-    public void itShouldAssertTheRideRequestIsAccepted(){
+    public void itShouldAssertTheRideRequestIsAccepted() {
         rideRequest.accept();
         assertTrue(rideRequest.isAccepted());
+        verify(ride, times(1)).addPassenger(any(User.class));
     }
 
     @Test
-    public void itShouldAssertTheRideRequestIsRejected(){
+    public void itShouldAssertTheRideRequestIsRejected() {
         rideRequest.reject();
         assertTrue(rideRequest.isRejected());
+        verify(ride, times(0)).addPassenger(any(User.class));
     }
 }

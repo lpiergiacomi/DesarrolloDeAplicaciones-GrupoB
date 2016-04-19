@@ -4,11 +4,11 @@ import ar.edu.unq.desapp.grupob.model.exceptions.RouteException;
 
 public class Passenger extends Role {
 
-    public boolean isPassenger(){
+    public boolean isPassenger() {
         return true;
     }
 
-    public boolean isDriver(){
+    public boolean isDriver() {
         return false;
     }
 
