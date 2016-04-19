@@ -17,7 +17,6 @@ function initMap() {
 
     var origin_input = document.getElementById('origin-input');
     var destination_input = document.getElementById('destination-input');
-    var modes = document.getElementById('mode-selector');
 
     var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
     origin_autocomplete.bindTo('bounds', map);
