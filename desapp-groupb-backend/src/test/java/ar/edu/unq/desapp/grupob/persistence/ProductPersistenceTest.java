@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test/test-spring-persistence-context.xml" })
+@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
 public class ProductPersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
@@ -26,8 +26,6 @@ public class ProductPersistenceTest extends AbstractTransactionalJUnit4SpringCon
     @Autowired
     private ProductsRepository productsRepository;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     @Test
     @Transactional

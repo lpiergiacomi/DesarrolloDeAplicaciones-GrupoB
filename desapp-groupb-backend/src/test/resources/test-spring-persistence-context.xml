@@ -8,7 +8,7 @@
 
 
 
-    <tx:annotation-driven transaction-manager="persistence.transactionManager"	proxy-target-class="true" />
+    <tx:annotation-driven transaction-manager="transactionManager"	proxy-target-class="true" />
 
 <!--
 		========================= GENERAL DEFINITIONS
@@ -19,7 +19,7 @@
 		properties files
 	-->
 	<!-- (in this case, mail and JDBC related properties) -->
-	<bean id="persistence.propertyConfigurer"
+	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
@@ -30,7 +30,7 @@
 		</property>
 	</bean>
 
-	<bean id="persistence.dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.db.url}" />
 		<property name="username" value="${jdbc.username}" />
@@ -46,10 +46,10 @@
 	<!--
 		Defines a global session factory that will be used by all modules.
 	-->
-	<bean id="persistence.sessionFactory"
+	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 
-		<property name="dataSource" ref="persistence.dataSource" />
+		<property name="dataSource" ref="dataSource" />
 <!--
 		<property name="entityCacheStrategies" ref="persistence.hibernateClassCacheProperties" />
 		<property name="collectionCacheStrategies" ref="persistence.hibernateCollectionCacheProperties" />
@@ -84,19 +84,18 @@
 
 
 <!-- Transaction manager for a single JDBC DataSource -->
-	<bean id="persistence.transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-		<property name="jdbcExceptionTranslator" ref="persistence.jdbcExceptionTranslator" />
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="jdbcExceptionTranslator" ref="jdbcExceptionTranslator" />
 	</bean>
 
-	<bean name="persistence.jdbcExceptionTranslator"
+	<bean name="jdbcExceptionTranslator"
 		class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
 		<constructor-arg>
-			<ref bean="persistence.dataSource" />
+			<ref bean="dataSource" />
 		</constructor-arg>
 	</bean>
-
 
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
@@ -104,9 +103,7 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 
-	<bean id="persistence.productrepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	<bean id="productrepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
-
 </beans>
