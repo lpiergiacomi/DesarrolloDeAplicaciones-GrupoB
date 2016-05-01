@@ -47,7 +47,7 @@
 		Defines a global session factory that will be used by all modules.
 	-->
 	<bean id="persistence.sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 
 		<property name="dataSource" ref="persistence.dataSource" />
 <!--
@@ -74,12 +74,7 @@
 				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
 			</props>
 		</property>
-		<property name="mappingLocations">
-			<list>
-				<value>classpath*:mappings/*.hbm.xml</value>
-			</list>
-		</property>
-
+    <property name="packagesToScan" value="ar.edu.unq.desapp.grupob.model" />
 	</bean>
 
 
@@ -104,9 +99,7 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 
-	<bean id="persistence.productrepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
+	<bean id="persistence.productsRepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
-
-
 </beans>

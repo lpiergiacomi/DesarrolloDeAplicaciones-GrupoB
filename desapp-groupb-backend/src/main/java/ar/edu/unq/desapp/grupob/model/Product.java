@@ -1,11 +1,15 @@
 package ar.edu.unq.desapp.grupob.model;
 
-public class Product extends Entity {
+import javax.persistence.*;
 
+@Entity
+@Table(name="PRODUCT")
+public class Product {
+
+    private Integer id;
     private String name;
     private int stock;
     private int cost;
-
 
     public Product(String name, int stock, int cost)  {
         this.name = name;
@@ -15,8 +19,22 @@ public class Product extends Entity {
 
     public Product(){}
 
+    public void subtractStock(int subtractNumber) {
+        stock -= subtractNumber;
+    }
+
+    @Id @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+      this.id = id;
+    }
+
+    @Column(nullable = false)
     public String getName() {
-        return name;
+          return name;
     }
 
     public void setName(String name) {
@@ -27,19 +45,15 @@ public class Product extends Entity {
         this.stock = stock;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
     public int getStock() {
         return stock;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public int getCost() {
+        return cost;
     }
 
-    public void subtractStock(int subtractNumber) {
-        stock -= subtractNumber;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 }
