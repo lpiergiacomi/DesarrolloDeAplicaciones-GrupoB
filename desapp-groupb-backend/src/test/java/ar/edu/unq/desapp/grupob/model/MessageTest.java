@@ -24,10 +24,10 @@ public class MessageTest {
         assertEquals(publicMessage.getSender(), sender);
     }
 
-    @Test
+   /* @Test
     public void itShouldGetItReceiver(){
         assertEquals(publicMessage.getReceiver(), receiver);
-    }
+    }*/
 
     @Test
     public void itShouldGetItContent(){

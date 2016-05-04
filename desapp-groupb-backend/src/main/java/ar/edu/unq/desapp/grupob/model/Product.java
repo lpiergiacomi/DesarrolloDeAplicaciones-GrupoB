@@ -3,7 +3,7 @@ package ar.edu.unq.desapp.grupob.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="PRODUCT")
+@Table
 public class Product {
 
     private Integer id;

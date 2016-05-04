@@ -100,6 +100,9 @@
 	<!-- ________________________________________ -->
 
 	<bean id="persistence.productsRepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
+
+
 </beans>
