@@ -41,7 +41,7 @@ public class ProductPersistenceTest extends AbstractTransactionalJUnit4SpringCon
     product.setCost(5);
     productsRepository.update(product);
 
-    assertEquals(productsRepository.find(1).getCost(), 5);
+    assertEquals(productsRepository.find(product.getId()).getCost(), 5);
   }
 
   @Test

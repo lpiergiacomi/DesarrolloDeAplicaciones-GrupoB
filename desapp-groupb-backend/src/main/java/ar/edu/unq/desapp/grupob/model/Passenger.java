@@ -2,13 +2,20 @@ package ar.edu.unq.desapp.grupob.model;
 
 import ar.edu.unq.desapp.grupob.model.exceptions.RouteException;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import java.beans.Transient;
+
+@Entity
 public class Passenger extends Role {
 
-    public boolean isPassenger(){
+    @Transient
+    public boolean passenger(){
         return true;
     }
 
-    public boolean isDriver(){
+    @Transient
+    public boolean driver(){
         return false;
     }
 

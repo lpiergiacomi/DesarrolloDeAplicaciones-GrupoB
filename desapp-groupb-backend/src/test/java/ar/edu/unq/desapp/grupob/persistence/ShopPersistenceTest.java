@@ -44,14 +44,14 @@ public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContex
     }
 
     @Test
-    public void itShouldSaveAProduct() {
+    public void itShouldSaveAShop() {
         List<Shop> shops = shopRepository.all();
 
         assertEquals(shops.size(), 1);
     }
 
     @Test
-    public void itShouldUpdateAProduct() {
+    public void itShouldUpdateAShop() {
         assertEquals(shop.getExchangeRegisters().size(), 0);
         Product product = new Product("a Product", 1, 2);
         productsRepository.save(product);
@@ -61,11 +61,11 @@ public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContex
         shop.registerExchange(user, product);
         shopRepository.update(shop);
 
-        assertEquals(shopRepository.find(1).getExchangeRegisters().size(), 1);
+        assertEquals(shopRepository.find(shop.getId()).getExchangeRegisters().size(), 1);
     }
 
     @Test
-    public void itShouldDeleteAProduct() {
+    public void itShouldDeleteAShop() {
         shopRepository.delete(shop.getId());
 
         assertEquals(shopRepository.all().size(), 0);

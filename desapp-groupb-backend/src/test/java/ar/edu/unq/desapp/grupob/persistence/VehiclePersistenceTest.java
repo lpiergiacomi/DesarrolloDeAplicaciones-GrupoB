@@ -30,24 +30,24 @@ public class VehiclePersistenceTest extends AbstractTransactionalJUnit4SpringCon
     }
 
     @Test
-    public void itShouldSaveAProduct() {
+    public void itShouldSaveAVehicle() {
         List<Vehicle> vehicles = vehicleRepository.all();
 
         assertEquals(vehicles.size(), 1);
     }
 
     @Test
-    public void itShouldUpdateAProduct() {
+    public void itShouldUpdateAVehicle() {
         assertEquals(vehicle.getCapacity(), 1);
 
         vehicle.setCapacity(2);
         vehicleRepository.update(vehicle);
 
-        assertEquals(vehicleRepository.find(1).getCapacity(), 2);
+        assertEquals(vehicleRepository.find(vehicle.getId()).getCapacity(), 2);
     }
 
     @Test
-    public void itShouldDeleteAProduct() {
+    public void itShouldDeleteAVehicle() {
         vehicleRepository.delete(vehicle.getId());
 
         assertEquals(vehicleRepository.all().size(), 0);

@@ -30,24 +30,24 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
     }
 
     @Test
-    public void itShouldSaveAProduct() {
+    public void itShouldSaveARoute() {
         List<Route> routes = routeRepository.all();
 
         assertEquals(routes.size(), 1);
     }
 
     @Test
-    public void itShouldUpdateAProduct() {
+    public void itShouldUpdateARoute() {
         assertEquals(route.getLongitude(), 2.2, 0);
 
         route.setLongitude(5.0);
         routeRepository.update(route);
 
-        assertEquals(routeRepository.find(1).getLongitude(), 5.0, 0);
+        assertEquals(routeRepository.find(route.getId()).getLongitude(), 5.0, 0);
     }
 
     @Test
-    public void itShouldDeleteAProduct() {
+    public void itShouldDeleteARoute() {
         routeRepository.delete(route.getId());
 
         assertEquals(routeRepository.all().size(), 0);

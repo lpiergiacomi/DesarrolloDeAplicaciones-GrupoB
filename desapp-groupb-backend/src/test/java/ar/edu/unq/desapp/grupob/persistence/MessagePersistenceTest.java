@@ -52,7 +52,7 @@ public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringCon
         publicMessage.setContent("Messages");
         messagesRepository.update(publicMessage);
 
-        assertEquals(messagesRepository.find(1).getContent(), "Messages");
+        assertEquals(messagesRepository.find(publicMessage.getId()).getContent(), "Messages");
     }
 
     @Test

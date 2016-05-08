@@ -21,12 +21,12 @@ public class PassengerTest {
 
     @Test
     public void itShouldDenyItIsADriver(){
-        assertFalse(passenger.isDriver());
+        assertFalse(passenger.driver());
     }
 
     @Test
     public void itShouldAssertItIsAPassenger(){
-        assertTrue(passenger.isPassenger());
+        assertTrue(passenger.passenger());
     }
 
     @Test

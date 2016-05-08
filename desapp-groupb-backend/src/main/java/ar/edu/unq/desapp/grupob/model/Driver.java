@@ -1,17 +1,25 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import javax.persistence.*;
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Driver extends Role {
 
-    protected List<Route> routes = new ArrayList<Route>();
+    private List<Route> routes;
 
-    public boolean isPassenger(){
-        return false;
+    public Driver(){
+        routes = new ArrayList<Route>();
     }
 
-    public boolean isDriver(){
+    @Transient
+    public boolean passenger(){
+        return false;
+    }
+    @Transient
+    public boolean driver(){
         return true;
     }
 
@@ -19,7 +27,13 @@ public class Driver extends Role {
         routes.add(route);
     }
 
+    @OneToMany
+    @JoinColumn
     public List<Route> getRoutes(){
         return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 }

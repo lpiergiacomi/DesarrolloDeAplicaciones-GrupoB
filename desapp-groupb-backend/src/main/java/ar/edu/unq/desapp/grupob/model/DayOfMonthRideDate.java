@@ -3,6 +3,9 @@ package ar.edu.unq.desapp.grupob.model;
 import org.joda.time.DateTime;
 import org.joda.time.MonthDay;
 
+import javax.persistence.Entity;
+
+@Entity
 public class DayOfMonthRideDate extends RideDate {
 
     private MonthDay monthDay;

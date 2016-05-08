@@ -103,6 +103,40 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="persistence.userRepository" class="ar.edu.unq.desapp.grupob.repositories.UserRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
+	<bean id="persistence.messagesRepository" class="ar.edu.unq.desapp.grupob.repositories.MessagesRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.routeRepository" class="ar.edu.unq.desapp.grupob.repositories.RouteRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.vehicleRepository" class="ar.edu.unq.desapp.grupob.repositories.VehicleRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.shopRepository" class="ar.edu.unq.desapp.grupob.repositories.ShopRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.exchangerRegisterRepository" class="ar.edu.unq.desapp.grupob.repositories.ExchangerRegisterRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rideRepository" class="ar.edu.unq.desapp.grupob.repositories.RideRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rideDateRepository" class="ar.edu.unq.desapp.grupob.repositories.RideDateRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.roleRepository" class="ar.edu.unq.desapp.grupob.repositories.RoleRepository" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 </beans>

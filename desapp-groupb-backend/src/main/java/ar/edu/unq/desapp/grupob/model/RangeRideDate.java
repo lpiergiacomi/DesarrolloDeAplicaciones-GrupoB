@@ -2,6 +2,10 @@ package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 
+import javax.persistence.Entity;
+
+
+@Entity
 public abstract class RangeRideDate extends RideDate {
 
     protected DateTime from;
