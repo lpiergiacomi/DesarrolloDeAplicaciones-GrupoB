@@ -11,8 +11,6 @@ public class Shop {
     private List<ExchangeRegister> exchangeRegisters= new ArrayList<ExchangeRegister>();
     private int id;
 
-    private ArrayList<ExchangeRegister> exchangeRegisters= new ArrayList<ExchangeRegister>();
-
     public void registerExchange(User user, Product product) {
         exchangeRegisters.add(new ExchangeRegister(user, product));
     }

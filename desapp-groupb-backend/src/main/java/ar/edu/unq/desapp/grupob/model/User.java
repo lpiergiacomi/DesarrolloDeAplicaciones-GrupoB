@@ -183,15 +183,18 @@ public class User {
 		return currentRole.getBadRate();
 	}
 
-    @OneToMany
-    @JoinColumn
-    public List<Message> getMessages(){
-        return messages;
-    }
+  @OneToMany
+  @JoinColumn
+  public List<Message> getMessages(){
+      return messages;
+  }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+  public void setMessages(List<Message> messages) {
+      this.messages = messages;
+  }
 
-
+  @Transient
+  public int getCapacityVehicle() {
+      return vehicle.getCapacity();
+  }
 }

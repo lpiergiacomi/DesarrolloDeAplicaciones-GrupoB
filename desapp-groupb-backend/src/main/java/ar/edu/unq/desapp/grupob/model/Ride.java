@@ -57,4 +57,23 @@ public class Ride {
     public void setDriver(User driver) {
         this.driver = driver;
     }
+
+    @ManyToMany
+    public List<User> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<User> passengers) {
+        this.passengers = passengers;
+    }
+
+    public void addPassenger(User passenger) {
+        passengers.add(passenger);
+    }
+
+    @Transient
+    public boolean isEfficient() {
+        return (this.passengers.size()  / driver.getCapacityVehicle()) >= 0.5;
+    }
+
 }

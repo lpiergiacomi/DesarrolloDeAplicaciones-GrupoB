@@ -1,10 +1,7 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
 import ar.edu.unq.desapp.grupob.model.*;
-import ar.edu.unq.desapp.grupob.repositories.RideDateRepository;
-import ar.edu.unq.desapp.grupob.repositories.RideRepository;
-import ar.edu.unq.desapp.grupob.repositories.RouteRepository;
-import ar.edu.unq.desapp.grupob.repositories.UserRepository;
+import ar.edu.unq.desapp.grupob.repositories.*;
 import org.joda.time.DateTimeConstants;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +31,10 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     @Autowired
     private RideDateRepository rideDateRepository;
 
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+
     private Ride ride;
     private User user;
     private Route route;
@@ -45,7 +46,10 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         route = new Route(2.0, 2.3);
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
+        Vehicle vehicle = new Vehicle(1, 2);
+        user.setVehicle(vehicle);
 
+        vehicleRepository.save(vehicle);
         rideDateRepository.save(rideDate);
         routeRepository.save(route);
         userRepository.save(user);

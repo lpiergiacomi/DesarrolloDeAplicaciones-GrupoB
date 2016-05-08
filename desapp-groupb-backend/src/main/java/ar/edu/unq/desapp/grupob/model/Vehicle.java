@@ -55,4 +55,12 @@ public class Vehicle {
         this.rate = rate;
     }
 
+    public double getCostPerKm() {
+        return costPerKm;
+    }
+
+    public void setCostPerKm(double costPerKm) {
+        this.costPerKm = costPerKm;
+    }
+
 }

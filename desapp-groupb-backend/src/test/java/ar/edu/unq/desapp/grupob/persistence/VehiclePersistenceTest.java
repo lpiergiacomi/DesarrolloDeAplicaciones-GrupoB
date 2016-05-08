@@ -25,7 +25,7 @@ public class VehiclePersistenceTest extends AbstractTransactionalJUnit4SpringCon
 
     @Before
     public void setUp() {
-        vehicle = new Vehicle(1);
+        vehicle = new Vehicle(1, 2);
         vehicleRepository.save(vehicle);
     }
 
