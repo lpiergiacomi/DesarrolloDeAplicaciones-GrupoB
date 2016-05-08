@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class VehicleTest {
+public class VehicleRepositoryTest {
 
     public Vehicle vehicle;
 

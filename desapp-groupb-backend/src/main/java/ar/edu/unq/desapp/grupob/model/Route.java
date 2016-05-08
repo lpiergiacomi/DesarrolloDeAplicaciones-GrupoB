@@ -1,20 +1,46 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Route {
 
-    private double from;
-    private double to;
+    private double latitude;
+    private double longitude;
+    private Integer id;
 
-    public Route(double from, double to) {
-        this.from = from;
-        this.to = to;
+    public Route(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public double getFrom() {
-        return from;
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
     }
 
-    public double getTo() {
-        return to;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

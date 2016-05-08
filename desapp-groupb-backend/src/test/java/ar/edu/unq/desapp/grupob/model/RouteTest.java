@@ -11,7 +11,7 @@ public class RouteTest {
     @Test
     public void itShouldCreateANewRouteWithItsLatitudeAndLongitude() {
         route = new Route(-2.3456, 7.89034);
-        assertEquals(route.getFrom(), -2.3456, 0);
-        assertEquals(route.getTo(), 7.89034, 0);
+        assertEquals(route.getLatitude(), -2.3456, 0);
+        assertEquals(route.getLongitude(), 7.89034, 0);
     }
 }

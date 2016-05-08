@@ -2,17 +2,20 @@ package ar.edu.unq.desapp.grupob.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class User {
 
 	private Vehicle vehicle;
 	private Role currentRole;
-	private Driver driverRole;
+    private Driver driverRole;
 	private Passenger passengerRole;
     private int points;
-	private List<Message> messages;
+    private List<Message> messages;
+	private Integer id;
 
 	public User(){
 		driverRole = new Driver();
@@ -20,30 +23,6 @@ public class User {
 		currentRole = passengerRole;
         points = 0;
 		messages = new ArrayList<>();
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-    public int getCapacityVehicle() {
-        return vehicle.getCapacity();
-    }
-
-	public List<Route> getRoutes(){
-		return driverRole.getRoutes();
-	}
-
-	public List<RideRequest> getRideRequests(){
-		return currentRole.getRideRequests();
-	}
-
-	public int getGoodRate(){
-		return currentRole.getGoodRate();
-	}
-
-	public int getBadRate(){
-		return currentRole.getBadRate();
 	}
 
 	public boolean hasVehicle() {
@@ -72,11 +51,7 @@ public class User {
         messages.add(message);
     }
 
-	public List<Message> getMessages(){
-		return messages;
-	}
-
-	public void acceptRequest(RideRequest rideRequest) throws RideRequestException {
+	public void acceptRequest(RideRequest rideRequest) throws RideRequestException{
 		this.handleRequest(rideRequest);
 		rideRequest.accept();
 	}
@@ -108,14 +83,6 @@ public class User {
 		points -= currentRole.receiveBadRate();
 	}
 
-	public boolean isPassengerRoleActivated() {
-		return currentRole.isPassenger();
-	}
-
-	public boolean isDriverRoleActivated() {
-		return currentRole.isDriver();
-	}
-
 	public void switchToDriver(){
 		currentRole = driverRole;
 	}
@@ -124,12 +91,110 @@ public class User {
 		currentRole = passengerRole;
 	}
 
-    public int getPoints(){
-        return points;
-    }
-
     public void exchangeProduct(Product product, int quantity) {
 		points -= product.getCost() * quantity;
 		product.subtractStock(quantity);
     }
+
+	@Transient
+	public boolean isPassengerRoleActivated() {
+		return currentRole.passenger();
+	}
+
+    @Transient
+	public boolean isDriverRoleActivated() {
+		return currentRole.driver();
+	}
+
+	@Transient
+	public Driver getDriverRole() {
+		return driverRole;
+	}
+
+	public void setDriverRole(Driver driverRole) {
+		this.driverRole = driverRole;
+	}
+
+    public int getPoints(){
+        return points;
+    }
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+    @Transient
+	public Passenger getPassengerRole() {
+		return passengerRole;
+	}
+
+	public void setPassengerRole(Passenger passengerRole) {
+		this.passengerRole = passengerRole;
+	}
+
+    @Transient
+	public Role getCurrentRole() {
+		return currentRole;
+	}
+
+	public void setCurrentRole(Role currentRole) {
+		this.currentRole = currentRole;
+	}
+
+	@Id @GeneratedValue
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@OneToOne
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	@Transient
+	public List<Route> getRoutes(){
+		return driverRole.getRoutes();
+	}
+
+    public void setRoutes(List<Route> routes){
+        driverRole.setRoutes(routes);
+    }
+
+	@Transient
+	public List<RideRequest> getRideRequests(){
+		return currentRole.getRideRequests();
+	}
+
+	@Transient
+	public int getGoodRate(){
+		return currentRole.getGoodRate();
+	}
+
+	@Transient
+	public int getBadRate(){
+		return currentRole.getBadRate();
+	}
+
+  @OneToMany
+  @JoinColumn
+  public List<Message> getMessages(){
+      return messages;
+  }
+
+  public void setMessages(List<Message> messages) {
+      this.messages = messages;
+  }
+
+  @Transient
+  public int getCapacityVehicle() {
+      return vehicle.getCapacity();
+  }
 }

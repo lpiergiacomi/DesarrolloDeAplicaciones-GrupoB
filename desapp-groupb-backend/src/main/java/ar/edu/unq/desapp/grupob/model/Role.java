@@ -1,35 +1,63 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import javax.persistence.*;
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Role {
 
     private int goodRate;
     private int badRate;
     private boolean hasOneBadRate;
-    private List<RideRequest> rideRequests = new ArrayList<>();
+    private List<RideRequest> rideRequests = new ArrayList<RideRequest>();
+    private Integer id;
 
     public Role(){
         goodRate = 0;
         badRate = 0;
         hasOneBadRate = false;
     }
+    @Id
+    @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
 
-    public abstract boolean isPassenger();
-
-    public abstract boolean isDriver();
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    @Transient
+    public abstract boolean passenger();
+    @Transient
+    public abstract boolean driver();
 
     public int getGoodRate(){
         return goodRate;
+    }
+
+    public void setGoodRate(int goodRate) {
+        this.goodRate = goodRate;
     }
 
     public int getBadRate(){
         return badRate;
     }
 
+    public void setBadRate(int badRate) {
+        this.badRate = badRate;
+    }
+
+    @OneToMany
+    @JoinColumn
     public List<RideRequest> getRideRequests(){
         return rideRequests;
+    }
+
+    public void setRideRequests(List<RideRequest> rideRequests) {
+        this.rideRequests = rideRequests;
     }
 
     public void addRideRequest(RideRequest rideRequest){
