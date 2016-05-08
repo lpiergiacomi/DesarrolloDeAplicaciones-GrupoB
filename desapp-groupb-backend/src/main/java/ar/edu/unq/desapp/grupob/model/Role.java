@@ -34,6 +34,8 @@ public abstract class Role {
     @Transient
     public abstract boolean driver();
 
+    public abstract boolean isDriver();
+
     public int getGoodRate(){
         return goodRate;
     }

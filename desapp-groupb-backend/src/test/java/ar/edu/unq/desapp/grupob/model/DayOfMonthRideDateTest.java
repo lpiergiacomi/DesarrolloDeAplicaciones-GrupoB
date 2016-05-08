@@ -1,18 +1,16 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import org.joda.time.DateTime;
-import org.joda.time.MonthDay;
+import org.joda.time.*;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class DayOfMonthRideDateTest {
 
     DateTime tenthOfDecember = new DateTime(2016, 12, 10, 12, 0);
 
     @Test
-    public void itShouldAssertADayOfMonthIsARideDay(){
+    public void itShouldAssertADayOfMonthIsARideDay() {
         MonthDay dayOfMonth = new MonthDay(12, 10);
         DayOfMonthRideDate dayOfMonthRideDate = new DayOfMonthRideDate(dayOfMonth);
 
@@ -20,7 +18,7 @@ public class DayOfMonthRideDateTest {
     }
 
     @Test
-    public void itShouldDenyADayOfMonthIsARideDay(){
+    public void itShouldDenyADayOfMonthIsARideDay() {
         MonthDay tenthOfNovember = new MonthDay(11, 10);
         DayOfMonthRideDate dayOfMonthRideDate = new DayOfMonthRideDate(tenthOfNovember);
 

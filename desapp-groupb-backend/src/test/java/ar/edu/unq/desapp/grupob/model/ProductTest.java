@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +11,7 @@ public class ProductTest {
     Product product;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         stock = 100;
         cost = 1000;
         product = new Product("Bag", stock, cost);
@@ -29,7 +28,7 @@ public class ProductTest {
     }
 
     @Test
-    public void itShouldAssertProductSubtractAStock(){
+    public void itShouldAssertProductSubtractAStock() {
         product.subtractStock(1);
         assertEquals(99, product.getStock());
     }

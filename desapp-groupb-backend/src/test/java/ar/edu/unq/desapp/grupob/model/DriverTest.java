@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -13,7 +12,7 @@ public class DriverTest {
     public RideRequest rideRequest;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         driver = new Driver();
         route = mock(Route.class);
         rideRequest = mock(RideRequest.class);
@@ -36,7 +35,7 @@ public class DriverTest {
     }
 
     @Test
-    public void itShouldBeAbleToAddARideRequestMadeByAPassenger(){
+    public void itShouldBeAbleToAddARideRequestMadeByAPassenger() {
         driver.addRideRequest(rideRequest);
         assertEquals(driver.getRideRequests().size(), 1);
     }

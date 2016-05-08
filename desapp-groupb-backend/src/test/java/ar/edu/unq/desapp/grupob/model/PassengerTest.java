@@ -1,8 +1,7 @@
 package ar.edu.unq.desapp.grupob.model;
 
 import ar.edu.unq.desapp.grupob.model.exceptions.RouteException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
@@ -13,7 +12,7 @@ public class PassengerTest {
     public RideRequest rideRequest;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         passenger = new Passenger();
         route = mock(Route.class);
         rideRequest = mock(RideRequest.class);
@@ -30,7 +29,7 @@ public class PassengerTest {
     }
 
     @Test
-    public void itShouldBeAbleToAddARideRequestMadeByIt(){
+    public void itShouldBeAbleToAddARideRequestMadeByIt() {
         passenger.addRideRequest(rideRequest);
         assertEquals(passenger.getRideRequests().size(), 1);
     }

@@ -1,19 +1,23 @@
 package ar.edu.unq.desapp.grupob.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
 public class Ride {
     RideDate date;
-    User drive;
+    User driver;
     Route route;
     Integer id;
+    List<User> passengers;
 
-    public Ride(User drive, Route route, RideDate date) {
-        this.drive = drive;
+    public Ride(User driver, Route route, RideDate date) {
+        this.driver = driver;
         this.route = route;
         this.date = date;
+        this.passengers = new ArrayList<>(this.driver.getCapacityVehicle());
     }
 
     @Id
@@ -46,11 +50,11 @@ public class Ride {
     }
 
     @OneToOne
-    public User getDrive() {
-        return drive;
+    public User getDriver() {
+        return driver;
     }
 
-    public void setDrive(User drive) {
-        this.drive = drive;
+    public void setDriver(User driver) {
+        this.driver = driver;
     }
 }

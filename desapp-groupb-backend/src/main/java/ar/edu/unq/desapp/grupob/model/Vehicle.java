@@ -10,10 +10,12 @@ import javax.persistence.Table;
 public class Vehicle {
 
     private int capacity, rate, id;
+    private double costPerKm;
 
-    public Vehicle(int capacity) {
+    public Vehicle(int capacity, double costPerKm) {
         this.capacity = capacity;
-        rate = 0;
+        this.rate = 0;
+        this.costPerKm = costPerKm;
     }
 
     @Id
@@ -43,6 +45,10 @@ public class Vehicle {
 
     public int getRate() {
         return rate;
+    }
+
+    public double getTotalCost(Double kilometres) {
+        return costPerKm * kilometres;
     }
 
     public void setRate(int rate) {

@@ -8,11 +8,9 @@ import java.util.List;
 @Entity
 public class Driver extends Role {
 
-    private List<Route> routes;
+    private List<Route> routes = new ArrayList<Route>();
 
-    public Driver(){
-        routes = new ArrayList<Route>();
-    }
+    public Driver(){}
 
     @Transient
     public boolean passenger(){

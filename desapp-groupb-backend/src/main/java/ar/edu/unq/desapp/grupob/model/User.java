@@ -56,7 +56,7 @@ public class User {
 		rideRequest.accept();
 	}
 
-	public void rejectRequest(RideRequest rideRequest) throws RideRequestException{
+	public void rejectRequest(RideRequest rideRequest) throws RideRequestException {
 		this.handleRequest(rideRequest);
 		rideRequest.reject();
 	}
@@ -114,7 +114,6 @@ public class User {
 	public void setDriverRole(Driver driverRole) {
 		this.driverRole = driverRole;
 	}
-
 
     public int getPoints(){
         return points;
@@ -185,7 +184,7 @@ public class User {
 	}
 
     @OneToMany
-    @JoinColumn(name = "user")
+    @JoinColumn
     public List<Message> getMessages(){
         return messages;
     }

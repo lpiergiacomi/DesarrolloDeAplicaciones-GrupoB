@@ -3,7 +3,6 @@ package ar.edu.unq.desapp.grupob.model;
 import ar.edu.unq.desapp.grupob.model.exceptions.RouteException;
 
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import java.beans.Transient;
 
 @Entity
