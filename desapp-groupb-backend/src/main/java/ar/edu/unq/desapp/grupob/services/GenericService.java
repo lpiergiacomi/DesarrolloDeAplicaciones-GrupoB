@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupob.services;
 
 import java.io.Serializable;
-import java.util.List;
 //import ar.edu.unq.desapp.grupob.repositories.GenericRepository;
 //import org.springframework.transaction.annotation.Transactional;
 

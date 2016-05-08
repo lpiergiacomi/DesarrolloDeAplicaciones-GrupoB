@@ -31,5 +31,5 @@
 		<!--<property name="repository" ref="persistence.productsRepository" />-->
 	</bean>
 
-  <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+  <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
 </beans>
