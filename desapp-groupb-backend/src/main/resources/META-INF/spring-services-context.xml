@@ -28,7 +28,7 @@
     </jaxrs:server>
 
 	<bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductsService">
-		<!--<property name="repository" ref="persistence.productsRepository" />-->
+		<property name="repository" ref="persistence.productsRepository" />
 	</bean>
 
   <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>

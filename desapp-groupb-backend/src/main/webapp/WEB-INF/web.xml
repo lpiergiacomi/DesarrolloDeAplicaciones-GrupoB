@@ -8,7 +8,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-          <!--classpath*:/META-INF/spring-persistence-context.xml,-->
+          classpath*:/META-INF/spring-persistence-context.xml,
           classpath*:/META-INF/spring-services-context.xml
         </param-value>
     </context-param>
@@ -29,6 +29,6 @@
 
     <servlet-mapping>
         <servlet-name>SQTLServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>sqtl/*</url-pattern>
     </servlet-mapping>
 </web-app>
