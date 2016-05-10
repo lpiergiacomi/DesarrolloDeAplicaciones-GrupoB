@@ -1,7 +1,6 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
 import ar.edu.unq.desapp.grupob.model.DayOfWeekRideDate;
-import ar.edu.unq.desapp.grupob.model.Product;
 import ar.edu.unq.desapp.grupob.model.RideDate;
 import ar.edu.unq.desapp.grupob.repositories.RideDateRepository;
 import org.joda.time.DateTimeConstants;
@@ -35,7 +34,7 @@ public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringCo
 
     @Test
     public void itShouldSaveARideDate() {
-        List<RideDate> rideDates = rideDateRepository.all();
+        List<RideDate> rideDates = rideDateRepository.getAll();
 
         assertEquals(rideDates.size(), 1);
     }
@@ -44,7 +43,7 @@ public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringCo
     public void itShouldDeleteARideDate() {
         rideDateRepository.delete(dayOfWeekRideDate.getId());
 
-        assertEquals(rideDateRepository.all().size(), 0);
+        assertEquals(rideDateRepository.getAll().size(), 0);
     }
 
 }

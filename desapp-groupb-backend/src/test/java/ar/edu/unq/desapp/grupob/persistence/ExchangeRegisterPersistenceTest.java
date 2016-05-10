@@ -46,7 +46,7 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
 
     @Test
     public void itShouldSaveAExchangeRegister() {
-        List<ExchangeRegister> exchangeRegisters = exchangerRegisterRepository.all();
+        List<ExchangeRegister> exchangeRegisters = exchangerRegisterRepository.getAll();
 
         assertEquals(exchangeRegisters.size(), 1);
     }
@@ -66,7 +66,7 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
     public void itShouldDeleteAExchangeRegister() {
         exchangerRegisterRepository.delete(exchangeRegister.getId());
 
-        assertEquals(exchangerRegisterRepository.all().size(), 0);
+        assertEquals(exchangerRegisterRepository.getAll().size(), 0);
     }
 
 }

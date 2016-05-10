@@ -60,7 +60,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void itShouldSaveARide() {
-        List<Ride> rides = rideRepository.all();
+        List<Ride> rides = rideRepository.getAll();
 
         assertEquals(rides.size(), 1);
     }
@@ -81,6 +81,6 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     public void itShouldDeleteARide() {
         rideRepository.delete(ride.getId());
 
-        assertEquals(rideRepository.all().size(), 0);
+        assertEquals(rideRepository.getAll().size(), 0);
     }
 }

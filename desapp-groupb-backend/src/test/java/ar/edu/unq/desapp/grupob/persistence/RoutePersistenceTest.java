@@ -31,7 +31,7 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
 
     @Test
     public void itShouldSaveARoute() {
-        List<Route> routes = routeRepository.all();
+        List<Route> routes = routeRepository.getAll();
 
         assertEquals(routes.size(), 1);
     }
@@ -50,6 +50,6 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
     public void itShouldDeleteARoute() {
         routeRepository.delete(route.getId());
 
-        assertEquals(routeRepository.all().size(), 0);
+        assertEquals(routeRepository.getAll().size(), 0);
     }
 }

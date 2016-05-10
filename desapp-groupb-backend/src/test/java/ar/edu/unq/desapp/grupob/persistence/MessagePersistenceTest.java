@@ -40,7 +40,7 @@ public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringCon
 
     @Test
     public void itShouldSaveAMessage() {
-        List<Message> messages = messagesRepository.all();
+        List<Message> messages = messagesRepository.getAll();
 
         assertEquals(messages.size(), 1);
     }
@@ -59,7 +59,7 @@ public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringCon
     public void itShouldDeleteAMessage() {
         messagesRepository.delete(publicMessage.getId());
 
-        assertEquals(messagesRepository.all().size(), 0);
+        assertEquals(messagesRepository.getAll().size(), 0);
     }
 
 }

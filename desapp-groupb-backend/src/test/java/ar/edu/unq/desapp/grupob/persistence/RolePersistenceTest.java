@@ -1,8 +1,6 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
-import ar.edu.unq.desapp.grupob.model.Driver;
 import ar.edu.unq.desapp.grupob.model.Passenger;
-import ar.edu.unq.desapp.grupob.model.Product;
 import ar.edu.unq.desapp.grupob.model.Role;
 import ar.edu.unq.desapp.grupob.repositories.RoleRepository;
 import org.junit.Before;
@@ -35,7 +33,7 @@ public class RolePersistenceTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void itShouldSaveARole() {
-        List<Role> roles = roleRepository.all();
+        List<Role> roles = roleRepository.getAll();
 
         assertEquals(roles.size(), 1);
     }
@@ -52,7 +50,7 @@ public class RolePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     public void itShouldDeleteARole() {
         roleRepository.delete(passenger.getId());
 
-        assertEquals(roleRepository.all().size(), 0);
+        assertEquals(roleRepository.getAll().size(), 0);
     }
 }
 

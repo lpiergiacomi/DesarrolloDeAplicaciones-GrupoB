@@ -31,7 +31,7 @@ public class VehiclePersistenceTest extends AbstractTransactionalJUnit4SpringCon
 
     @Test
     public void itShouldSaveAVehicle() {
-        List<Vehicle> vehicles = vehicleRepository.all();
+        List<Vehicle> vehicles = vehicleRepository.getAll();
 
         assertEquals(vehicles.size(), 1);
     }
@@ -50,6 +50,6 @@ public class VehiclePersistenceTest extends AbstractTransactionalJUnit4SpringCon
     public void itShouldDeleteAVehicle() {
         vehicleRepository.delete(vehicle.getId());
 
-        assertEquals(vehicleRepository.all().size(), 0);
+        assertEquals(vehicleRepository.getAll().size(), 0);
     }
 }

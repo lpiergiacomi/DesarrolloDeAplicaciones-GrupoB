@@ -45,7 +45,7 @@ public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void itShouldSaveAShop() {
-        List<Shop> shops = shopRepository.all();
+        List<Shop> shops = shopRepository.getAll();
 
         assertEquals(shops.size(), 1);
     }
@@ -68,6 +68,6 @@ public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContex
     public void itShouldDeleteAShop() {
         shopRepository.delete(shop.getId());
 
-        assertEquals(shopRepository.all().size(), 0);
+        assertEquals(shopRepository.getAll().size(), 0);
     }
 }

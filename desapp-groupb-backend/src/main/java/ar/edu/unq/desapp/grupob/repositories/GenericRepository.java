@@ -2,10 +2,12 @@ package ar.edu.unq.desapp.grupob.repositories;
 
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public abstract class GenericRepository<T> extends HibernateDaoSupport {
 
     protected Class<T> persistentClass = this.getDomainClass();
@@ -18,7 +20,7 @@ public abstract class GenericRepository<T> extends HibernateDaoSupport {
 
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
-    public List<T> all() {
+    public List<T> getAll() {
         return (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName() + " o");
     }
 
