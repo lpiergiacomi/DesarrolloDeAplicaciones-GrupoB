@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name holisApp.controller:MainCtrl
+ * @name subiQueTeLlevoApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the holisApp
+ * Controller of the subiQueTeLlevoApp
  */
-angular.module('holisApp')
+angular.module('subiQueTeLlevoApp')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
