@@ -4,9 +4,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xmlns:cxf="http://cxf.apache.org/core"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
-                           http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+                           http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd"
+       xmlns:aop="http://www.springframework.org/schema/aop
+                  http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
@@ -27,9 +30,13 @@
         </jaxrs:providers>
     </jaxrs:server>
 
+    <aop:aspectj-autoproxy />
+
 	<bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductsService">
 		<property name="repository" ref="persistence.productsRepository" />
 	</bean>
+
+	<bean id="logAspect" class="ar.edu.unq.desapp.grupob.services.LoggingAspect" />
 
   <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
 </beans>
