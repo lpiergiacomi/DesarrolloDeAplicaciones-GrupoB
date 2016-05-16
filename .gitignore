@@ -21,3 +21,4 @@ logs/
 /bower_components
 
 *.log
+*.log.*
