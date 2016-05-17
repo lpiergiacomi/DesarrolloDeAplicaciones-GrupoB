@@ -20,7 +20,7 @@ var app = angular
         'pascalprecht.translate',
         ])
 
-app.controller('HomeController', function ($scope, $http) {
+app.controller('HomeController', function ($scope, $http, $translate) {
     $scope.login = true;
     $scope.register = true;
     $scope.showButtonsAccounts = true;
@@ -34,6 +34,10 @@ app.controller('HomeController', function ($scope, $http) {
     $scope.showRegisterForm= function(){
       $scope.register = false;
       $scope.showButtonsAccounts = false;
+    }
+    $scope.setLanguage= function(keyLanguage){
+     console.log("HOLa");
+     $translate.use(keyLanguage);
     }
 
     $scope.selectDriver= function(){
