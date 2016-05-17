@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 
-var subiQueTeLlevoApp = angular
+var app = angular
 .module('subiQueTeLlevoApp', [
         'ngAnimate',
         'ngCookies',
@@ -19,32 +19,57 @@ var subiQueTeLlevoApp = angular
         'ngTouch'
         ])
 
-subiQueTeLlevoApp.controller('RecorridosController', function ($scope, $http) {
+app.controller('HomeController', function ($scope, $http) {
+    $scope.login = true;
+    $scope.register = true;
+    $scope.showButtonsAccounts = true;
+    $scope.isDriverSelected = false;
 
+    $scope.showLoginForm= function(){
+      $scope.login = false;
+      $scope.showButtonsAccounts = false;
+    }
 
-    $scope.rides=[{"id": 1, "driver": "pepe", "route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
-    {"id": 2, "driver": "raul" , "route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
-    ];
+    $scope.showRegisterForm= function(){
+      $scope.register = false;
+      $scope.showButtonsAccounts = false;
+    }
 
-    $scope.myRides=[{"route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
-    {"route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
-    ];
+    $scope.selectDriver= function(){
+      $scope.isDriverSelected = !$scope.isDriverSelected;
+    }
 
-    $scope.lista = false;
+   $scope.resetForm =function(){
+      $scope.showButtonsAccounts = true;
+      $scope.login = true;
+      $scope.register = true;
+   }
+
+   $scope.createUser=function(user){
+    $http.post($scope.baseUrl +'/create/user/' ,
+                   {"username":user.name, "stock":product.stock, "cost":product.cost})
+           .success(function(data){
+              $scope.productNew = {"name": "", "stock":"","cost":""};
+    })
+
+   }
+
+})
+
+app.controller('ProductController', function ($scope, $http) {
     $scope.baseUrl = "http://localhost:8080/sqtl";
-    $scope.productNew= {"name": "", "stock":"","cost":""}
     $scope.addProduct=false;
     $scope.showAllProducts = false;
     $scope.productFind = 0;
-    $scope.showSuccessAlert = false;
+    $scope.productNew= {"name": "", "stock":"","cost":""}
 
     $scope.showProductForm= function(){
-        $scope.addProduct=true;
+         $scope.addProduct=true;
     }
 
     $scope.resetProductForm=function(){
         $scope.addProduct=false;
-        $scope.productNew = {};
+        $scope.productNew = {"name": "", "stock":"","cost":""};
     }
 
     $scope.saveProductForm= function(product){
@@ -52,7 +77,7 @@ subiQueTeLlevoApp.controller('RecorridosController', function ($scope, $http) {
         $http.post($scope.baseUrl +'/products/' ,
                 {"name":product.name, "stock":product.stock, "cost":product.cost})
         .success(function(data){
-           $scope.productNew = {};
+           $scope.productNew = {"name": "", "stock":"","cost":""};
         })
         $scope.addProduct=false;
     }
@@ -65,10 +90,6 @@ subiQueTeLlevoApp.controller('RecorridosController', function ($scope, $http) {
                 $scope.showAllProducts = true;
             })
     }
-    // lo quiero usar para el alert
-    $scope.switchBool = function(value) {
-        $scope[value] = !$scope[value];
-    };
 
     $scope.findProduct = function(product){
         console.log(product);
@@ -77,6 +98,29 @@ subiQueTeLlevoApp.controller('RecorridosController', function ($scope, $http) {
 
             })
     }
+})
+
+app.controller('RecorridosController', function ($scope, $http) {
+
+
+    $scope.rides=[{"id": 1, "driver": "pepe", "route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
+    {"id": 2, "driver": "raul" , "route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
+    ];
+
+    $scope.myRides=[{"route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
+    {"route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
+    ];
+
+    $scope.lista = false;
+    $scope.baseUrl = "http://localhost:8080/sqtl";
+    $scope.showSuccessAlert = false;
+    $scope.showMap= false;
+
+
+    // lo quiero usar para el alert
+    $scope.switchBool = function(value) {
+        $scope[value] = !$scope[value];
+    };
 
     $scope.joinRide = function(rideId){
         $scope.rides = [{"id": 2, "driver": "raul" , "route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}];
@@ -88,5 +132,5 @@ subiQueTeLlevoApp.controller('RecorridosController', function ($scope, $http) {
            })*/
     }
 
-    $scope.showMap= false;
+
 })
