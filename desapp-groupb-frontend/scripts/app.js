@@ -36,7 +36,6 @@ app.controller('HomeController', function ($scope, $http, $translate) {
       $scope.showButtonsAccounts = false;
     }
     $scope.setLanguage= function(keyLanguage){
-     console.log("HOLa");
      $translate.use(keyLanguage);
     }
 
@@ -62,10 +61,10 @@ app.controller('HomeController', function ($scope, $http, $translate) {
 })
 
 app.controller('ProductController', function ($scope, $http) {
-    $scope.baseUrl = "http://localhost:8080/sqtl";
+    $scope.baseUrl = "http://localhost:8080/sqtl/products/";
     $scope.addProduct=false;
     $scope.showAllProducts = false;
-    $scope.productFind = 0;
+    $scope.productFind;
     $scope.productNew= {"name": "", "stock":"","cost":""}
 
     $scope.showProductForm= function(){
@@ -79,7 +78,7 @@ app.controller('ProductController', function ($scope, $http) {
 
     $scope.saveProductForm= function(product){
         console.log(product);
-        $http.post($scope.baseUrl +'/products/' ,
+        $http.post($scope.baseUrl,
                 {"name":product.name, "stock":product.stock, "cost":product.cost})
         .success(function(data){
            $scope.productNew = {"name": "", "stock":"","cost":""};
@@ -88,19 +87,18 @@ app.controller('ProductController', function ($scope, $http) {
     }
 
     $scope.getAllProducts= function(){
-        $http.get($scope.baseUrl +'/products/all/')
+        $http.get($scope.baseUrl + 'all')
             .success(function(data){
-                console.log(data);
                 $scope.allProducts = data;
                 $scope.showAllProducts = true;
             })
     }
 
     $scope.findProduct = function(product){
-        console.log(product);
-        $http.get($scope.baseUrl +'/products/'+ 1)
+        $http.get($scope.baseUrl + product)
             .success(function(data){
-
+                $scope.allProductgs = [data];
+                $scope.showAllProducts = true;
             })
     }
 })
