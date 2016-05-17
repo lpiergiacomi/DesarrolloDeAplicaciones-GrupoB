@@ -1,187 +1,303 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="utf-8">
-<title>Subi que te llevo!</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<!-- build:css(.) styles/vendor.css -->
-<!-- bower:css -->
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-<!-- endbower -->
-<!-- endbuild -->
-<!-- build:css(.tmp) styles/main.css -->
+<meta name="author" content="">
+
+<title>Subi que te llevo</title>
+
+<!-- Custom CSS -->
+<link href="styles/stylish-portfolio.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet"  href="styles/main.css">
-<!-- endbuild -->
-<link rel="stylesheet"  href="styles/maps.css">
-<script src="scripts/controllers/maps.js"></script>
-<style>
-#map {height: 440px; padding: 20px; border: 2px solid #CCC; margin-bottom: 20px; background-color:#FFF}
-</style>
+  <style>
+    #map {height: 440px; padding: 20px; border: 2px solid #CCC; margin-bottom: 20px; background-color:#FFF}
+  </style>
 </head>
+
 <body ng-app="subiQueTeLlevoApp">
-<h1 class="page-header">Subi que te llevo!!</h1>
-<div class="alert alert-success" ng-show="showSuccessAlert">
-  <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
-  <strong>Done!</strong> {{successTextAlert}}
-</div>
-<div  data-ng-controller="RecorridosController">
-    <div class="col-xs-4">
-        <div class="from-group">
-            <h2>Recorridos disponibles</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Conductor</th>
-                        <th>Dia</th>
-                        <th>Desde</th>
-                        <th>Hasta</th>
-                        <th>Unirse</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="ride in rides">
-                    <td>{{ride.driver}}</td>
-                    <td>{{ride.date}}</td>
-                    <td>{{ride.route.from}}</td>
-                    <td>{{ride.route.to}}</td>
-                    <td><button class="btn btn-sm btn-success" ng-click="joinRide(ride.id)">Unirse</button></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="from-group">
-            <h2>Mis Recorridos</h2>
-            <div role="tabpanel">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                    <a href="#conductor" aria-controls="pasajero" role="tab" data-toggle="tab">
-                        Conductor
-                    </a>
-                    </li>
-                    <li role="presentation">
-                    <a href="#pasajero" aria-controls="conductor" role="tab" data-toggle="tab">
-                        Pasajero
-                    </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="pasajero">
-                        <table class="table" >
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper" data-ng-controller="HomeController">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+        <a href="#top"  onclick = $("#menu-close").click(); >Subi que te llevo!</a>
+        </li>
+        <li>
+        <a href="#top" onclick = $("#menu-close").click(); >{{'HOME' | translate}}</a>
+        </li>
+        <li>
+        <a href="#myRides" onclick = $("#menu-close").click(); >{{'MY_RIDES' | translate}}</a>
+        </li>
+        <li>
+        <a href="#products" onclick = $("#menu-close").click(); >{{'PRODUCTS' | translate}}</a>
+        </li>
+      <li>
+        <a ng-click="setLanguage('sp')">Español</a>
+        <a ng-click="setLanguage('en')">Ingles</a>
+      </li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<header id="top" class="header" data-ng-controller="HomeController">
+    <div class="text-vertical-center">
+        <h1>Subi que te llevo</h1>
+        <br>
+        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showRegisterForm()">{{'REGISTER' | translate}}</a>
+        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showLoginForm()">{{'LOGIN' | translate}}</a>
+        <form class="registration" ng-hide="register">
+            <input type="text" placeholder="{{'USERNAME' | translate}}" required><br>
+            <input type="text" placeholder="{{'EMAIL' | translate}}" required><br>
+            <input type="checkbox" ng-click="selectDriver()"> {{'CHECKBOX_DRIVER' | translate}}<br>
+            <select ng-show="isDriverSelected">
+                <option value="" disabled selected>{{'TYPE_VEHICLE' | translate}}</option>
+                <option value="volvo">Car</option>
+                <option value="saab">Van</option>
+            </select><br>
+            <input type="number" ng-show="isDriverSelected"  placeholder="{{'VEHICLE_CAPACITY' | translate}}"><br>
+            <input type="submit" ng-click="createUser()"  value="{{'REGISTER' | translate}}">
+            <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
+        </form>
+       <form class="registration" ng-hide="login">
+        <input type="text" placeholder="Username or email" required><br>
+        <input type="text" placeholder="" required><br>
+        <input type="submit" ng-click="loginUser()"  value="{{'LOGIN' | translate}}">
+        <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
+      </form>
+    </div>
+</header>
+
+
+<!-- About -->
+<section id="myRides" class="rides" data-ng-controller="RecorridosController">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Mis Recorridos</h2>
+                <hr class="small">
+                <div class="row">
+                    <div class="from-group">
+                        <h2>Recorridos disponibles</h2>
+                        <table class="table">
                             <thead>
                                 <tr>
+                                    <th>Conductor</th>
                                     <th>Dia</th>
                                     <th>Desde</th>
                                     <th>Hasta</th>
+                                    <th>Unirse</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr data-ng-repeat="ride in myRides">
+                            <tr data-ng-repeat="ride in rides">
+                                <td>{{ride.driver}}</td>
                                 <td>{{ride.date}}</td>
                                 <td>{{ride.route.from}}</td>
                                 <td>{{ride.route.to}}</td>
+                                <td><button class="btn btn-sm btn-success" ng-click="joinRide(ride.id)">Unirse</button></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="conductor">
-                        <table class="prices table" id="price_options">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Desde</th>
-                                    <th>Hasta</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr data-ng-repeat="ride in myRides">
-                                <td>{{ride.date}}</td>
-                                <td>{{ride.route.from}}</td>
-                                <td>{{ride.route.to}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="from-group">
+                        <h2>Mis Recorridos</h2>
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                <a href="#conductor" aria-controls="pasajero" role="tab" data-toggle="tab">
+                                    Conductor
+                                </a>
+                                </li>
+                                <li role="presentation">
+                                <a href="#pasajero" aria-controls="conductor" role="tab" data-toggle="tab">
+                                    Pasajero
+                                </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="pasajero">
+                                    <table class="table" >
+                                        <thead>
+                                            <tr>
+                                                <th>Dia</th>
+                                                <th>Desde</th>
+                                                <th>Hasta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="ride in myRides">
+                                            <td>{{ride.date}}</td>
+                                            <td>{{ride.route.from}}</td>
+                                            <td>{{ride.route.to}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="conductor">
+                                    <table class="prices table" id="price_options">
+                                        <thead>
+                                            <tr>
+                                                <th>Dia</th>
+                                                <th>Desde</th>
+                                                <th>Hasta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="ride in myRides">
+                                            <td>{{ride.date}}</td>
+                                            <td>{{ride.route.from}}</td>
+                                            <td>{{ride.route.to}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-4">
-        <div class="form-group">
-            <form novalidate name="myForm"  ng-show="addProduct">
-                <h2> Agregar Producto</h2>
+</section>
+<section id="products" class="products bg-primary" data-ng-controller="ProductController">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h2>Productos</h2>
+              <div class="row">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre" required>
-                    <div role="alert">
-                        <span class="error" ng-show="myForm.product.$error.required">
-                            Required!</span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger" ng-click="getAllProducts()"/> Todos los productos</button>
+                        <button class="btn btn-info btn-success" ng-hide="addProduct" ng-click="showProductForm()"> Agregar Producto</button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock" required>
-                    <div role="alert">
-                        <span class="error" ng-show="myForm.lastName.$error.minlength">
-                            Too short!</span>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="productSearch" ng-model="productFind" placeholder="Producto a buscar">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" ng-click="findProduct(productFind)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost" required>
-                    <div role="alert">
-                        <span class="error" ng-show="myForm.lastName.$error.minlength">
-                            Too short!</span>
-                    </div>
+            </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <form novalidate name="myForm"  ng-show="addProduct">
+                      <h2> Agregar Producto</h2>
+                      <div class="form-group">
+                        <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre" required>
+                        <div role="alert">
+                                <span class="error" ng-show="myForm.product.$error.required">
+                                    Required!</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock" required>
+                        <div role="alert">
+                                <span class="error" ng-show="myForm.lastName.$error.minlength">
+                                    Too short!</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost" required>
+                        <div role="alert">
+                                <span class="error" ng-show="myForm.lastName.$error.minlength">
+                                    Too short!</span>
+                        </div>
+                      </div>
+                      <input type="button" class="btn btn-danger" ng-click="resetProductForm()" value="Reset" />
+                      <input type="submit" class="btn btn-success" ng-click="saveProductForm(productNew)" value="Save" />
+                    </form>
+                  </div>
+                  <div class="form-group" ng-show="showAllProducts">
+                    <table class="prices table">
+                      <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Stock</th>
+                        <th>Costo</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr data-ng-repeat="product in allProducts">
+                        <td>{{product.name}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>$ {{product.cost}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <input type="button" class="btn btn-danger" ng-click="resetProductForm()" value="Reset" />
-                <input type="submit" class="btn btn-success" ng-click="saveProductForm(productNew)" value="Save" />
-            </form>
-        </div>
-        <div class="form-group" ng-show="showAllProducts">
-            <table class="prices table">
-              <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Stock</th>
-                <th>Costo</th>
-              </tr>
-              </thead>
-                <tbody>
-                <tr data-ng-repeat="product in allProducts">
-                    <td>{{product.name}}</td>
-                    <td>{{product.stock}}</td>
-                    <td>$ {{product.cost}}</td>
-                </tr>
-                </tbody>
-            </table>
+              </div>
+            </div>
         </div>
     </div>
-    <div class="col-xs-4">
-      <div class="form-group">
-        <div class="btn-group">
-          <button type="button" class="btn btn-danger" ng-click="getAllProducts()"/> Todos los productos</button>
-          <button class="btn btn-info btn-success" ng-hide="addProduct" ng-click="showProductForm()"> Agregar Producto</button>
-        </div>
-      </div>
-      <div class="form-group">
-          <div class="input-group">
-            <input type="text" class="form-control" name="productSearch" ng-model="productFind" placeholder="Producto a buscar">
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-default" ng-click="findProduct(productFind)">
-                  <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-          </div>
-      </div>
-    </div>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-!function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-    r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-}(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+</section>
 
-ga('create', 'UA-XXXXX-X');
-ga('send', 'pageview');
+<!-- Map
+<section id="contact" class="map">
+  <input id="origin-input" class="controls" type="text"
+         placeholder="Desde">
+
+  <input id="destination-input" class="controls" type="text"
+         placeholder="Hasta">
+
+  <div id="map"></div>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNTAVH_1zEZBZUNBA6dGcVchluktaaaBU&libraries=places&callback=initMap"
+    async defer></script>
+</section>
+-->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+// Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
+            });
+
+// Opens the sidebar menu
+$("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+        });
+
+// Scrolls to the selected menu item on the page
+$(function() {
+        $('a href').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+            $('html,body').animate({
+scrollTop: target.offset().top
+}, 1000);
+            return false;
+            }
+            }
+            });
+        });
     </script>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -195,13 +311,18 @@ ga('send', 'pageview');
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/maps.js"></script>
     <!-- endbuild -->
-    </body>
-    </html>
+
+</body>
+
+</html>
