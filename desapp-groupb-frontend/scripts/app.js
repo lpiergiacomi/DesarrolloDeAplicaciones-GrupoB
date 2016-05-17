@@ -155,7 +155,7 @@ app.config(function($translateProvider) {
       'TYPE_VEHICLE': 'Select your vehicle type',
   })
 
-  $translateProvider.translations('es', {
+  $translateProvider.translations('sp', {
         'REGISTER': 'Registrarse',
         'LOGIN': 'Login',
         'HOME': 'Home',
