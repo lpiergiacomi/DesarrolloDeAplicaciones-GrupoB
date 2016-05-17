@@ -26,21 +26,25 @@
 <body ng-app="subiQueTeLlevoApp">
 <!-- Navigation -->
 <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-<nav id="sidebar-wrapper">
+<nav id="sidebar-wrapper" data-ng-controller="HomeController">
     <ul class="sidebar-nav">
         <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
         <li class="sidebar-brand">
         <a href="#top"  onclick = $("#menu-close").click(); >Subi que te llevo!</a>
         </li>
         <li>
-        <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+        <a href="#top" onclick = $("#menu-close").click(); >{{'HOME' | translate}}</a>
         </li>
         <li>
-        <a href="#myRides" onclick = $("#menu-close").click(); >My Rides</a>
+        <a href="#myRides" onclick = $("#menu-close").click(); >{{'MY_RIDES' | translate}}</a>
         </li>
         <li>
-        <a href="#products" onclick = $("#menu-close").click(); >Products</a>
+        <a href="#products" onclick = $("#menu-close").click(); >{{'PRODUCTS' | translate}}</a>
         </li>
+      <li>
+        <a hg-click="switchLanguage('es')">Español</a>
+        <a hg-click="switchLanguage('en')">Ingles</a>
+      </li>
     </ul>
 </nav>
 
@@ -49,26 +53,26 @@
     <div class="text-vertical-center">
         <h1>Subi que te llevo</h1>
         <br>
-        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showRegisterForm()">Register</a>
-        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showLoginForm()">Log in</a>
+        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showRegisterForm()">{{'REGISTER' | translate}}</a>
+        <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showLoginForm()">{{'LOGIN' | translate}}</a>
         <form class="registration" ng-hide="register">
-            <input type="text" placeholder="User name" required><br>
-            <input type="text" placeholder="Email" required><br>
-            <input type="checkbox" ng-click="selectDriver()"> Do you have a car and want to be a driver? Select if you do! <br>
+            <input type="text" placeholder="{{'USERNAME' | translate}}" required><br>
+            <input type="text" placeholder="{{'EMAIL' | translate}}" required><br>
+            <input type="checkbox" ng-click="selectDriver()"> {{'CHECKBOX_DRIVER' | translate}}<br>
             <select ng-show="isDriverSelected">
-                <option value="" disabled selected>Select your vehicle type</option>
+                <option value="" disabled selected>{{'TYPE_VEHICLE' | translate}}</option>
                 <option value="volvo">Car</option>
                 <option value="saab">Van</option>
             </select><br>
-            <input type="number" ng-show="isDriverSelected"  placeholder="Vehicle capacity"><br>
-            <input type="submit" ng-click="createUser()"  value="Register">
-            <input type="submit" ng-click="resetForm()"  value="Cancel">
+            <input type="number" ng-show="isDriverSelected"  placeholder="{{'VEHICLE_CAPACITY' | translate}}"><br>
+            <input type="submit" ng-click="createUser()"  value="{{'REGISTER' | translate}}">
+            <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
         </form>
        <form class="registration" ng-hide="login">
         <input type="text" placeholder="Username or email" required><br>
-        <input type="text" placeholder="Password" required><br>
-        <input type="submit" ng-click="loginUser()"  value="Login">
-        <input type="submit" ng-click="resetForm()"  value="Cancel">
+        <input type="text" placeholder="" required><br>
+        <input type="submit" ng-click="loginUser()"  value="{{'LOGIN' | translate}}">
+        <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
       </form>
     </div>
 </header>
@@ -307,10 +311,12 @@ scrollTop: target.offset().top
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>

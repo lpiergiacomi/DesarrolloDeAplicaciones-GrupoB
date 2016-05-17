@@ -16,7 +16,8 @@ var app = angular
         'ngResource',
         'ngRoute',
         'ngSanitize',
-        'ngTouch'
+        'ngTouch',
+        'pascalprecht.translate',
         ])
 
 app.controller('HomeController', function ($scope, $http) {
@@ -132,5 +133,37 @@ app.controller('RecorridosController', function ($scope, $http) {
            })*/
     }
 
+
+})
+
+app.config(function($translateProvider) {
+  $translateProvider.translations('en', {
+      'REGISTER': 'Register',
+      'LOGIN': 'Login',
+      'HOME': 'Home',
+      'MY_RIDES': 'My rides',
+      'PRODUCTS': 'Products',
+      'USERNAME': 'Username',
+      'EMAIL':'Email',
+      'CHECKBOX_DRIVER':'Do you have a car and want to be a driver? Select if you do!',
+      'CANCEL':'Cancel',
+      'VEHICLE_CAPACITY':'Vehicle capacity',
+      'TYPE_VEHICLE': 'Select your vehicle type',
+  })
+
+  $translateProvider.translations('es', {
+        'REGISTER': 'Registrarse',
+        'LOGIN': 'Login',
+        'HOME': 'Home',
+        'MY_RIDES': 'Mis recorridos',
+        'PRODUCTS': 'Productos',
+        'USERNAME': 'Nombre de usuario',
+        'EMAIL':'Email',
+        'CHECKBOX_DRIVER':'Selecciona si tenes un auto y queres ser conductor!',
+        'CANCEL':'Cancelar',
+        'VEHICLE_CAPACITY':'Capacidad del vehiculo',
+        'TYPE_VEHICLE': 'Selecciona tu tipo de vehiculo',
+    })
+  $translateProvider.preferredLanguage('en');
 
 })
