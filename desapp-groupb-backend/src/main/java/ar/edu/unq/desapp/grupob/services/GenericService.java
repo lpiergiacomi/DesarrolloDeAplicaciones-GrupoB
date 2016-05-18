@@ -41,7 +41,7 @@ public class GenericService<T> implements Serializable {
   @Path("/{id}")
   @Produces("application/json")
   @Transactional(readOnly = true)
-  public T get(Integer id) {
+  public T get(@PathParam("id") Integer id) {
     return this.getRepository().find(id);
   }
 

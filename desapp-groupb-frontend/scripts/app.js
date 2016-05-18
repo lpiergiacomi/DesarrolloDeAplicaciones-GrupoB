@@ -21,10 +21,12 @@ var app = angular
         ])
 
 app.controller('HomeController', function ($scope, $http, $translate) {
+    $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.login = true;
     $scope.register = true;
     $scope.showButtonsAccounts = true;
     $scope.isDriverSelected = false;
+    $scope.user;
 
     $scope.showLoginForm= function(){
       $scope.login = false;
@@ -49,11 +51,14 @@ app.controller('HomeController', function ($scope, $http, $translate) {
       $scope.register = true;
    }
 
+   $scope.loginUser=function(user){
+      $http.get($scope.baseUrl + 'users/' + user.email + '/' + user.password)
+   }
+
    $scope.createUser=function(user){
-    $http.post($scope.baseUrl +'/create/user/' ,
-                   {"username":user.name, "stock":product.stock, "cost":product.cost})
-           .success(function(data){
-              $scope.productNew = {"name": "", "stock":"","cost":""};
+    $http.get($scope.baseUrl + 'users/register/' + user.email + '/' + user.password)
+    .success(function(data){
+        $scope.user = data;
     })
 
    }
@@ -145,8 +150,8 @@ app.config(function($translateProvider) {
       'HOME': 'Home',
       'MY_RIDES': 'My rides',
       'PRODUCTS': 'Products',
-      'USERNAME': 'Username',
       'EMAIL':'Email',
+      'PASSWORD':'Contraseña',
       'CHECKBOX_DRIVER':'Do you have a car and want to be a driver? Select if you do!',
       'CANCEL':'Cancel',
       'VEHICLE_CAPACITY':'Vehicle capacity',
@@ -159,8 +164,8 @@ app.config(function($translateProvider) {
         'HOME': 'Home',
         'MY_RIDES': 'Mis recorridos',
         'PRODUCTS': 'Productos',
-        'USERNAME': 'Nombre de usuario',
         'EMAIL':'Email',
+        'PASSWORD':'Contraseña',
         'CHECKBOX_DRIVER':'Selecciona si tenes un auto y queres ser conductor!',
         'CANCEL':'Cancelar',
         'VEHICLE_CAPACITY':'Capacidad del vehiculo',

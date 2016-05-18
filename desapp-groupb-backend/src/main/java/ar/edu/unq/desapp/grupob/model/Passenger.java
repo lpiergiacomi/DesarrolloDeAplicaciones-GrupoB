@@ -8,6 +8,8 @@ import java.beans.Transient;
 @Entity
 public class Passenger extends Role {
 
+    public Passenger(){}
+
     @Transient
     public boolean passenger(){
         return true;
