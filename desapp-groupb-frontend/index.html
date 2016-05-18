@@ -33,6 +33,9 @@
         <a href="#top"  onclick = $("#menu-close").click(); >Subi que te llevo!</a>
         </li>
         <li>
+            <span>{{user.email}}</span> // FIXME
+        </li>
+        <li>
         <a href="#top" onclick = $("#menu-close").click(); >{{'HOME' | translate}}</a>
         </li>
         <li>
@@ -56,8 +59,8 @@
         <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showRegisterForm()">{{'REGISTER' | translate}}</a>
         <a class="btn btn-dark btn-lg" ng-show="showButtonsAccounts" ng-click="showLoginForm()">{{'LOGIN' | translate}}</a>
         <form class="registration" ng-hide="register">
-            <input type="text" placeholder="{{'USERNAME' | translate}}" required><br>
-            <input type="text" placeholder="{{'EMAIL' | translate}}" required><br>
+            <input type="text" ng-model="user.email" placeholder="{{'EMAIL' | translate}}" required><br>
+            <input type="text" ng-model="user.password" placeholder="{{'PASSWORD' | translate}}" required><br>
             <input type="checkbox" ng-click="selectDriver()"> {{'CHECKBOX_DRIVER' | translate}}<br>
             <select ng-show="isDriverSelected">
                 <option value="" disabled selected>{{'TYPE_VEHICLE' | translate}}</option>
@@ -65,13 +68,13 @@
                 <option value="saab">Van</option>
             </select><br>
             <input type="number" ng-show="isDriverSelected"  placeholder="{{'VEHICLE_CAPACITY' | translate}}"><br>
-            <input type="submit" ng-click="createUser()"  value="{{'REGISTER' | translate}}">
+            <input type="submit" ng-click="createUser(user)"  value="{{'REGISTER' | translate}}">
             <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
         </form>
        <form class="registration" ng-hide="login">
         <input type="text" placeholder="Username or email" required><br>
         <input type="text" placeholder="" required><br>
-        <input type="submit" ng-click="loginUser()"  value="{{'LOGIN' | translate}}">
+        <input type="submit" ng-click="loginUser(user)"  value="{{'LOGIN' | translate}}">
         <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
       </form>
     </div>
