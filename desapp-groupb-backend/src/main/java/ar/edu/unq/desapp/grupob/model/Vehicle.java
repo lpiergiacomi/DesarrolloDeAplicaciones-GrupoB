@@ -12,6 +12,8 @@ public class Vehicle {
     private int capacity, rate, id;
     private double costPerKm;
 
+    public Vehicle(){}
+
     public Vehicle(int capacity, double costPerKm) {
         this.capacity = capacity;
         this.rate = 0;

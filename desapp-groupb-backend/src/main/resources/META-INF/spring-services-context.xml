@@ -5,11 +5,11 @@
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xmlns:cxf="http://cxf.apache.org/core"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
                            http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
@@ -19,6 +19,8 @@
     <jaxrs:server id="sqtl" address="/">
         <jaxrs:serviceBeans>
             <ref bean="services.productsService" />
+            <ref bean="services.usersService" />
+            <ref bean="services.rideRequestsService" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -33,11 +35,16 @@
 
     <aop:aspectj-autoproxy />
 
-    <bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductsService">
-        <property name="repository" ref="persistence.productsRepository" />
-    </bean>
-
     <bean id="logAspect" class="ar.edu.unq.desapp.grupob.services.LoggingAspect" />
-
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
+
+	  <bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductService">
+		    <property name="repository" ref="persistence.productsRepository" />
+	  </bean>
+    <bean id="services.usersService" class="ar.edu.unq.desapp.grupob.services.UserService">
+        <property name="repository" ref="persistence.userRepository" />
+    </bean>
+  <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
+        <property name="repository" ref="persistence.rideRequestRepository" />
+    </bean>
 </beans>

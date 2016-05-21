@@ -27,11 +27,6 @@ public class UserTest {
     }
 
     @Test
-    public void itShouldDenyTheUserHasAVehicle() {
-        assertFalse(user.hasVehicle());
-    }
-
-    @Test
     public void itShouldGetTheUsersRoutes() {
         Route route = mock(Route.class);
         user.addRoute(route);

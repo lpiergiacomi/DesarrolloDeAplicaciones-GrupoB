@@ -43,7 +43,6 @@ public class UserPersistenceTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void itShouldUpdateAUser() {
-        assertFalse(user.hasVehicle());
         Vehicle vehicle = new Vehicle(1, 2);
         vehicleRepository.save(vehicle);
 
