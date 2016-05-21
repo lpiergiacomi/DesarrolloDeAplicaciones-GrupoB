@@ -38,7 +38,7 @@ public class UserPersistenceTest extends AbstractTransactionalJUnit4SpringContex
     public void itShouldSaveAUser() {
         List<User> users = userRepository.getAll();
 
-        assertEquals(users.size(), 3);
+        assertEquals(users.size(), 1);
     }
 
     @Test
@@ -56,6 +56,6 @@ public class UserPersistenceTest extends AbstractTransactionalJUnit4SpringContex
     public void itShouldDeleteAUser() {
         userRepository.delete(user.getId());
 
-        assertEquals(userRepository.getAll().size(), 2);
+        assertEquals(userRepository.getAll().size(), 0);
     }
 }
