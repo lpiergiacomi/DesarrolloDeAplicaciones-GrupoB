@@ -13,6 +13,8 @@ public class Route {
     private double longitude;
     private Integer id;
 
+    public Route(){}
+
     public Route(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;

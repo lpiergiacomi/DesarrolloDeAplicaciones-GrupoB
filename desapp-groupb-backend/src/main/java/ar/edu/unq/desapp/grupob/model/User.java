@@ -125,6 +125,7 @@ public class User {
       this.driverRole = driverRole;
     }
 
+    @Column(nullable = false, columnDefinition = "int default 0")
     public int getPoints(){
           return points;
       }
