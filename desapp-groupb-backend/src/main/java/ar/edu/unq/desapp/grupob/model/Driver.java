@@ -1,5 +1,8 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.beans.Transient;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class Driver extends Role {
     }
 
     @OneToMany
-    @JoinColumn
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Route> getRoutes(){
         return routes;
     }

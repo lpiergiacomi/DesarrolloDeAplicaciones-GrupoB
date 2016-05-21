@@ -1,5 +1,8 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.beans.Transient;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public abstract class Role {
     private int badRate;
     private boolean hasOneBadRate;
     private List<RideRequest> rideRequests = new ArrayList<RideRequest>();
+    private List<Ride> rides = new ArrayList<Ride>();
     private Integer id;
 
     public Role(){
@@ -51,7 +55,7 @@ public abstract class Role {
     }
 
     @OneToMany
-    @JoinColumn
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<RideRequest> getRideRequests(){
         return rideRequests;
     }
@@ -62,6 +66,20 @@ public abstract class Role {
 
     public void addRideRequest(RideRequest rideRequest){
         rideRequests.add(rideRequest);
+    }
+
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public List<Ride> getRides(){
+        return rides;
+    }
+
+    public void setRides(List<Ride> rides) {
+        this.rides = rides;
+    }
+
+    public void addRide(Ride ride){
+        rides.add(ride);
     }
 
     public int receiveGoodRate() {

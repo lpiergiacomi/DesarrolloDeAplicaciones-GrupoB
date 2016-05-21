@@ -24,7 +24,7 @@
             <a href="#top" onclick = $("#menu-close").click(); >Subi que te llevo!</a>
             </li>
             <li>
-                <span>{{user.email}}</span> // FIXME
+                <a href="#">{{user.email}}</a>
             </li>
             <li>
             <a href="#top" onclick = $("#menu-close").click(); >{{'HOME' | translate}}</a>
@@ -35,10 +35,10 @@
             <li>
             <a href="#products" onclick = $("#menu-close").click(); >{{'PRODUCTS' | translate}}</a>
             </li>
-          <li>
-            <a ng-click="setLanguage('es')">Español</a>
-            <a ng-click="setLanguage('en')">English</a>
-          </li>
+            <li>
+              <a ng-click="setLanguage('es')">Español</a>
+              <a ng-click="setLanguage('en')">English</a>
+            </li>
         </ul>
     </nav>
 
@@ -74,7 +74,7 @@
         </div>
     </header>
 
-    <section id="myRides" class="rides container" data-ng-controller="RecorridosController">
+    <section id="myRoutes" class="rides container" data-ng-controller="RidesController">
             <span class="col-lg-12">
                 <h2>{{'ROUTES' | translate}}</h2>
                 <hr class="large">
@@ -83,61 +83,93 @@
                     <table class="table table-hover">
                         <thead>
                             <th>{{'DRIVER' | translate}}</th>
-                            <th>{{'DAY' | translate}}</th>
                             <th>{{'FROM' | translate}}</th>
                             <th>{{'TO' | translate}}</th>
-                            <th>{{'JOIN' | translate}}</th>
+                            <th></th>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="ride in rides">
-                            <td>{{ride.driver}}</td>
-                            <td>{{ride.date}}</td>
-                            <td>{{ride.route.from}}</td>
-                            <td>{{ride.route.to}}</td>
+                            <td>{{ride.driver.email}}</td>
+                            <td>{{ride.route.latitude}}</td>
+                            <td>{{ride.route.longitude}}</td>
                             <td>
-                                <button class="btn btn-dark" ng-click="joinRide(ride.id)">{{'JOIN' | translate}}</button>
+                                <button class="btn btn-dark" ng-click="joinRide(ride)">{{'JOIN' | translate}}</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="from-group">
-                    <h3>{{'MY_ROUTES' | translate}}</h3>
+                    <h3>{{'MY_RIDES' | translate}}</h3>
                     <div role="tabpanel">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#conductor" role="tab" data-toggle="tab">{{'DRIVER' | translate}}</a>
+                                <a href="#driver" role="tab" data-toggle="tab" ng-click="getDriverRides()">{{'DRIVER' | translate}}</a>
                             </li>
                             <li role="presentation">
-                                <a href="#pasajero" role="tab" data-toggle="tab">{{'PASSENGER' | translate}}</a>
+                                <a href="#passenger" role="tab" data-toggle="tab" ng-click="getPassengerRides()">{{'PASSENGER' | translate}}</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade in active" id="pasajero">
+                            <div role="tabpanel" class="tab-pane fade in active">
                                 <table class="table">
                                     <thead>
-                                        <th>{{'DAY' | translate}}</th>
                                         <th>{{'FROM' | translate}}</th>
                                         <th>{{'TO' | translate}}</th>
+                                        <th>{{'PASSENGERS' | translate}}</th>
                                     </thead>
-                                    <tbody data-ng-repeat="ride in myRides">
-                                        <td>{{ride.date}}</td>
-                                        <td>{{ride.route.from}}</td>
-                                        <td>{{ride.route.to}}</td>
+                                    <tbody data-ng-repeat="ride in userRides">
+                                        <td>{{ride.route.latitude}}</td>
+                                        <td>{{ride.route.longitude}}</td>
+                                        <td>{{ride.passengers.size}}</td>
                                     </tbody>
                                 </table>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="conductor">
-                                <table class="prices table" id="price_options">
+                        </div>
+                    </div>
+                </div>
+            </span>
+    </section>
+
+    <section id="myRideRequests" class="rides container" data-ng-controller="RidesController">
+            <span class="col-lg-12">
+                <div class="from-group">
+                    <h3>{{'MY_RIDE_REQUESTS' | translate}}</h3>
+                    <div role="tabpanel">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#driver" role="tab" data-toggle="tab" ng-click="getDriverRideRequests()">{{'DRIVER' | translate}}</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#passenger" role="tab" data-toggle="tab" ng-click="getPassengerRideRequests()">{{'PASSENGER' | translate}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="passengerRideRequests">
+                                <table class="table">
                                     <thead>
-                                        <th>{{'DAY' | translate}}</th>
                                         <th>{{'FROM' | translate}}</th>
                                         <th>{{'TO' | translate}}</th>
+                                        <th>{{'STATUS' | translate}}</th>
                                     </thead>
-                                    <tbody data-ng-repeat="ride in myRides">
-                                        <td>{{ride.date}}</td>
-                                        <td>{{ride.route.from}}</td>
-                                        <td>{{ride.route.to}}</td>
+                                    <tbody data-ng-repeat="ride in userRideRequests">
+                                        <td>{{ride.route.longitude}}</td>
+                                        <td>{{ride.route.latitude}}</td>
+                                        <td>{{ride.status}}</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="driverRideRequests">
+                                <table class="table">
+                                    <thead>
+                                        <th>{{'FROM' | translate}}</th>
+                                        <th>{{'TO' | translate}}</th>
+                                        <th>{{'STATUS' | translate}}</th>
+                                    </thead>
+                                    <tbody data-ng-repeat="ride in userRideRequests">
+                                        <td>{{ride.route.longitude}}</td>
+                                        <td>{{ride.route.latitude}}</td>
+                                        <td>{{ride.status}}</td>
                                     </tbody>
                                 </table>
                             </div>

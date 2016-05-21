@@ -11,47 +11,64 @@ var app = angular
         "pascalprecht.translate",
         ]);
 
-app.controller("HomeController", function ($scope, $http, $translate) {
+
+app.run(function($rootScope) {
+    $rootScope.user;
+})
+
+app.controller("HomeController", function ($scope, $http, $translate, $rootScope) {
     $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.login = true;
     $scope.register = true;
     $scope.showButtonsAccounts = true;
     $scope.isDriverSelected = false;
-    $scope.user;
 
     $scope.showLoginForm= function(){
       $scope.login = false;
       $scope.showButtonsAccounts = false;
     };
 
-    $scope.showRegisterForm= function(){
+    $scope.showRegisterForm = function(){
       $scope.register = false;
       $scope.showButtonsAccounts = false;
     };
 
-    $scope.setLanguage= function(keyLanguage){
+    $scope.setLanguage = function(keyLanguage){
       $translate.use(keyLanguage);
     };
 
-    $scope.selectDriver= function(){
+    $scope.selectDriver = function(){
       $scope.isDriverSelected = !$scope.isDriverSelected;
     };
 
-   $scope.resetForm =function(){
+   $scope.resetForm = function(){
       $scope.showButtonsAccounts = true;
       $scope.login = true;
       $scope.register = true;
    };
 
-   $scope.loginUser=function(user){
-      $http.get($scope.baseUrl + "users/" + user.email + "/" + user.password);
+   $scope.loginUser = function(user){
+//      $http.get($scope.baseUrl + "users/" + user.email + "/" + user.password);
+      $http.post($scope.baseUrl + "users/register/",
+          { "email": user.email, "password": user.password })
+      .success(function(data){
+          $rootScope.user = data;
+      });
    };
 
-   $scope.createUser=function(user){
-    $http.get($scope.baseUrl + "users/register/" + user.email + "/" + user.password)
+   $scope.createUser = function(user, vehicle){
+    $http.post($scope.baseUrl + "users/register/",
+        { "email": user.email, "password": user.password })
     .success(function(data){
-        $scope.user = data;
+        $rootScope.user = data;
+//        if($scope.isDriverSelected){
+//            this.createVehicle(vehicle)
+//        }
     });
+   };
+
+   $scope.createVehicle= function(vehicle){
+          $http.post($scope.baseUrl + 'vehicle')
    };
 
 });
@@ -61,7 +78,7 @@ app.controller("ProductController", function ($scope, $http) {
     $scope.addProduct=false;
     $scope.showAllProducts = false;
     $scope.productFind;
-    $scope.productNew= {"name": "", "stock":"","cost":""};
+    $scope.productNew= {"name": "", "stock":"", "cost":""};
 
     $scope.showProductForm= function(){
          $scope.showAllProducts = false;
@@ -75,7 +92,7 @@ app.controller("ProductController", function ($scope, $http) {
 
     $scope.saveProductForm= function(product){
         $http.post($scope.baseUrl,
-                {"name":product.name, "stock":product.stock, "cost":product.cost})
+                {"name": product.name, "stock": product.stock, "cost": product.cost})
         .success(function(data){
            $scope.productNew = {"name": "", "stock":"","cost":""};
         });
@@ -91,8 +108,8 @@ app.controller("ProductController", function ($scope, $http) {
             });
     };
 
-    $scope.findProduct = function(product){
-        $http.get($scope.baseUrl + product)
+    $scope.findProduct = function(productName){
+        $http.get($scope.baseUrl + productName)
             .success(function(data){
                 $scope.allProducts = [data];
                 $scope.showAllProducts = true;
@@ -102,36 +119,54 @@ app.controller("ProductController", function ($scope, $http) {
     };
 });
 
-app.controller("RecorridosController", function ($scope, $http) {
+app.controller("RidesController", function ($scope, $http, $rootScope) {
 
-
-    $scope.rides=[{"id": 1, "driver": "pepe", "route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
-    {"id": 2, "driver": "raul" , "route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
-    ];
-
-    $scope.myRides=[{"route":{"from": "Berzategui", "to": "Parque Patricios"}, "date": "12/12/06"},
-    {"route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}
-    ];
-
-    $scope.lista = false;
-    $scope.baseUrl = "http://localhost:8080/sqtl";
+    $scope.rides;
+    $scope.userRides;
+    $scope.userRideRequests;
+    $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.showSuccessAlert = false;
     $scope.showMap= false;
-
 
     // lo quiero usar para el alert
     $scope.switchBool = function(value) {
         $scope[value] = !$scope[value];
     };
 
-    $scope.joinRide = function(rideId){
-        $scope.rides = [{"id": 2, "driver": "raul" , "route":{"from": "Bernal", "to": "Quilmes"}, "date": "11/12/06"}];
+    $scope.getDriverRides = function(){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRides").
+        success(function(data){
+            $scope.userRides = data;
+        })
+    }
 
-        /*
-           $http.post("/joinRide" ,{"rideId": rideId}).
-           success(function(data){
-           console.log("Hola")
-           })*/
+    $scope.getPassengerRides = function(){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides").
+        success(function(data){
+            $scope.userRides = data;
+        })
+    }
+
+    $scope.getDriverRideRequests = function(){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRideRequests").
+        success(function(data){
+            $scope.userRideRequests = data;
+        })
+    }
+
+    $scope.getPassengerRideRequests = function(){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRideRequests").
+        success(function(data){
+            $scope.userRideRequests = data;
+        })
+    }
+
+    $scope.joinRide = function(ride){
+        $http.post($scope.baseUrl + 'rideRequests/joinRide',
+            { ride: ride, user: $rootScope.user }).
+        success(function(data){
+             $scope.myRides.add(data);
+         });
     };
 
 
@@ -152,6 +187,7 @@ app.config(function($translateProvider) {
       "TYPE_VEHICLE": "Select your vehicle type",
       "AVAILABLE_ROUTES": "Available routes",
       "MY_ROUTES": "My routes",
+      "MY_RIDE_REQUESTS": "My ride requests",
       "ROUTES" : "Routes",
       "DRIVER": "Driver",
       "DAY": "Day",
@@ -164,6 +200,8 @@ app.config(function($translateProvider) {
       "NAME" : "Name",
       "STOCK" : "Stock",
       "PRICE" : "Price",
+      "STATUS" : "Status",
+      "PASSENGERS" : "Passengers",
   });
 
   $translateProvider.translations("es", {
@@ -180,6 +218,7 @@ app.config(function($translateProvider) {
         "TYPE_VEHICLE": "Selecciona tu tipo de vehiculo",
         "AVAILABLE_ROUTES": "Rutas disponibles",
         "MY_ROUTES": "Mis rutas",
+        "MY_RIDE_REQUESTS": "Mis solicitudes de viaje",
         "ROUTES" : "Recorridos",
         "DRIVER": "Conductor",
         "DAY": "Dia",
@@ -192,6 +231,8 @@ app.config(function($translateProvider) {
         "NAME" : "Nombre",
         "STOCK" : "Stock",
         "PRICE" : "Costo",
+        "STATUS" : "Estado",
+        "PASSENGERS" : "Pasajeros",
   });
 
   $translateProvider.preferredLanguage("en");

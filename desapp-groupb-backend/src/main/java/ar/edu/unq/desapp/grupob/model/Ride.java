@@ -13,6 +13,8 @@ public class Ride {
     Integer id;
     List<User> passengers;
 
+    public Ride(){}
+
     public Ride(User driver, Route route, RideDate date) {
         this.driver = driver;
         this.route = route;
@@ -22,7 +24,7 @@ public class Ride {
 
     @Id
     @GeneratedValue
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -31,7 +33,6 @@ public class Ride {
     }
 
     @OneToOne
-    @JoinColumn(name = "Ride")
     public RideDate getDate() {
         return date;
     }
@@ -75,5 +76,4 @@ public class Ride {
     public boolean isEfficient() {
         return (this.passengers.size()  / driver.getCapacityVehicle()) >= 0.5;
     }
-
 }

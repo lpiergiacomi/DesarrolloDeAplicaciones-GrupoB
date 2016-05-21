@@ -128,6 +128,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+  <bean id="persistence.rideRequestRepository" class="ar.edu.unq.desapp.grupob.repositories.RideRequestRepository" >
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
 	<bean id="persistence.rideDateRepository" class="ar.edu.unq.desapp.grupob.repositories.RideDateRepository" >
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

@@ -17,7 +17,7 @@ public class RideRequest {
     private String status;
     private Integer id;
 
-    public RideRequest(User user, Ride ride, RideDate requestRideDate) throws Exception {
+    public RideRequest(User user, Ride ride, RideDate requestRideDate) {
         this.user = user;
         this.ride = ride;
         this.requestDate = DateTime.now();
@@ -81,6 +81,7 @@ public class RideRequest {
     public void accept() {
         status = ACCEPTED;
         ride.addPassenger(user);
+        user.addRide(ride);
     }
 
     public void reject() {

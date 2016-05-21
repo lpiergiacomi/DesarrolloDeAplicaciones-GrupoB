@@ -3,7 +3,13 @@ package ar.edu.unq.desapp.grupob.model;
 import java.util.ArrayList;
 import java.util.List;
 import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
+import org.hibernate.annotations.*;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table
@@ -109,7 +115,8 @@ public class User {
       return currentRole.driver();
     }
 
-    @Transient
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Driver getDriverRole() {
       return driverRole;
     }
@@ -126,7 +133,8 @@ public class User {
       this.points = points;
     }
 
-    @Transient
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Passenger getPassengerRole() {
       return passengerRole;
     }
@@ -153,7 +161,8 @@ public class User {
       this.id = id;
     }
 
-    @OneToOne(cascade= CascadeType.ALL)
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Vehicle getVehicle() {
       return vehicle;
     }
@@ -184,6 +193,15 @@ public class User {
     @Transient
     public int getBadRate(){
       return currentRole.getBadRate();
+    }
+
+    @Transient
+    public List<Ride> getRides(){
+        return currentRole.getRides();
+    }
+
+    public void addRide(Ride ride){
+        currentRole.addRide(ride);
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
