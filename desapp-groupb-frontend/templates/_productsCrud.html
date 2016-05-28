@@ -1,0 +1,56 @@
+<div id="products" class="container" data-ng-controller="ProductController">
+    <h3>{{'PRODUCTS' | translate}}</h3>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" name="productSearch" ng-model="productFind" placeholder="Producto a buscar">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" ng-click="findProduct(productFind)"> 
+                        <span class="glyphicon glyphicon-search"></span> 
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <button class="btn btn-info addProductBtn" ng-click="showProductForm()">
+                {{'ADD_PRODUCT' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{'NAME' | translate}}</th>
+                        <th>{{'STOCK' | translate}}</th>
+                        <th>{{'PRICE' | translate}}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="product in allProducts">
+                        <td>{{product.name}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>$ {{product.cost}}</td>
+                        <td>
+                            <button type="button" class="btn glyphicon glyphicon-edit">
+                            <button type="button" class="btn glyphicon glyphicon-trash">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-hide="hideProductForm" class="form-group">
+            <form class="addProduct">
+                <h4>{{'ADD_PRODUCT' | translate}}</h4>
+                <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre"><br>
+                <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
+                <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
+                <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
+                <button class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
+            </form>
+        </div>
+    </div>
+</div>

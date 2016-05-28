@@ -1,0 +1,47 @@
+    <section id="myRideRequests" class="rides container" data-ng-controller="RidesController">
+            <span class="col-md-6">
+                <div class="from-group">
+                    <h3>{{'MY_RIDE_REQUESTS' | translate}}</h3>
+                    <div role="tabpanel">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#driver" role="tab" data-toggle="tab" ng-click="getDriverRideRequests()">{{'DRIVER' | translate}}</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#passenger" role="tab" data-toggle="tab" ng-click="getPassengerRideRequests()">{{'PASSENGER' | translate}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="passengerRideRequests">
+                                <table class="table">
+                                    <thead>
+                                        <th>{{'FROM' | translate}}</th>
+                                        <th>{{'TO' | translate}}</th>
+                                        <th>{{'STATUS' | translate}}</th>
+                                    </thead>
+                                    <tbody data-ng-repeat="ride in userRideRequests">
+                                        <td>{{ride.route.longitude}}</td>
+                                        <td>{{ride.route.latitude}}</td>
+                                        <td>{{ride.status}}</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="driverRideRequests">
+                                <table class="table">
+                                    <thead>
+                                        <th>{{'FROM' | translate}}</th>
+                                        <th>{{'TO' | translate}}</th>
+                                        <th>{{'STATUS' | translate}}</th>
+                                    </thead>
+                                    <tbody data-ng-repeat="ride in userRideRequests">
+                                        <td>{{ride.route.longitude}}</td>
+                                        <td>{{ride.route.latitude}}</td>
+                                        <td>{{ride.status}}</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+    </section>
