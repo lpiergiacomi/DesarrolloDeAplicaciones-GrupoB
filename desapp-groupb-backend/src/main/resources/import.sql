@@ -6,7 +6,7 @@ INSERT INTO Route (ID, latitude, longitude) VALUES (3, 1, 5);
 INSERT INTO Route (ID, latitude, longitude) VALUES (2, 3, 5);
 INSERT INTO Route (ID, latitude, longitude) VALUES (1, 4, 5);
 
-INSERT INTO RideDate (ID) VALUES (1);
+INSERT INTO DayOfWeekRideDate (ID, day) VALUES (1, 3);
 
 INSERT INTO Vehicle (ID) VALUES (1);
 INSERT INTO Vehicle (ID) VALUES (2);

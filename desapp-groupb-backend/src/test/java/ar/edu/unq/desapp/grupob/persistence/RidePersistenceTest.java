@@ -28,8 +28,8 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private RideDateRepository rideDateRepository;
+    @Autowired
+    private RideDateRepository rideDateRepository;
 
     @Autowired
     private VehicleRepository vehicleRepository;
@@ -40,7 +40,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     private Route route;
     private DayOfWeekRideDate rideDate;
 
-//    @Before
+    @Before
     public void setUp() {
         user =  new User();
         route = new Route(2.0, 2.3);
@@ -50,7 +50,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         user.setVehicle(vehicle);
 
         vehicleRepository.save(vehicle);
-//        rideDateRepository.save(rideDate);
+        rideDateRepository.save(rideDate);
         routeRepository.save(route);
         userRepository.save(user);
 
@@ -60,12 +60,12 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void itShouldSaveARide() {
-//        List<Ride> rides = rideRepository.getAll();
-//
-//        assertEquals(rides.size(), 1);
+        List<Ride> rides = rideRepository.getAll();
+
+        assertEquals(rides.size(), 1);
     }
 
-//    @Test
+    @Test
     public void itShouldUpdateARide() {
         assertEquals(ride.getDate(), rideDate);
         int monday = DateTimeConstants.MONDAY;
@@ -77,7 +77,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         assertEquals(rideRepository.find(ride.getId()).getDate(), rideDateUpdate);
     }
 
-//    @Test
+    @Test
     public void itShouldDeleteARide() {
         rideRepository.delete(ride.getId());
 
