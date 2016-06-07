@@ -1,6 +1,4 @@
-angular.module("subiQueTeLlevoApp")
-.controller("HomeController", function ($scope, $http, $translate, $rootScope, auth,
-                                        store, $location) {
+app.controller("HomeController", ['$scope', '$http', '$translate', '$rootScope', function ($scope, $http, $translate, $rootScope) {
     'use strict';
 
     $scope.login = true;
@@ -8,7 +6,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.showButtonsAccounts = true;
     $scope.isDriverSelected = false;
     $scope.auth = auth;
-    window.auth = auth;
 
     $scope.showLoginForm= function(){
         $scope.login = false;
