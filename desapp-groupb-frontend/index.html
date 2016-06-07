@@ -7,6 +7,23 @@
 
     <title>Subi que te llevo</title>
 
+    <!-- Auth0's lock widget library -->
+    <script type="text/javascript" src="https://cdn.auth0.com/js/lock-7.12.min.js"></script>
+    <!-- AngularJS core -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.js"></script>
+    <!-- Angular cookie wrapper library for client cookies -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
+    <!-- Angular's Router Library for SPA -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+    <!-- Auth0's Angular SDK Library -->
+    <script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
+    <!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
+    <script src="http://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
+    <!-- Angular wrapper library for JWT-->
+    <script src="http://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
 
@@ -14,17 +31,20 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
-    
+
+    <script type="text/javascript" src="auth0-variables.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/HomeController.js"></script>
+    <script src="scripts/controllers/NavBarCtrl.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
     <script src="scripts/controllers/RidesController.js"></script>
+
 </head>
 
 <body ng-app="subiQueTeLlevoApp">
 
     <button id="menu-toggle" class="btn btn-dark glyphicon glyphicon-menu-hamburger"></button>
-    <nav id="sidebar-wrapper" data-ng-controller="HomeController">
+    <nav id="sidebar-wrapper" data-ng-controller="NavBarCtrl">
         <ul class="sidebar-nav">
             <button id="menu-close" class="btn btn-dark glyphicon glyphicon-menu-hamburger pull-right"></button>
             <li class="sidebar-brand"> Subi que te llevo! </li>
@@ -37,20 +57,23 @@
                 <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
+                <a ng-if="isLogin" ng-click="logout()">Logout </a>
             </li>
         </ul>
     </nav>
+    <div ng-if="!isLogin">
+      <div id="header" ng-include src="'templates/_home.html'"></div>
+    </div>
+    <div ng-if="isLogin">
 
-    <div id="header" ng-include src="'templates/_home.html'"></div>
+      <div id="routes" ng-include src="'templates/_availableRoutes.html'"></div>
 
-    <div id="routes" ng-include src="'templates/_availableRoutes.html'"></div>
-    
-    <div id="rides" ng-include src="'templates/_myRides.html'"></div>
+      <div id="rides" ng-include src="'templates/_myRides.html'"></div>
 
-    <div id="rideRequests" ng-include src="'templates/_rideRequests.html'"></div>
+      <div id="rideRequests" ng-include src="'templates/_rideRequests.html'"></div>
 
-    <div ng-include src="'templates/_productsCrud.html'"></div>
-
+      <div ng-include src="'templates/_productsCrud.html'"></div>
+    </div>
     <script>
         // Closes the sidebar menu
         $("#menu-close").click(function(e) {
@@ -64,6 +87,7 @@
         $("#sidebar-wrapper").toggleClass("active");
         });
     </script>
+
 </body>
 
 </html>

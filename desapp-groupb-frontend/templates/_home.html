@@ -2,11 +2,16 @@
     <span class="well well-lg">
         <h1>Subi que te llevo</h1>
         <br>
+      <!--
         <button class="btn btn-dark btn-lg" ng-show="showButtonsAccounts"
                 ng-click="showRegisterForm()">{{'REGISTER' | translate}}</button>
         <button class="btn btn-dark btn-lg" ng-show="showButtonsAccounts"
                 ng-click="showLoginForm()">{{'LOGIN' | translate}}</button>
+      -->
+      <button class="btn btn-dark btn-lg" ng-click="loginGoogle()">Log in</button>
+      <button class="btn btn-dark btn-lg" ng-click="signUpGoogle()">Sign up</button>
 
+      <!--
         <form class="registration" ng-hide="register">
             <input type="text" ng-model="user.email" placeholder="{{'EMAIL' | translate}}" required><br>
             <input type="password" ng-model="user.password" placeholder="{{'PASSWORD' | translate}}" required><br>
@@ -28,5 +33,6 @@
             <input type="submit" ng-click="loginUser(user)"  value="{{'LOGIN' | translate}}">
             <input type="submit" ng-click="resetForm()"  value="{{'CANCEL' | translate}}">
         </form>
+        -->
     </span>
 </span>

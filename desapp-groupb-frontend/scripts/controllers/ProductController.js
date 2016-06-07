@@ -1,10 +1,13 @@
-app.controller("ProductController", ['$scope', '$http', function ($scope, $http) {
+angular.module("subiQueTeLlevoApp")
+.controller("ProductController", function ($scope, $http, $rootScope) {
 	'use strict';
 
-    $scope.baseUrl = "http://localhost:8080/sqtl/products/";
+
+    $scope.productUrl = $rootScope.baseUrl +"/products/"
     $scope.productFind;
-    $scope.productNew= {"name": "", "stock":"", "cost":""};
+    $scope.productNew = {"name": "", "stock":"", "cost":""};
     $scope.hideProductForm = true;
+
 
     $scope.showProductForm= function(){
         $scope.hideProductForm = false;
@@ -16,28 +19,28 @@ app.controller("ProductController", ['$scope', '$http', function ($scope, $http)
     };
 
     $scope.saveProductForm= function(product){
-        $http.post($scope.baseUrl,
+        $http.post($scope.productUrl,
                 {"name": product.name, "stock": product.stock, "cost": product.cost})
         .success(function(data){
             $scope.productNew = {"name": "", "stock":"","cost":""};
             $scope.hideProductForm = true;
-            $scope.getAllProducts();           
+            $scope.getAllProducts();
         });
     };
 
     $scope.getAllProducts= function(){
-        $http.get($scope.baseUrl + "all")
+        $http.get($scope.productUrl + "all")
             .success(function(data){
                 $scope.allProducts = data;
             });
     };
 
     $scope.findProduct = function(productName){
-        $http.get($scope.baseUrl + productName)
+        $http.get($scope.productUrl + productName)
             .success(function(data){
                 $scope.allProducts = [data];
             });
     };
 
     $scope.getAllProducts();
-}]);
+});
