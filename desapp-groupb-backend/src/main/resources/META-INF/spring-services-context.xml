@@ -21,6 +21,7 @@
             <ref bean="services.productsService" />
             <ref bean="services.usersService" />
             <ref bean="services.rideRequestsService" />
+            <ref bean="services.ridesService" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -35,7 +36,8 @@
 
     <aop:aspectj-autoproxy />
 
-    <bean id="logAspect" class="ar.edu.unq.desapp.grupob.services.LoggingAspect" />
+    <bean id="auditAspect" class="ar.edu.unq.desapp.grupob.aspects.AuditAspect" />
+    <bean id="errorAspect" class="ar.edu.unq.desapp.grupob.aspects.ErrorAspect" />
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
 
 	  <bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductService">
@@ -44,7 +46,10 @@
     <bean id="services.usersService" class="ar.edu.unq.desapp.grupob.services.UserService">
         <property name="repository" ref="persistence.userRepository" />
     </bean>
-  <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
+    <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
         <property name="repository" ref="persistence.rideRequestRepository" />
+    </bean>
+    <bean id="services.ridesService" class="ar.edu.unq.desapp.grupob.services.RideService">
+        <property name="repository" ref="persistence.rideRepository" />
     </bean>
 </beans>

@@ -2,12 +2,12 @@ angular.module("subiQueTeLlevoApp")
 .controller("RidesController", function ($scope, $http, $rootScope) {
     'use strict';
 
-    $scope.rides = {};
-    $scope.userRides = {};
+    $scope.rides;
+    $scope.userRides;
     $scope.userRideRequests = {};
     $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.showSuccessAlert = false;
-    $scope.showMap= false;
+    $scope.showMap= true;
 
     // lo quiero usar para el alert
     $scope.switchBool = function(value) {
@@ -49,4 +49,15 @@ angular.module("subiQueTeLlevoApp")
              $scope.myRides.add(data);
          });
     };
+
+    $scope.getAllRides = function(){
+        $http.get($scope.baseUrl + "rides/all").
+        success(function(data){
+            $scope.rides = data;
+        })
+    }
+
+    $scope.getAllRides();
+//    $scope.getDriverRides();
+
 });
