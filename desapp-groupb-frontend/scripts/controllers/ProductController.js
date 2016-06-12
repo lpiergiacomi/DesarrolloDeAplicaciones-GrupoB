@@ -2,12 +2,10 @@ angular.module("subiQueTeLlevoApp")
 .controller("ProductController", function ($scope, $http, $rootScope) {
 	'use strict';
 
-
     $scope.productUrl = $rootScope.baseUrl +"/products/"
     $scope.productFind;
     $scope.productNew = {"name": "", "stock":"", "cost":""};
     $scope.hideProductForm = true;
-
 
     $scope.showProductForm= function(){
         $scope.hideProductForm = false;

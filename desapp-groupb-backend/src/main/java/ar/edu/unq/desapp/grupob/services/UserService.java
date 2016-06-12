@@ -4,6 +4,8 @@ import ar.edu.unq.desapp.grupob.model.Ride;
 import ar.edu.unq.desapp.grupob.model.RideRequest;
 import ar.edu.unq.desapp.grupob.model.Route;
 import ar.edu.unq.desapp.grupob.model.User;
+import ar.edu.unq.desapp.grupob.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Path("/users")
 public class UserService extends GenericService<User> {
+
+    @Autowired
+    private UserRepository repository;
 
     @POST
     @Path("/register")
@@ -23,6 +28,14 @@ public class UserService extends GenericService<User> {
         newUser.setPassword(user.getPassword());
         getRepository().save(newUser);
         return newUser;
+    }
+
+    @GET
+    @Path("/login/{email}")
+    @Produces("application/json")
+    @Transactional
+    public User loginUser(@PathParam("email") String email){
+      return  getRepository().findByEmail(email);
     }
 
     @GET
@@ -63,5 +76,13 @@ public class UserService extends GenericService<User> {
         User user = getRepository().find(id);
         user.switchToPassenger();
         return user.getRideRequests();
+    }
+
+    public UserRepository getRepository() {
+      return repository;
+    }
+
+    public void setRepository(UserRepository repository) {
+      this.repository = repository;
     }
 }

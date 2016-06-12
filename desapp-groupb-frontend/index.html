@@ -43,7 +43,7 @@
 
 <body ng-app="subiQueTeLlevoApp">
 
-    <button id="menu-toggle" class="btn btn-dark glyphicon glyphicon-menu-hamburger"></button>
+    <button id="menu-toggle" class="btn btn-dark glyphicon glyphicon-menu-hamburger" ng-show="isLogin"></button>
     <nav id="sidebar-wrapper" data-ng-controller="NavBarCtrl">
         <ul class="sidebar-nav">
             <button id="menu-close" class="btn btn-dark glyphicon glyphicon-menu-hamburger pull-right"></button>
@@ -61,19 +61,17 @@
             </li>
         </ul>
     </nav>
-    <div ng-if="!isLogin">
-      <div id="header" ng-include src="'templates/_home.html'"></div>
-    </div>
-    <div ng-if="isLogin">
 
-      <div id="routes" ng-include src="'templates/_availableRoutes.html'"></div>
+    <div id="header" ng-include src="'templates/_home.html'" ng-if="!isLogin"></div>
 
-      <div id="rides" ng-include src="'templates/_myRides.html'"></div>
+    <div id="routes" ng-include src="'templates/_availableRoutes.html'" ng-if="isLogin"></div>
 
-      <div id="rideRequests" ng-include src="'templates/_rideRequests.html'"></div>
+    <div id="rides" ng-include src="'templates/_myRides.html'" ng-if="isLogin"></div>
 
-      <div ng-include src="'templates/_productsCrud.html'"></div>
-    </div>
+    <div id="rideRequests" ng-include src="'templates/_rideRequests.html'" ng-if="isLogin"></div>
+
+    <div ng-include src="'templates/_productsCrud.html'" ng-if="isLogin"></div>
+
     <script>
         // Closes the sidebar menu
         $("#menu-close").click(function(e) {

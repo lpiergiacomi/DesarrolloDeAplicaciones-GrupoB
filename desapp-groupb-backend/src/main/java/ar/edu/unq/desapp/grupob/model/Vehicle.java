@@ -1,9 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -45,6 +42,7 @@ public class Vehicle {
         rate -= 1;
     }
 
+    @Column(name = "rate", nullable = false, columnDefinition = "int default 0")
     public int getRate() {
         return rate;
     }

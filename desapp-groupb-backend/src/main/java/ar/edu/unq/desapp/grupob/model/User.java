@@ -220,6 +220,7 @@ public class User {
       return vehicle.getCapacity();
   }
 
+    @Column(unique = true)
     public String getEmail() {
       return email;
     }
