@@ -36,7 +36,8 @@
 
     <aop:aspectj-autoproxy />
 
-    <bean id="logAspect" class="ar.edu.unq.desapp.grupob.services.LoggingAspect" />
+    <bean id="auditAspect" class="ar.edu.unq.desapp.grupob.aspects.AuditAspect" />
+    <bean id="errorAspect" class="ar.edu.unq.desapp.grupob.aspects.ErrorAspect" />
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
 
 	  <bean id="services.productsService" class="ar.edu.unq.desapp.grupob.services.ProductService">
