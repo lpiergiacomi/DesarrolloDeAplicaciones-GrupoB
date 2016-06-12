@@ -32,7 +32,8 @@ public class Ride {
         this.id = id;
     }
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ridedate_id")
     public RideDate getDate() {
         return date;
     }

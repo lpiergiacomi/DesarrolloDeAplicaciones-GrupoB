@@ -3,11 +3,15 @@ package ar.edu.unq.desapp.grupob.model;
 import org.joda.time.DateTime;
 import org.joda.time.MonthDay;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("dayofmonth")
 public class DayOfMonthRideDate extends RideDate {
 
+    @Column(name= "monthDay")
     private MonthDay monthDay;
 
     public DayOfMonthRideDate(MonthDay monthDay){
