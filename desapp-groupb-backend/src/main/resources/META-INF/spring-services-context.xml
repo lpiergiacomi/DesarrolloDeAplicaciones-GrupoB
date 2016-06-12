@@ -21,6 +21,7 @@
             <ref bean="services.productsService" />
             <ref bean="services.usersService" />
             <ref bean="services.rideRequestsService" />
+            <ref bean="services.ridesService" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -44,7 +45,10 @@
     <bean id="services.usersService" class="ar.edu.unq.desapp.grupob.services.UserService">
         <property name="repository" ref="persistence.userRepository" />
     </bean>
-  <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
+    <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
         <property name="repository" ref="persistence.rideRequestRepository" />
+    </bean>
+    <bean id="services.ridesService" class="ar.edu.unq.desapp.grupob.services.RideService">
+        <property name="repository" ref="persistence.rideRepository" />
     </bean>
 </beans>
