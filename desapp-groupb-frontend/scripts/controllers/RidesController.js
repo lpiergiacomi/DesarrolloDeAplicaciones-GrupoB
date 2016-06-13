@@ -1,4 +1,5 @@
-app.controller("RidesController", ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+angular.module("subiQueTeLlevoApp")
+.controller("RidesController", function ($scope, $http, $rootScope) {
     'use strict';
 
     $scope.rides;
@@ -58,4 +59,5 @@ app.controller("RidesController", ['$scope', '$http', '$rootScope', function ($s
 
     $scope.getAllRides();
 //    $scope.getDriverRides();
-}]);
+
+});

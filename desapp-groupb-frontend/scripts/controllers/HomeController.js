@@ -1,62 +1,65 @@
-app.controller("HomeController", ['$scope', '$http', '$translate', '$rootScope', function ($scope, $http, $translate, $rootScope) {
+angular.module("subiQueTeLlevoApp")
+.controller("HomeController", function ($scope, $http, $translate, $rootScope, auth, store, $location) {
     'use strict';
 
-    $scope.baseUrl = "http://localhost:8080/sqtl/";
-    $scope.login = true;
-    $scope.register = true;
-    $scope.showButtonsAccounts = true;
-    $scope.isDriverSelected = false;
+    $scope.auth = auth;
 
-    $scope.showLoginForm= function(){
-        $scope.login = false;
-        $scope.showButtonsAccounts = false;
+    function endLoginProccess(profile, token){
+        store.set('profile', profile);
+        store.set('token', token);
+        $location.path('/');
+        $scope.loading = false;
+    }
+
+    function onLoginSuccess(profile, token) {
+        var user = {"email": profile.email, "password": profile.password};
+        $scope.loginUser(user);
+        endLoginProccess(profile, token);
     };
 
-    $scope.showRegisterForm = function(){
-        $scope.register = false;
-        $scope.showButtonsAccounts = false;
+    function onSingUpSuccess(profile, token) {
+        var user = {"email": profile.email, "password": profile.password};
+        $scope.createUser(user);
+        endLoginProccess(profile, token);
     };
 
-    $scope.setLanguage = function(keyLanguage){
-        $translate.use(keyLanguage);
+    function onFailed() {
+        $scope.loading = false;
     };
 
-    $scope.selectDriver = function(){
-        $scope.isDriverSelected = !$scope.isDriverSelected;
+    $scope.loginGoogle = function(){
+        auth.signin({
+            popup: false,
+            connection: 'google-oauth2',
+            scope: 'openid name email'
+        }, onLoginSuccess, onFailed);
     };
 
-    $scope.resetForm = function(){
-        $scope.showButtonsAccounts = true;
-        $scope.login = true;
-        $scope.register = true;
+    $scope.signUpGoogle = function(){
+        auth.signup({
+            popup: false,
+            connection: 'google-oauth2',
+            scope: 'openid name email'
+        }, onSingUpSuccess, onFailed);
     };
 
     $scope.loginUser = function(user){
-    //      $http.get($scope.baseUrl + "users/" + user.email + "/" + user.password);
-        $http.post($scope.baseUrl + "users/register/",
-        { "email": user.email, "password": user.password })
-        .success(function(data){
-            $rootScope.user = data;
-        });
+        $http.get($rootScope.baseUrl + "/users/login/" + user.email)
+            .success(function(data){
+                $rootScope.user = data;
+            });
     };
 
-    $scope.createUser = function(user, vehicle){
-        $http.post($scope.baseUrl + "users/register/",
-        { "email": user.email, "password": user.password })
+    $scope.createUser = function(user){
+        $http.post($rootScope.baseUrl + "/users/register/",
+                { "email": user.email, "password": user.password })
         .success(function(data){
             $rootScope.user = data;
-    //        if($scope.isDriverSelected){
-    //            this.createVehicle(vehicle)
-    //        }
+            $rootScope.isLogin = true;
         });
     };
 
     $scope.createVehicle = function(vehicle){
-        $http.post($scope.baseUrl + 'vehicle');
+        $http.post($rootScope.baseUrl + 'vehicle');
     };
-
-    $scope.goTo = function(elementId) {
-        window.location.hash = elementId;
-        $("#sidebar-wrapper").toggleClass("active");
-    };
-}]);
+});
