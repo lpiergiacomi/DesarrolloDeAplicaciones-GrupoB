@@ -1,17 +1,17 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.Entity;
 import org.joda.time.DateTime;
 
 import javax.persistence.DiscriminatorValue;
 
 @Entity
-@DiscriminatorValue("dayofmonth")
+@DiscriminatorValue("range_dayofmonth")
 public class RangeWithDayOfMonthRideDate extends RangeRideDate {
 
     public RangeWithDayOfMonthRideDate(DateTime from, DateTime to, DayOfMonthRideDate rideDate) {
-        this.from= from;
-        this.to = to;
+        this.fromm= from;
+        this.too = to;
         this.rideDate = rideDate;
     }
 

@@ -10,19 +10,19 @@ import javax.persistence.*;
 @DiscriminatorValue(value="ridedate")
 public abstract class RideDate {
 
+    @Id
+    @GeneratedValue
     private Integer id;
 
     @Transient
     public abstract boolean isRideDay(DateTime dateTime);
 
-    @Id
-    @GeneratedValue
-    public int getId() {
-        return id;
-    }
-
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }

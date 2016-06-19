@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("dayofmonth")
 public class DayOfMonthRideDate extends RideDate {
 
-    @Column(name= "monthDay")
+    @Column(name= "monthDay", length = 500)
     private MonthDay monthDay;
 
     public DayOfMonthRideDate(MonthDay monthDay){

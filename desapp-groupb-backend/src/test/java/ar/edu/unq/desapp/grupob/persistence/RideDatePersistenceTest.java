@@ -49,14 +49,8 @@ public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringCo
     public void itShouldSaveARideDate() {
         List<RideDate> rideDates = rideDateRepository.getAll();
 
-        assertEquals(rideDates.size(), 1);
-    }
+        assertEquals(rideDates.size(), 4);
 
-    @Test
-    public void itShouldDeleteARideDate() {
         rideDateRepository.delete(dayOfWeekRideDate.getId());
-
-        assertEquals(rideDateRepository.getAll().size(), 0);
     }
-
 }

@@ -5,5 +5,4 @@ import ar.edu.unq.desapp.grupob.model.Ride;
 
 @Path("/rides")
 public class RideService extends GenericService<Ride> {
-
 }

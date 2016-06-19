@@ -14,6 +14,8 @@ public class DayOfWeekRideDate extends RideDate {
     @Column(name= "dai")
     private int dai;
 
+    public DayOfWeekRideDate(){ }
+
     public DayOfWeekRideDate(int dai){
         this.dai = dai;
     }
