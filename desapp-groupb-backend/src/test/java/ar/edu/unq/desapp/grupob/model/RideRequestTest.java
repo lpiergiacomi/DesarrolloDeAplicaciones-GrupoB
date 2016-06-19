@@ -2,6 +2,10 @@ package ar.edu.unq.desapp.grupob.model;
 
 import org.joda.time.DateTime;
 import org.junit.*;
+
+import java.sql.Date;
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -25,7 +29,7 @@ public class RideRequestTest {
 
     @Test
     public void itShouldAssertTheRideRequestHasARequestDate() {
-        assertEquals(rideRequest.getRequestDate().getDayOfYear(), DateTime.now().getDayOfYear());
+        assertEquals(rideRequest.getRequestDate().getDay(), new Date(Calendar.getInstance().getTime().getTime()).getDay());
     }
 
     @Test

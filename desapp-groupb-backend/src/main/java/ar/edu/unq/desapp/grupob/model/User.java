@@ -31,7 +31,9 @@ public class User {
         currentRole = passengerRole;
         points = 0;
         messages = new ArrayList<>();
-        vehicle = new Vehicle(0, 0); // FIXME
+        vehicle = new Vehicle(4, 0); // FIXME
+        email = "example@holis.com";
+        password = "123456";
     }
 
     public boolean hasVehicle() {

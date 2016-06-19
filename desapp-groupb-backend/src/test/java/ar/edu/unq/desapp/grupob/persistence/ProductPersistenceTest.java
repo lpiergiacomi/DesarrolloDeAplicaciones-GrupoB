@@ -31,7 +31,7 @@ public class ProductPersistenceTest extends AbstractTransactionalJUnit4SpringCon
   public void itShouldSaveAProduct() {
     List<Product> products = productsRepository.getAll();
 
-    assertEquals(products.size(), 4);
+    assertEquals(products.size(), 1);
   }
 
   @Test
@@ -48,6 +48,6 @@ public class ProductPersistenceTest extends AbstractTransactionalJUnit4SpringCon
   public void itShouldDeleteAProduct() {
     productsRepository.delete(product.getId());
 
-    assertEquals(productsRepository.getAll().size(), 3);
+    assertEquals(productsRepository.getAll().size(), 0);
   }
 }

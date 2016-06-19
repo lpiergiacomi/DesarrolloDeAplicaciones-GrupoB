@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 @Entity
 @Table
 public class Ride {
+
     RideDate date;
     User driver;
     Route route;
@@ -32,7 +35,8 @@ public class Ride {
         this.id = id;
     }
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ridedate_id")
     public RideDate getDate() {
         return date;
     }
@@ -60,6 +64,7 @@ public class Ride {
     }
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<User> getPassengers() {
         return passengers;
     }

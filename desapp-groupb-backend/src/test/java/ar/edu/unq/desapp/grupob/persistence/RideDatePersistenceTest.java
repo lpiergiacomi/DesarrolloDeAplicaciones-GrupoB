@@ -1,9 +1,10 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
-import ar.edu.unq.desapp.grupob.model.DayOfWeekRideDate;
-import ar.edu.unq.desapp.grupob.model.RideDate;
+import ar.edu.unq.desapp.grupob.model.*;
 import ar.edu.unq.desapp.grupob.repositories.RideDateRepository;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.MonthDay;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,22 +29,28 @@ public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringCo
     @Before
     public void setUp() {
         int tuesday = DateTimeConstants.TUESDAY;
+        DateTime from = new DateTime(2016, 3, 29, 12, 0);
+        DateTime to = new DateTime(2016, 4, 29, 12, 0);
+
         dayOfWeekRideDate = new DayOfWeekRideDate(tuesday);
         rideDateRepository.save(dayOfWeekRideDate);
+
+        DayOfMonthRideDate dayOfMonthRideDate = new DayOfMonthRideDate(new MonthDay(12, 10));
+        rideDateRepository.save(dayOfMonthRideDate);
+
+        RangeWithDayOfMonthRideDate rangeWithDayOfMonthRideDate = new RangeWithDayOfMonthRideDate(from, to, dayOfMonthRideDate);
+        rideDateRepository.save(rangeWithDayOfMonthRideDate);
+
+        RangeWithDayOfWeekRideDate rangeWithDayOfWeekRideDate = new RangeWithDayOfWeekRideDate(from, to, dayOfWeekRideDate);
+        rideDateRepository.save(rangeWithDayOfWeekRideDate);
     }
 
     @Test
     public void itShouldSaveARideDate() {
         List<RideDate> rideDates = rideDateRepository.getAll();
 
-        assertEquals(rideDates.size(), 1);
-    }
+        assertEquals(rideDates.size(), 4);
 
-    @Test
-    public void itShouldDeleteARideDate() {
         rideDateRepository.delete(dayOfWeekRideDate.getId());
-
-        assertEquals(rideDateRepository.getAll().size(), 0);
     }
-
 }

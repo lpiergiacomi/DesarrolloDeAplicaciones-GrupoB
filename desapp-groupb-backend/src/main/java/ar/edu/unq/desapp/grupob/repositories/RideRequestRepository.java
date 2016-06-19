@@ -1,9 +1,11 @@
 package ar.edu.unq.desapp.grupob.repositories;
 
-public class RideRequestRepository extends GenericRepository<RideRequestRepository>{
+import ar.edu.unq.desapp.grupob.model.RideRequest;
+
+public class RideRequestRepository extends GenericRepository<RideRequest>{
 
     @Override
-    protected Class<RideRequestRepository> getDomainClass() {
-        return RideRequestRepository.class;
+    protected Class<RideRequest> getDomainClass() {
+        return RideRequest.class;
     }
 }
