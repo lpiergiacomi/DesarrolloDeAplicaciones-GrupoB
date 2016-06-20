@@ -7,22 +7,15 @@
 
     <title>Subi que te llevo</title>
 
-    <!-- Auth0's lock widget library -->
     <script type="text/javascript" src="https://cdn.auth0.com/js/lock-7.12.min.js"></script>
-    <!-- AngularJS core -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.js"></script>
-    <!-- Angular cookie wrapper library for client cookies -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
-    <!-- Angular's Router Library for SPA -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
-    <!-- Auth0's Angular SDK Library -->
     <script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
-    <!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
     <script src="http://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
-    <!-- Angular wrapper library for JWT-->
     <script src="http://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
@@ -40,6 +33,7 @@
     <script src="scripts/controllers/NavBarCtrl.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
     <script src="scripts/controllers/RidesController.js"></script>
+    <script src="scripts/controllers/MapController.js"></script>
 
 </head>
 
@@ -63,7 +57,11 @@
             </li>
         </ul>
     </nav>
+
     <span ng-view></span>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNTAVH_1zEZBZUNBA6dGcVchluktaaaBU&libraries=places&callback=initMap"
+    async defer></script>
 
     <script>
         // Closes the sidebar menu

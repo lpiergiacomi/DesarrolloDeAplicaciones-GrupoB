@@ -1,6 +1,8 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
+import ar.edu.unq.desapp.grupob.model.Coordinate;
 import ar.edu.unq.desapp.grupob.model.Route;
+import ar.edu.unq.desapp.grupob.repositories.CoordinateRepository;
 import ar.edu.unq.desapp.grupob.repositories.RouteRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +23,19 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
     @Autowired
     private RouteRepository routeRepository;
 
+    @Autowired
+    private CoordinateRepository coordinateRepository;
+
     private Route route;
 
     @Before
     public void setUp() {
-        route = new Route(1.0, 2.2);
+        Coordinate beginning = new Coordinate(2.123, -3.456);
+        Coordinate end = new Coordinate(-4.123, 5.342);
+        coordinateRepository.save(beginning);
+        coordinateRepository.save(end);
+
+        route = new Route(beginning, end);
         routeRepository.save(route);
     }
 
@@ -38,12 +48,15 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
 
     @Test
     public void itShouldUpdateARoute() {
-        assertEquals(route.getLongitude(), 2.2, 0);
+        assertEquals(route.getBegin().getLatitude(), 2.123, 0);
+        assertEquals(route.getBegin().getLongitude(), -3.456, 0);
 
-        route.setLongitude(5.0);
+        Coordinate newBeginning = new Coordinate(-3.456, 8.907);
+        route.setBegin(newBeginning);
         routeRepository.update(route);
 
-        assertEquals(routeRepository.find(route.getId()).getLongitude(), 5.0, 0);
+        assertEquals(route.getBegin().getLatitude(), -3.456, 0);
+        assertEquals(route.getBegin().getLongitude(), 8.907, 0);
     }
 
     @Test

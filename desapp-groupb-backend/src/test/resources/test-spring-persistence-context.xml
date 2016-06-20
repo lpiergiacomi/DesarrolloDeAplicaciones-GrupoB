@@ -8,16 +8,12 @@
 
 
 
-    <tx:annotation-driven transaction-manager="transactionManager"	proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
 
-<!--
-		========================= GENERAL DEFINITIONS
-		=========================
-	-->
-	<!--
-		Configurer that replaces ${...} placeholders with values from
-		properties files
-	-->
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+	<!-- Configurer that replaces ${...} placeholders with values from properties 
+		files -->
 	<!-- (in this case, mail and JDBC related properties) -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -36,49 +32,43 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<property name="defaultAutoCommit" value="false" />
-        <property name="poolPreparedStatements" value="true" />
-        <property name="initialSize" value="20" />
-        <property name="maxActive" value="30" />
-        <property name="maxIdle" value="25" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="initialSize" value="20" />
+		<property name="maxActive" value="30" />
+		<property name="maxIdle" value="25" />
 
 	</bean>
 
-	<!--
-		Defines a global session factory that will be used by all modules.
-	-->
+	<!-- Defines a global session factory that will be used by all modules. -->
 	<bean id="sessionFactory"
-        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 
-  <property name="dataSource" ref="dataSource" />
-<!--
-		<property name="entityCacheStrategies" ref="persistence.hibernateClassCacheProperties" />
-		<property name="collectionCacheStrategies" ref="persistence.hibernateCollectionCacheProperties" />
--->
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="entityCacheStrategies" ref="persistence.hibernateClassCacheProperties" 
+			/> <property name="collectionCacheStrategies" ref="persistence.hibernateCollectionCacheProperties" 
+			/> -->
 
 		<property name="hibernateProperties">
 			<props>
-				<!--
-					Configuration generic properties. They are loaded from file
-					hibernate.properties
-				-->
+				<!-- Configuration generic properties. They are loaded from file hibernate.properties -->
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 
 				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
-				<!-- Propiedades para la configuración de la cache de segundo nivel
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-				<prop key="hibernate.cache.use_second_level_cache">false</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop> -->
+				<!-- Propiedades para la configuración de la cache de segundo nivel <prop 
+					key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop> 
+					<prop key="hibernate.cache.use_second_level_cache">false</prop> <prop key="hibernate.cache.use_query_cache">true</prop> -->
 				<prop key="hibernate.connection.autocommit">false</prop>
-				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory
+				</prop>
 			</props>
 		</property>
-    <property name="packagesToScan" value="ar.edu.unq.desapp.grupob.model" />
+		<property name="packagesToScan" value="ar.edu.unq.desapp.grupob.model" />
 	</bean>
 
 
-<!-- Transaction manager for a single JDBC DataSource -->
+	<!-- Transaction manager for a single JDBC DataSource -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -94,51 +84,61 @@
 
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
-	<!-- ___________ Beans  de negocio___________ -->
+	<!-- ___________ Beans de negocio___________ -->
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 
-    <bean id="persistence.productsRepository" class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.userRepository" class="ar.edu.unq.desapp.grupob.repositories.UserRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.messagesRepository" class="ar.edu.unq.desapp.grupob.repositories.MessagesRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.routeRepository" class="ar.edu.unq.desapp.grupob.repositories.RouteRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.vehicleRepository" class="ar.edu.unq.desapp.grupob.repositories.VehicleRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.shopRepository" class="ar.edu.unq.desapp.grupob.repositories.ShopRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <bean id="persistence.exchangerRegisterRepository" class="ar.edu.unq.desapp.grupob.repositories.ExchangerRegisterRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-	<bean id="persistence.rideRepository" class="ar.edu.unq.desapp.grupob.repositories.RideRepository" >
+	<bean id="persistence.productsRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.ProductsRepository">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="persistence.rideRequestRepository" class="ar.edu.unq.desapp.grupob.repositories.RideRequestRepository" >
+	<bean id="persistence.userRepository" class="ar.edu.unq.desapp.grupob.repositories.UserRepository">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-    <bean id="persistence.rideDateRepository" class="ar.edu.unq.desapp.grupob.repositories.RideDateRepository" >
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
+	<bean id="persistence.messagesRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.MessagesRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
-	<bean id="persistence.roleRepository" class="ar.edu.unq.desapp.grupob.repositories.RoleRepository" >
+	<bean id="persistence.routeRepository" class="ar.edu.unq.desapp.grupob.repositories.RouteRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.vehicleRepository" class="ar.edu.unq.desapp.grupob.repositories.VehicleRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.shopRepository" class="ar.edu.unq.desapp.grupob.repositories.ShopRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.exchangerRegisterRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.ExchangerRegisterRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rideRepository" class="ar.edu.unq.desapp.grupob.repositories.RideRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rideRequestRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.RideRequestRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rideDateRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.RideDateRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.roleRepository" class="ar.edu.unq.desapp.grupob.repositories.RoleRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistence.coordinateRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.CoordinateRepository">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 </beans>
