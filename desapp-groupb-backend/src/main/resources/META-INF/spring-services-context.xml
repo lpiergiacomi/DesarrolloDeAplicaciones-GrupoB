@@ -23,6 +23,7 @@
             <ref bean="services.rideRequestsService" />
             <ref bean="services.ridesService" />
             <ref bean="initializationService" />
+            <ref bean="services.routeService" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -66,5 +67,8 @@
         <property name="routeRepository" ref="persistence.routeRepository" />
         <property name="rideRepository" ref="persistence.rideRepository" />
         <property name="rideRequestRepository" ref="persistence.rideRequestRepository" />
+    </bean>
+    <bean id="services.routeService" class="ar.edu.unq.desapp.grupob.services.RouteService">
+        <property name="repository" ref="persistence.routeRepository" />
     </bean>
 </beans>
