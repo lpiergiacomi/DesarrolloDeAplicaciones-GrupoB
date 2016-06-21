@@ -23,7 +23,9 @@ public class InitializationService {
   }
 
   private void initializeProducts() {
-    productsRepository.save(new Product("Cubierta", 10, 200));
+    for ( int i = 1; i <= 50; i ++ ) {
+      productsRepository.save(new Product("Cubierta"+ i, 10, 200));
+    }
   }
 
   private void initializeUsers() {

@@ -1,6 +1,6 @@
 'use strict';
 var app = angular.module('subiQueTeLlevoApp', ['pascalprecht.translate','auth0',
-        'angular-storage', 'angular-jwt', 'ngRoute']);
+        'angular-storage', 'angular-jwt', 'ngRoute', 'ui.bootstrap']);
 
 app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.user;
