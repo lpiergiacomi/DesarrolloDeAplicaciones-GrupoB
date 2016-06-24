@@ -12,7 +12,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.loginUser = function(user){
         $http.get($rootScope.baseUrl + "/users/login/" + user.email)
             .success(function(data){
-                  debugger
                  setCurrentUser(data);
             });
     };
@@ -62,22 +61,6 @@ angular.module("subiQueTeLlevoApp")
             connection: 'google-oauth2',
             scope: 'openid name email'
         }, onSingUpSuccess, onFailed);
-    };
-
-    $scope.loginUser = function(user){
-        $http.get($rootScope.baseUrl + "/users/login/" + user.email)
-            .success(function(data){
-                $rootScope.user = data;
-            });
-    };
-
-    $scope.createUser = function(user){
-        $http.post($rootScope.baseUrl + "/users/register/",
-                { "email": user.email, "password": user.password })
-        .success(function(data){
-            $rootScope.user = data;
-            $rootScope.isLogin = true;
-        });
     };
 
     $scope.createVehicle = function(vehicle){

@@ -41,6 +41,10 @@ public class InitializationService {
     passenger.setEmail("passenger@domain.com");
     passenger.setPassword("123456");
     userRepository.save(passenger);
+
+    User javier = new User();
+    javier.setEmail("javierperini90@gmail.com ");
+    userRepository.save(javier);
   }
 
   public void initializeRideDates() {

@@ -15,29 +15,29 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getDriverRides = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRides").
-        success(function(data){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRides")
+        .success(function(data){
             $scope.userRides = data;
         });
     };
 
     $scope.getPassengerRides = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides").
-        success(function(data){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides")
+        .success(function(data){
             $scope.userRides = data;
         });
     };
 
     $scope.getDriverRideRequests = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRideRequests").
-        success(function(data){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRideRequests")
+        .success(function(data){
             $scope.userRideRequests = data;
         });
     };
 
     $scope.getPassengerRideRequests = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRideRequests").
-        success(function(data){
+        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRideRequests")
+        .success(function(data){
             $scope.userRideRequests = data;
         });
     };
