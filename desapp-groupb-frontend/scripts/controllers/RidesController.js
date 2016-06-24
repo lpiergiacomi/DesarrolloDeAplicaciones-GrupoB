@@ -15,7 +15,7 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getDriverRides = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRides")
+        $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
         .success(function(data){
             $scope.userRides = data;
         });
@@ -58,6 +58,5 @@ angular.module("subiQueTeLlevoApp")
     }
 
     $scope.getAllRides();
-//    $scope.getDriverRides();
 
 });
