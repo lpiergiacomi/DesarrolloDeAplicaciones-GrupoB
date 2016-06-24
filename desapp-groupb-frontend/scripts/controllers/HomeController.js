@@ -4,6 +4,27 @@ angular.module("subiQueTeLlevoApp")
 
     $scope.auth = auth;
 
+    function setCurrentUser(data){
+      store.set("currentUser", data);
+      $rootScope.user = data;
+    }
+
+    $scope.loginUser = function(user){
+        $http.get($rootScope.baseUrl + "/users/login/" + user.email)
+            .success(function(data){
+                  debugger
+                 setCurrentUser(data);
+            });
+    };
+
+    $scope.createUser = function(user){
+        $http.post($rootScope.baseUrl + "/users/register/",
+                { "email": user.email, "password": user.password })
+        .success(function(data){
+            setCurrentUser(data);
+        });
+    };
+
     function endLoginProccess(profile, token){
         store.set('profile', profile);
         store.set('token', token);

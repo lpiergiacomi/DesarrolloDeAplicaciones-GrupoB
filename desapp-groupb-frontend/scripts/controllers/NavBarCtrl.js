@@ -15,6 +15,8 @@ angular.module("subiQueTeLlevoApp")
         auth.signout();
         store.remove('profile');
         store.remove('token');
+        store.remove('currentUser');
+        $rootScope.user = undefined;
         $rootScope.isLogin = false;
         $location.path('/login');
         $("#sidebar-wrapper").toggleClass("active");

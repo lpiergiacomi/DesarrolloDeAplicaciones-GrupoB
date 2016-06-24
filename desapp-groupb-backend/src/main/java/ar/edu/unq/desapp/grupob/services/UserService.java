@@ -35,6 +35,7 @@ public class UserService extends GenericService<User> {
     @Produces("application/json")
     @Transactional
     public User loginUser(@PathParam("email") String email){
+      System.out.println("EMAIL DEL USER " + email);
       return  getRepository().findByEmail(email);
     }
 

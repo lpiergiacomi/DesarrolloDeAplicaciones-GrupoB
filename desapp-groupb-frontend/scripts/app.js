@@ -11,9 +11,11 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
 
     $rootScope.$on('$locationChangeStart', function() {
         var token = store.get('token'),
-        profile = store.get('profile');
+        profile = store.get('profile'),
+        user = store.get('currentUser');
+        $rootScope.user = user;
 
-    $rootScope.isLogin = profile !==null;
+    $rootScope.isLogin= user !== null && profile !== null
 
     if (token) {
         if (!jwtHelper.isTokenExpired(token)) {
