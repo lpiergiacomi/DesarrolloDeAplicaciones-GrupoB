@@ -51,10 +51,10 @@
             <li>
                 <a ng-click="goTo('#header')">{{user.email}}</a>
                 <a ng-click="goTo('#header')">{{'HOME' | translate}}</a>
-                <a ng-click="goTo('#routes')">{{'AVAILABLE_ROUTES' | translate}}</a>
-                <a ng-click="goTo('#rides')">{{'MY_RIDES' | translate}}</a>
-                <a ng-click="goTo('#rideRequests')">{{'MY_RIDE_REQUESTS' | translate}}</a>
-                <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
+                <a href="#rideRequests">{{'MY_RIDE_REQUESTS' | translate}}</a>
+                <a href="#myRides">{{'MY_RIDES' | translate}}</a>
+                <a href="#products">{{'PRODUCTS' | translate}}</a>
+                <a href="#profile">{{'PROFILE' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
                 <a ng-if="isLogin" ng-click="logout()">Logout </a>
@@ -62,15 +62,11 @@
         </ul>
     </nav>
 
+    <div ng-view></div>
+
     <div id="header" ng-include src="'templates/_home.html'" ng-if="!isLogin"></div>
 
-    <div id="routes" ng-include src="'templates/_availableRoutes.html'" ng-if="isLogin"></div>
-
-    <div id="rides" ng-include src="'templates/_myRides.html'" ng-if="isLogin"></div>
-
-    <div id="rideRequests" ng-include src="'templates/_rideRequests.html'" ng-if="isLogin"></div>
-
-    <div ng-include src="'templates/_productsCrud.html'" ng-if="isLogin"></div>
+    <div id="routes" ng-include src="'templates/_routes.html'" ng-if="isLogin"></div>
 
     <script>
         // Closes the sidebar menu
