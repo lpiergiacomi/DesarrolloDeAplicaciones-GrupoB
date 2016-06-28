@@ -63,12 +63,7 @@
             </li>
         </ul>
     </nav>
-
-    <div ng-view></div>
-
-    <div id="header" ng-include src="'templates/_home.html'" ng-if="!isLogin"></div>
-
-    <div id="routes" ng-include src="'templates/_routes.html'" ng-if="isLogin"></div>
+    <span ng-view></span>
 
     <script>
         // Closes the sidebar menu

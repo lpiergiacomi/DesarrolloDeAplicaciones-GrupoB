@@ -27,7 +27,7 @@ angular.module("subiQueTeLlevoApp")
     function endLoginProccess(profile, token){
         store.set('profile', profile);
         store.set('token', token);
-        $location.path('/');
+        $location.path('/home');
         $scope.loading = false;
     }
 

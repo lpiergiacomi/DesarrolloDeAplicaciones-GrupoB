@@ -1,8 +1,2 @@
-<span class="text-vertical-center" data-ng-controller="HomeController">
-    <span class="well well-lg">
-      <h1>Subi que te llevo</h1>
-      <br>
-      <button class="btn btn-dark btn-lg" ng-click="loginGoogle()">Log in</button>
-      <button class="btn btn-dark btn-lg" ng-click="signUpGoogle()">Sign up</button>
-    </span>
-</span>
+<div id="header" ng-include src="'templates/_loginOrSingUp.html'" ng-if="!isLogin"></div>
+<div id="routes" ng-include src="'templates/_routes.html'" ng-if="isLogin"></div>

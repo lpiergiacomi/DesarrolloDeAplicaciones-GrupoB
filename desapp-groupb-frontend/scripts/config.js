@@ -14,30 +14,39 @@ angular.module("subiQueTeLlevoApp")
         controller: 'LogoutCtrl'
     })
     .when('/login',   {
-        templateUrl: 'views/_home.html',
+        templateUrl: 'templates/_home.html',
         controller: 'HomeController'
     })
     .when('/routes',   {
             templateUrl: 'templates/_routes.html',
-            controller: 'RidesController'
+            controller: 'RidesController',
+            requiresLogin: true
     })
     .when('/rideRequests',   {
             templateUrl: 'templates/_rideRequests.html',
-            controller: 'RidesController'
+            controller: 'RidesController',
+            requiresLogin: true
     })
     .when('/myRides',   {
             templateUrl: 'templates/_myRides.html',
-            controller: 'RidesController'
+            controller: 'RidesController',
+            requiresLogin: true
     })
     .when('/profile',   {
         templateUrl: 'templates/_profile.html',
-        controller: 'ProfileController'
+        controller: 'ProfileController',
+        requiresLogin: true
     })
     .when('/products',   {
             templateUrl: 'templates/_products.html',
-            controller: 'ProductController'
+            controller: 'ProductController',
+            requiresLogin: true
     })
-    .otherwise({ redirectTo: '/' });
+    .when('/home',   {
+                templateUrl: 'templates/_home.html',
+                controller: 'HomeController'
+    })
+    .otherwise({ redirectTo: '/home'});
 
     authProvider.on('loginSuccess', function($rootScope, $location, profilePromise, idToken, store) {
 
