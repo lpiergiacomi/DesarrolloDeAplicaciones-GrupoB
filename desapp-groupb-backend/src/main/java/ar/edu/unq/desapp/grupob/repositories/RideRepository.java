@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 public class RideRepository extends GenericRepository<Ride>{
 
     @Override
@@ -15,16 +14,11 @@ public class RideRepository extends GenericRepository<Ride>{
             return Ride.class;
     }
 
-  @Transactional
-  public List<Ride> findByDriverId(int id){
-    try{
-      List<Ride> rides = this.getHibernateTemplate()
-        .findByCriteria(DetachedCriteria.forClass(Ride.class)
+    @Transactional
+    public List<Ride> findByDriverId(int id){
+        return  this.getHibernateTemplate()
+          .findByCriteria(DetachedCriteria.forClass(Ride.class)
             .createAlias("driver", "d")
             .add(Restrictions.eq("d.id", id)));
-      return rides;
-    }catch(IndexOutOfBoundsException e){
-      return null;
     }
-  }
 }

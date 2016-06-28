@@ -33,14 +33,6 @@ public class RideService extends GenericService<Ride> {
     return getRepository().findByDriverId(id);
   }
 
-  @GET
-  @Path("/{id}/passengerRides")
-  @Produces("application/json")
-  @Transactional
-  public List<Ride> getPassengerRides(@PathParam("id") Integer id){
-    return getRepository().findByPassengerId(id);
-  }
-
   public RideRepository getRepository() {
     return repository;
   }

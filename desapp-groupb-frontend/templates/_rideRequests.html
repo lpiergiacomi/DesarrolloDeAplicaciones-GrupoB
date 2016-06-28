@@ -25,20 +25,10 @@
                                         <td>{{ride.status}}</td>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="driverRideRequests">
-                                <table class="table">
-                                    <thead>
-                                        <th>{{'FROM' | translate}}</th>
-                                        <th>{{'TO' | translate}}</th>
-                                        <th>{{'STATUS' | translate}}</th>
-                                    </thead>
-                                    <tbody data-ng-repeat="ride in userRideRequests">
-                                        <td>{{ride.route.longitude}}</td>
-                                        <td>{{ride.route.latitude}}</td>
-                                        <td>{{ride.status}}</td>
-                                    </tbody>
-                                </table>
+                              <uib-pagination total-items="totalRideRequestItems" ng-model="currentPageRideRequest"
+                                              ng-change="pageRideRequestChanged()"
+                                              class="pagination-sm" items-per-page="itemsPerPage">
+                              </uib-pagination>
                             </div>
                         </div>
                     </div>
