@@ -25,7 +25,7 @@ angular.module("subiQueTeLlevoApp")
     // $scope.searchRoute = function() {
 
     // };
-});
+}); 
 
 function initMap() {
 
