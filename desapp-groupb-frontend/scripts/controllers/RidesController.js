@@ -4,7 +4,7 @@ angular.module("subiQueTeLlevoApp")
 
     $scope.rides;
     $scope.userRides;
-    $scope.userRideRequests = {};
+    $scope.userRideRequests = [];
     $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.filteredUserRides = [];
     $scope.filteredUserRidesRequest = [];
@@ -53,10 +53,10 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.joinRide = function(ride){
-        $http.post($scope.baseUrl + 'rideRequests/joinRide',
-            { ride: ride, user: $rootScope.user }).
-        success(function(data){
-             $scope.myRides.add(data);
+        $http.post($scope.baseUrl + 'rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
+        .success(function(data){
+             $scope.userRideRequests.push(data);
+             $scope.pageRideRequestChanged();
          });
     };
 

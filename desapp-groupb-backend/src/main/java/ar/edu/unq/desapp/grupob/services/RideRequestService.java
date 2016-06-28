@@ -1,9 +1,7 @@
 package ar.edu.unq.desapp.grupob.services;
 
-import ar.edu.unq.desapp.grupob.model.DayOfWeekRideDate;
-import ar.edu.unq.desapp.grupob.model.Ride;
-import ar.edu.unq.desapp.grupob.model.RideRequest;
-import ar.edu.unq.desapp.grupob.model.User;
+import ar.edu.unq.desapp.grupob.model.*;
+import ar.edu.unq.desapp.grupob.repositories.RideDateRepository;
 import ar.edu.unq.desapp.grupob.repositories.RideRepository;
 import ar.edu.unq.desapp.grupob.repositories.RideRequestRepository;
 import ar.edu.unq.desapp.grupob.repositories.UserRepository;
@@ -24,18 +22,22 @@ public class RideRequestService extends GenericService<RideRequest> {
     @Autowired
     private RideRequestRepository repository;
 
+  @Autowired
+    private RideDateRepository rideDateRepository;
 
 
     @POST
-    @Path("/joinRide")
+    @Path("/{rideId}/{userId}/joinRide")
     @Consumes("application/json")
     @Transactional
-    public RideRequest joinRide(Ride ride, User user){
-        RideRequest rideRequest = new RideRequest(user, rideRepository.find(ride.getId()), new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
-        getRepository().save(rideRequest);
-        user.addRideRequest(rideRequest);
-        userRepository.update(user);
-        return rideRequest;
+    public RideRequest joinRide(@PathParam("rideId") Integer rideId,@PathParam("userId") Integer userId){
+      Ride ride = rideRepository.find(rideId);
+      User user = userRepository.find(userId);
+      RideDate rideDate = new DayOfWeekRideDate(DateTimeConstants.TUESDAY);
+      rideDateRepository.save(rideDate);
+      RideRequest rideRequest = new RideRequest(user, ride, rideDate);
+      getRepository().save(rideRequest);
+      return rideRequest;
     }
 
     @GET
@@ -61,6 +63,31 @@ public class RideRequestService extends GenericService<RideRequest> {
     public void setRepository(RideRequestRepository repository) {
       this.repository = repository;
     }
+
+    public RideRepository getRideRepository() {
+    return rideRepository;
+  }
+
+    public void setRideRepository(RideRepository repository) {
+    this.rideRepository = repository;
+  }
+
+    public UserRepository getUserRepository() {
+      return userRepository;
+    }
+
+    public void setUserRepository(UserRepository repository) {
+      this.userRepository = repository;
+    }
+
+    public RideDateRepository getRideDateRepository() {
+    return rideDateRepository;
+  }
+
+    public void setRideDateRepository(RideDateRepository repository) {
+    this.rideDateRepository = repository;
+  }
+
 
 }
 
