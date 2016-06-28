@@ -16,12 +16,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.currentPageAllRide = 1;
     $scope.itemsPerPage = 10;
 
-
-    // lo quiero usar para el alert
-    $scope.switchBool = function(value) {
-        $scope[value] = !$scope[value];
-    };
-
     $scope.getDriverRides = function(){
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
         .success(function(data){
@@ -77,27 +71,26 @@ angular.module("subiQueTeLlevoApp")
     }
 
     $scope.pageRideChanged = function() {
-        var end = $scope.currentPageRide * $scope.itemsPerPage,
-          begin = ($scope.currentPageRide-1)* $scope.itemsPerPage;
-        $scope.filteredUserRides = $scope.userRides.slice(begin, end);
+        $scope.pageChanged(function(begin, end){
+                                   $scope.filteredUserRides = $scope.userRides.slice(begin, end);}
+                                  ,$scope.currentPageAllRide);
     };
 
     $scope.pageRideRequestChanged = function() {
-        var end = $scope.currentPageRideRequest * $scope.itemsPerPage,
-              begin = ($scope.currentPageRideRequest-1)* $scope.itemsPerPage;
-        $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);
+        $scope.pageChanged(function(begin, end){
+                           $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);}
+                          ,$scope.currentPageAllRide);
     };
 
     $scope.pageAllRidesChanged = function(){
-        var end = $scope.currentPageAllRide * $scope.itemsPerPage,
-                  begin = ($scope.currentPageAllRide-1)* $scope.itemsPerPage;
-        $scope.filteredAllRides = $scope.rides.slice(begin, end);
+        $scope.pageChanged(function(begin, end){$scope.filteredAllRides = $scope.rides.slice(begin, end);}
+                     ,$scope.currentPageAllRide);
     };
 
-    $scope.pageChanged = function(list, listFiltered, currentPage) {
+    $scope.pageChanged = function(changeFilter, currentPage) {
         var end = currentPage * $scope.itemsPerPage,
             begin = (currentPage-1)* $scope.itemsPerPage;
-        listFiltered = list.slice(begin, end);
+        changeFilter(begin, end);
     };
 
     $scope.getAllRides();
