@@ -17,7 +17,7 @@
             </button>
         </div>
     </div>
-
+    </br>
     <div class="row">
         <div class="col-lg-6">
             <table class="table">
@@ -29,28 +29,29 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr data-ng-repeat="product in allProducts">
-                        <td>{{product.name}}</td>
-                        <td>{{product.stock}}</td>
-                        <td>$ {{product.cost}}</td>
-                        <td>
-                            <button type="button" class="btn glyphicon glyphicon-edit">
-                            <button type="button" class="btn glyphicon glyphicon-trash">
-                        </td>
-                    </tr>
-                </tbody>
+                <tr data-ng-repeat="product in filteredAllProducts">
+                    <td>{{product.name}}</td>
+                    <td>{{product.stock}}</td>
+                    <td>$ {{product.cost}}</td>
+                    <td><button type="button" class="btn glyphicon glyphicon-edit"></button>
+                        <button type="button" class="btn glyphicon glyphicon-trash"></button>
+                    </td>
+                </tr>
             </table>
+            <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+            class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
         </div>
-        <div ng-hide="hideProductForm" class="form-group">
-            <form class="addProduct">
-                <h4>{{'ADD_PRODUCT' | translate}}</h4>
-                <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre"><br>
-                <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
-                <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
-                <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
-                <button class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
-            </form>
+        <div class="col-lg-6">
+            <div ng-hide="hideProductForm" class="form-group">
+                <form class="addProduct">
+                    <h4>{{'ADD_PRODUCT' | translate}}</h4>
+                    <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre"><br>
+                    <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
+                    <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
+                    <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
+                    <button class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

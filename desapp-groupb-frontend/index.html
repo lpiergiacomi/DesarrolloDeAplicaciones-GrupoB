@@ -28,12 +28,14 @@
     <link rel="stylesheet" type="text/css" href="styles/style.css">
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
     <script type="text/javascript" src="auth0-variables.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/translations.js"></script>
     <script src="scripts/controllers/HomeController.js"></script>
     <script src="scripts/controllers/NavBarCtrl.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
@@ -49,24 +51,19 @@
             <button id="menu-close" class="btn btn-dark glyphicon glyphicon-menu-hamburger pull-right"></button>
             <li class="sidebar-brand"> Subi que te llevo! </li>
             <li>
-                <a ng-click="goTo('#header')">{{user.email}}</a>
-                <a ng-click="goTo('#header')">{{'HOME' | translate}}</a>
-                <a href="#rideRequests">{{'MY_RIDE_REQUESTS' | translate}}</a>
-                <a href="#myRides">{{'MY_RIDES' | translate}}</a>
-                <a href="#products">{{'PRODUCTS' | translate}}</a>
-                <a href="#profile">{{'PROFILE' | translate}}</a>
+                <a ng-click="goTo('#home')">{{user.email}}</a>
+                <a ng-click="goTo('#home')">{{'HOME' | translate}}</a>
+                <a ng-click="goTo('#rideRequests')">{{'MY_RIDE_REQUESTS' | translate}}</a>
+                <a ng-click="goTo('#myRides')">{{'MY_RIDES' | translate}}</a>
+                <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
+                <a ng-click="goTo('#profile')">{{'PROFILE' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
                 <a ng-if="isLogin" ng-click="logout()">Logout </a>
             </li>
         </ul>
     </nav>
-
-    <div ng-view></div>
-
-    <div id="header" ng-include src="'templates/_home.html'" ng-if="!isLogin"></div>
-
-    <div id="routes" ng-include src="'templates/_routes.html'" ng-if="isLogin"></div>
+    <span ng-view></span>
 
     <script>
         // Closes the sidebar menu

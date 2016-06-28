@@ -4,10 +4,30 @@ angular.module("subiQueTeLlevoApp")
 
     $scope.auth = auth;
 
+    function setCurrentUser(data){
+      store.set("currentUser", data);
+      $rootScope.user = data;
+    }
+
+    $scope.loginUser = function(user){
+        $http.get($rootScope.baseUrl + "/users/login/" + user.email)
+            .success(function(data){
+                 setCurrentUser(data);
+            });
+    };
+
+    $scope.createUser = function(user){
+        $http.post($rootScope.baseUrl + "/users/register/",
+                { "email": user.email, "password": user.password })
+        .success(function(data){
+            setCurrentUser(data);
+        });
+    };
+
     function endLoginProccess(profile, token){
         store.set('profile', profile);
         store.set('token', token);
-        $location.path('/');
+        $location.path('/home');
         $scope.loading = false;
     }
 
@@ -41,22 +61,6 @@ angular.module("subiQueTeLlevoApp")
             connection: 'google-oauth2',
             scope: 'openid name email'
         }, onSingUpSuccess, onFailed);
-    };
-
-    $scope.loginUser = function(user){
-        $http.get($rootScope.baseUrl + "/users/login/" + user.email)
-            .success(function(data){
-                $rootScope.user = data;
-            });
-    };
-
-    $scope.createUser = function(user){
-        $http.post($rootScope.baseUrl + "/users/register/",
-                { "email": user.email, "password": user.password })
-        .success(function(data){
-            $rootScope.user = data;
-            $rootScope.isLogin = true;
-        });
     };
 
     $scope.createVehicle = function(vehicle){

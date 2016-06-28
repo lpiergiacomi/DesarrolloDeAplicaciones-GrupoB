@@ -6,6 +6,10 @@ angular.module("subiQueTeLlevoApp")
     $scope.productFind;
     $scope.productNew = {"name": "", "stock":"", "cost":""};
     $scope.hideProductForm = true;
+    $scope.filteredAllProducts = [];
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+
 
     $scope.showProductForm= function(){
         $scope.hideProductForm = false;
@@ -27,10 +31,19 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getAllProducts= function(){
+        $scope.allProducts = [];
         $http.get($scope.productUrl + "all")
             .success(function(data){
                 $scope.allProducts = data;
+                $scope.totalItems = $scope.allProducts.length;
+                $scope.pageChanged();
             });
+    };
+
+    $scope.pageChanged = function() {
+        var end = $scope.currentPage * $scope.itemsPerPage,
+            begin = ($scope.currentPage-1)* $scope.itemsPerPage;
+        $scope.filteredAllProducts = $scope.allProducts.slice(begin, end);
     };
 
     $scope.findProduct = function(productName){

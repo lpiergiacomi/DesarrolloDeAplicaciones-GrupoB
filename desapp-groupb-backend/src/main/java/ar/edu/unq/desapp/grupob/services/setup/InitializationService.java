@@ -12,6 +12,9 @@ public class InitializationService {
   RouteRepository routeRepository;
   RideRepository rideRepository;
   RideRequestRepository rideRequestRepository;
+  User passenger;
+  User driver;
+  Ride driverRide;
 
   public void setUp(){
     initializeProducts();
@@ -23,11 +26,25 @@ public class InitializationService {
   }
 
   private void initializeProducts() {
-    productsRepository.save(new Product("Cubierta", 10, 200));
+    for ( int i = 1; i <= 50; i ++ ) {
+      productsRepository.save(new Product("Cubierta"+ i, 10, 200));
+    }
   }
 
   private void initializeUsers() {
-    userRepository.save(new User());
+    driver = new User();
+    driver.setEmail("driver@domain.com");
+    driver.setPassword("123456");
+    userRepository.save(driver);
+
+    passenger = new User();
+    passenger.setEmail("passenger@domain.com");
+    passenger.setPassword("123456");
+    userRepository.save(passenger);
+
+    User javier = new User();
+    javier.setEmail("javierperini90@gmail.com ");
+    userRepository.save(javier);
   }
 
   public void initializeRideDates() {
@@ -39,12 +56,14 @@ public class InitializationService {
   }
 
   public void initializeRides() {
-    Ride ride = new Ride(userRepository.find(1), routeRepository.find(1), rideDateRepository.find(1));
-    rideRepository.save(ride);
+    driverRide = new Ride(userRepository.find(driver.getId()), routeRepository.find(1),
+                          rideDateRepository.find(1));
+    rideRepository.save(driverRide);
   }
 
   public void initializeRideRequests() {
-    RideRequest rideRequest = new RideRequest(userRepository.find(1), rideRepository.find(1), rideDateRepository.find(1));
+    RideRequest rideRequest = new RideRequest(userRepository.find(passenger.getId()), rideRepository.find(1),
+                                              rideDateRepository.find(1));
     rideRequestRepository.save(rideRequest);
   }
 

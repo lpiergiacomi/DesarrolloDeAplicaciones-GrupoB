@@ -9,15 +9,19 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr data-ng-repeat="ride in rides">
+              <tr data-ng-repeat="ride in filteredAllRides">
                 <td>{{ride.driver.email}}</td>
                 <td>{{ride.route.latitude}}</td>
                 <td>{{ride.route.longitude}}</td>
                 <td>
-                <button class="btn btn-dark" ng-click="joinRide(ride)">{{'JOIN' | translate}}</button>
+                  <button class="btn btn-dark" ng-click="joinRide(ride)">{{'JOIN' | translate}}</button>
                 </td>
-                </tr>
+              </tr>
             </tbody>
         </table>
+        <uib-pagination total-items="totalAllRidesItems" ng-model="currentPageAllRide"
+                        ng-change="pageAllRidesChanged()"
+                        class="pagination-sm" items-per-page="itemsPerPage">
+        </uib-pagination>
     </span>
 </div>
