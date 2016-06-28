@@ -18,7 +18,7 @@ angular.module("subiQueTeLlevoApp")
         store.remove('currentUser');
         $rootScope.user = undefined;
         $rootScope.isLogin = false;
-        $location.path('/login');
+        $location.path('/');
         $("#sidebar-wrapper").toggleClass("active");
     }
 })

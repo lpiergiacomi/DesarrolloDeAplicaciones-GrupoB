@@ -42,16 +42,20 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getDriverRideRequests = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/driverRideRequests")
+        $http.get($scope.baseUrl + "rideRequests/" + $rootScope.user.id + "/driverRideRequests")
         .success(function(data){
             $scope.userRideRequests = data;
+            $scope.totalRideRequestItems = $scope.userRideRequests.length;
+            $scope.pageRideRequestChanged();
         });
     };
 
     $scope.getPassengerRideRequests = function(){
-        $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRideRequests")
+        $http.get($scope.baseUrl + "rideRequests/" + $rootScope.user.id + "/passengerRideRequests")
         .success(function(data){
             $scope.userRideRequests = data;
+            $scope.totalRideRequestItems = $scope.userRideRequests.length;
+            $scope.pageRideRequestChanged();
         });
     };
 
@@ -79,12 +83,15 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.pageRideRequestChanged = function() {
-        $scope.pageChanged($scope.userRideRequests, $scope.filteredUserRidesRequest,
-                           $scope.currentPageRideRequest);
+        var end = $scope.currentPageRideRequest * $scope.itemsPerPage,
+              begin = ($scope.currentPageRideRequest-1)* $scope.itemsPerPage;
+        $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);
     };
 
-    $scope.pageAllRidesChanged =function(){
-        $scope.pageChanged($scope.rides, $scope.filteredAllRides, $scope.currentPageAllRide)
+    $scope.pageAllRidesChanged = function(){
+        var end = $scope.currentPageAllRide * $scope.itemsPerPage,
+                  begin = ($scope.currentPageAllRide-1)* $scope.itemsPerPage;
+        $scope.filteredAllRides = $scope.rides.slice(begin, end);
     };
 
     $scope.pageChanged = function(list, listFiltered, currentPage) {

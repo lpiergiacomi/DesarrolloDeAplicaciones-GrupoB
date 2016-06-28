@@ -5,10 +5,10 @@
           <div role="tabpanel">
               <ul class="nav nav-tabs">
                   <li class="active">
-                      <a href="#driver" data-toggle="tab" ng-click="getDriverRides()">{{'DRIVER' | translate}}</a>
+                      <a data-toggle="tab" ng-click="getDriverRides()">{{'DRIVER' | translate}}</a>
                   </li>
                   <li>
-                      <a href="#passenger" data-toggle="tab" ng-click="getPassengerRides()">{{'PASSENGER' | translate}}</a>
+                      <a data-toggle="tab" ng-click="getPassengerRides()">{{'PASSENGER' | translate}}</a>
                   </li>
               </ul>
               <div class="tab-content">
@@ -26,7 +26,8 @@
                           </tbody>
                       </table>
                     <uib-pagination total-items="totalRideItems" ng-model="currentPageRide" ng-change="pageRideChanged()"
-                                    class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
+                                    class="pagination-sm" items-per-page="itemsPerPage">
+                    </uib-pagination>
                   </div>
               </div>
           </div>

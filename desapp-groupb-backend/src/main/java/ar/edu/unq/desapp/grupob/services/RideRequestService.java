@@ -5,14 +5,14 @@ import ar.edu.unq.desapp.grupob.model.Ride;
 import ar.edu.unq.desapp.grupob.model.RideRequest;
 import ar.edu.unq.desapp.grupob.model.User;
 import ar.edu.unq.desapp.grupob.repositories.RideRepository;
+import ar.edu.unq.desapp.grupob.repositories.RideRequestRepository;
 import ar.edu.unq.desapp.grupob.repositories.UserRepository;
 import org.joda.time.DateTimeConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import java.util.List;
 
 @Path("/rideRequests")
 public class RideRequestService extends GenericService<RideRequest> {
@@ -21,6 +21,10 @@ public class RideRequestService extends GenericService<RideRequest> {
     private RideRepository rideRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RideRequestRepository repository;
+
+
 
     @POST
     @Path("/joinRide")
@@ -32,6 +36,30 @@ public class RideRequestService extends GenericService<RideRequest> {
         user.addRideRequest(rideRequest);
         userRepository.update(user);
         return rideRequest;
+    }
+
+    @GET
+    @Path("/{id}/passengerRideRequests")
+    @Produces("application/json")
+    @Transactional
+    public List<RideRequest> getPassengerRidesRequest(@PathParam("id") Integer id){
+      return getRepository().findByPassengerId(id);
+    }
+
+    @GET
+    @Path("/{id}/driverRideRequests")
+    @Produces("application/json")
+    @Transactional
+    public List<RideRequest> getDriverRidesRequest(@PathParam("id") Integer id){
+      return getRepository().findByDriverId(id);
+    }
+
+    public RideRequestRepository getRepository() {
+      return repository;
+    }
+
+    public void setRepository(RideRequestRepository repository) {
+      this.repository = repository;
     }
 
 }

@@ -34,6 +34,8 @@
 
     <script type="text/javascript" src="auth0-variables.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/translations.js"></script>
     <script src="scripts/controllers/HomeController.js"></script>
     <script src="scripts/controllers/NavBarCtrl.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
@@ -51,10 +53,10 @@
             <li>
                 <a ng-click="goTo('#header')">{{user.email}}</a>
                 <a ng-click="goTo('#header')">{{'HOME' | translate}}</a>
-                <a href="#rideRequests">{{'MY_RIDE_REQUESTS' | translate}}</a>
-                <a href="#myRides">{{'MY_RIDES' | translate}}</a>
-                <a href="#products">{{'PRODUCTS' | translate}}</a>
-                <a href="#profile">{{'PROFILE' | translate}}</a>
+                <a ng-click="goTo('#rideRequests')">{{'MY_RIDE_REQUESTS' | translate}}</a>
+                <a ng-click="goTo('#myRides')">{{'MY_RIDES' | translate}}</a>
+                <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
+                <a ng-click="goTo('#profile')">{{'PROFILE' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
                 <a ng-if="isLogin" ng-click="logout()">Logout </a>

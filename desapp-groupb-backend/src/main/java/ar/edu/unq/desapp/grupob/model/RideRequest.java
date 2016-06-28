@@ -19,6 +19,8 @@ public class RideRequest {
     private String status;
     private Integer id;
 
+    public RideRequest(){}
+
     public RideRequest(User user, Ride ride, RideDate requestRideDate) {
         this.user = user;
         this.ride = ride;
@@ -29,7 +31,7 @@ public class RideRequest {
 
     @Id
     @GeneratedValue
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
