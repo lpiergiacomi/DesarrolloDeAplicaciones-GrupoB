@@ -51,13 +51,27 @@ app.config(function myAppConfig ($routeProvider, authProvider, $httpProvider, $l
         templateUrl: 'views/_home.html',
         controller: 'HomeController'
     })
-    /*
-    .when('/', {
-        templateUrl: 'views/root.html',
-        controller: 'RootCtrl',
-        requiresLogin: true
-    });
-    */
+    .when('/routes',   {
+            templateUrl: 'templates/_routes.html',
+            controller: 'RidesController'
+    })
+    .when('/rideRequests',   {
+            templateUrl: 'templates/_rideRequests.html',
+            controller: 'RidesController'
+    })
+    .when('/myRides',   {
+            templateUrl: 'templates/_myRides.html',
+            controller: 'RidesController'
+    })
+    .when('/profile',   {
+        templateUrl: 'templates/_profile.html',
+        controller: 'ProfileController'
+    })
+    .when('/products',   {
+            templateUrl: 'templates/_products.html',
+            controller: 'ProductController'
+    })
+
     authProvider.on('loginSuccess', function($rootScope, $location, profilePromise, idToken, store) {
 
         profilePromise.then(function(profile) {
@@ -117,6 +131,7 @@ app.config(function($translateProvider) {
         "STATUS" : "Status",
         "PASSENGERS" : "Passengers",
         "SAVE" : "Save",
+        "PROFILE" : "Profile",
     });
 
     $translateProvider.translations("es", {
@@ -151,6 +166,7 @@ app.config(function($translateProvider) {
         "STATUS" : "Estado",
         "PASSENGERS" : "Pasajeros",
         "SAVE" : "Guardar",
+        "PROFILE" : "Perfil",
     });
 
     $translateProvider.preferredLanguage("en");
