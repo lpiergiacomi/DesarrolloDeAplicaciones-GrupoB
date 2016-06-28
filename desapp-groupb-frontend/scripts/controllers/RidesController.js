@@ -6,8 +6,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.userRides;
     $scope.userRideRequests = {};
     $scope.baseUrl = "http://localhost:8080/sqtl/";
-    $scope.showSuccessAlert = false;
-    $scope.showMap= true;
     $scope.filteredUserRides = [];
     $scope.filteredUserRidesRequest = [];
     $scope.filteredAllRides = [];
@@ -20,6 +18,7 @@ angular.module("subiQueTeLlevoApp")
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
         .success(function(data){
             $scope.userRides = data;
+            debugger
             $scope.totalRideItems = $scope.userRides.length;
             $scope.pageRideChanged();
         });

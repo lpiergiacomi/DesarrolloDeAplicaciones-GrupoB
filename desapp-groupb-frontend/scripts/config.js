@@ -37,6 +37,7 @@ angular.module("subiQueTeLlevoApp")
             templateUrl: 'templates/_products.html',
             controller: 'ProductController'
     })
+    .otherwise({ redirectTo: '/' });
 
     authProvider.on('loginSuccess', function($rootScope, $location, profilePromise, idToken, store) {
 
