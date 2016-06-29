@@ -102,6 +102,11 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="persistence.coordinateRepository"
+		class="ar.edu.unq.desapp.grupob.repositories.CoordinateRepository">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
 	<bean id="persistence.routeRepository" class="ar.edu.unq.desapp.grupob.repositories.RouteRepository">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -137,8 +142,4 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="persistence.coordinateRepository"
-		class="ar.edu.unq.desapp.grupob.repositories.CoordinateRepository">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
 </beans>
