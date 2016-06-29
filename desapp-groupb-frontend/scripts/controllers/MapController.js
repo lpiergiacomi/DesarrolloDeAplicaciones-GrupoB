@@ -1,7 +1,7 @@
 angular.module("subiQueTeLlevoApp")
 .controller("MapController", function ($scope, $http, $rootScope) {
 
-    $scope.routeUrl = $rootScope.baseUrl +"/routes/"
+    $scope.routeUrl = $rootScope.baseUrl +"/routes/saveRoute"
     
     $scope.fetchDrawnRoute = function() {
         $scope.originLatitude = localStorage.getItem("originLatitude");

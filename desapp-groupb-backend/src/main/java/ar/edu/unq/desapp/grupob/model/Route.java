@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table
 public class Route {
@@ -32,6 +34,7 @@ public class Route {
     }
 
     @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Coordinate getBegin() {
         return begin;
     }
@@ -41,6 +44,7 @@ public class Route {
     }
 
     @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Coordinate getEnd() {
         return end;
     }
