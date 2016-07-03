@@ -24,8 +24,8 @@
                                         <td>{{rideRequest.ride.route.longitude}}</td>
                                         <td>{{rideRequest.ride.route.latitude}}</td>
                                         <td>{{rideRequest.status}}</td>
-                                        <td ng-if="isDriver && rideRequest.status != pendingG">
-                                          <button ng-click="acceptRideRequests(rideRequest)">Aceptar solicitud</button>
+                                        <td ng-if="rideRequest.status == 'pending'">
+                                          <button class="btn btn-primary" ng-click="acceptRideRequests(rideRequest)">Aceptar solicitud</button>
                                         </td>
                                     </tbody>
                                 </table>

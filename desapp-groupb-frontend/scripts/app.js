@@ -6,6 +6,7 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.user;
     $rootScope.isLogin = false;
     $rootScope.baseUrl = "http://localhost:8080/sqtl";
+    $rootScope.alerts = [];
 
     auth.hookEvents();
 
@@ -31,4 +32,12 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
         }
     }
     });
+
+    $rootScope.addAlert = function(type, msg) {
+        $rootScope.alerts.push({ type: type, msg: msg});
+    };
+
+    $rootScope.closeAlert = function(index) {
+        $rootScope.alerts.splice(index, 1);
+    };
 });

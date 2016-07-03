@@ -13,13 +13,11 @@ angular.module("subiQueTeLlevoApp")
     $scope.currentPageRideRequest = 1;
     $scope.currentPageAllRide = 1;
     $scope.itemsPerPage = 10;
-    $scope.isDriver = false;
 
     $scope.getDriverRides = function(){
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
         .success(function(data){
             $scope.userRides = data;
-            debugger
             $scope.totalRideItems = $scope.userRides.length;
             $scope.pageRideChanged();
         });
@@ -28,7 +26,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.getPassengerRides = function(){
         $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides")
         .success(function(data){
-            debugger
             $scope.userRides = data;
             $scope.totalRideItems = $scope.userRides.length;
             $scope.pageRideChanged();
@@ -60,6 +57,7 @@ angular.module("subiQueTeLlevoApp")
                   $scope.userRideRequests.pop(rideRequest);
                   $scope.totalRideRequestItems = $scope.userRideRequests.length;
                   $scope.pageRideRequestChanged();
+                  $rootScope.addAlert('success', 'Aceptaste una solicitud de viaje');
               });
     };
 
@@ -104,8 +102,8 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getAllRides();
-    /*
-    $scope.$on('$viewContentLoaded', function(){
+
+    $scope.$on('isLogged', function(){
         $scope.getDriverRides();
-    });*/
+    });
 });
