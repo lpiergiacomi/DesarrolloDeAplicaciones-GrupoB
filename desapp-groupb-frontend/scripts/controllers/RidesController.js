@@ -26,7 +26,6 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getPassengerRides = function(){
-        // ARREGLAR EL PEDIDO PORQUE NO FUNCIONA
         $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides")
         .success(function(data){
             debugger

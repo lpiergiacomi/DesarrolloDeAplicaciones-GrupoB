@@ -44,8 +44,7 @@ public class UserService extends GenericService<User> {
     @Transactional
     public List<Ride> getDriverRides(@PathParam("id") Integer id){
         User user = getRepository().find(id);
-        user.switchToDriver();
-        return user.getRides();
+        return user.getDriverRides();
     }
 
     @GET

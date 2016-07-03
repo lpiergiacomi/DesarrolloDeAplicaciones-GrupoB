@@ -35,20 +35,20 @@ public class UserTest {
 
 	@Test
 	public void itShouldSendARequestForJoiningADriversRide() {
-		user.addRideRequest(rideRequest);
+		user.addDriverRideRequest(rideRequest);
 		//assertEquals(user.getRideRequests().size(), 1);
 	}
 
 	@Test
 	public void itShouldAcceptARideRequest() throws RideRequestException {
-		user.addRideRequest(rideRequest);
+		user.addDriverRideRequest(rideRequest);
 		user.acceptRequest(rideRequest);
 		verify(rideRequest, times(1)).accept();
 	}
 
 	@Test
 	public void itShouldRejectARideRequest() throws RideRequestException {
-		user.addRideRequest(rideRequest);
+		user.addDriverRideRequest(rideRequest);
 		user.rejectRequest(rideRequest);
 		verify(rideRequest, times(1)).reject();
 	}
@@ -67,65 +67,46 @@ public class UserTest {
 	@Test
 	public void itShouldGiveAGoodRateToAnotherUser() {
 		User anotherUser = new User();
-		user.giveGoodRate(anotherUser);
-		assertEquals(anotherUser.getGoodRate(), 1);
+		user.giveDriverGoodRate(anotherUser);
+		assertEquals(anotherUser.getDriverGoodRate(), 1);
 	}
 
 	@Test
 	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldChange() {
 		User anotherUser = new User();
-		user.giveBadRate(anotherUser);
-		assertEquals(anotherUser.getBadRate(), 1);
+		user.giveDriverBadRate(anotherUser);
+		assertEquals(anotherUser.getDriverBadRate(), 1);
 	}
 
-	@Test
-	public void itShouldBeInitiatedAsAPassenger(){
-		assertTrue(user.isPassengerRoleActivated());
-	}
+  @Test
+  public void itShouldIncreaseItsPointsWhenReceivingAGoodRate() {
+      user.receiveGoodRate(user.getDriverRole());
+      assertEquals(user.getPoints(), 500);
+  }
 
-	@Test
-	public void itShouldSwitchToDriverRoleSuccessfully() {
-		user.switchToDriver();
-		assertTrue(user.isDriverRoleActivated());
-		assertFalse(user.isPassengerRoleActivated());
-	}
+  @Test
+  public void itShouldNotChangeItsPointsWhenReceivingABadRateForTheFirstTime() {
+      user.receiveBadRate(user.getDriverRole());
+      assertEquals(user.getPoints(), 0);
+  }
 
-	@Test
-	public void itShouldSwitchToPassengerRoleSuccessfully() {
-		user.switchToPassenger();
-		assertFalse(user.isDriverRoleActivated());
-		assertTrue(user.isPassengerRoleActivated());
-	}
-
-    @Test
-    public void itShouldIncreaseItsPointsWhenReceivingAGoodRate() {
-        user.receiveGoodRate();
-        assertEquals(user.getPoints(), 500);
-    }
-
-    @Test
-    public void itShouldNotChangeItsPointsWhenReceivingABadRateForTheFirstTime() {
-        user.receiveBadRate();
-        assertEquals(user.getPoints(), 0);
-    }
-
-    @Test
-    public void itShouldDecreaseItsPointsWhenReceivingABadRateForTheSecondTime() {
-        user.receiveBadRate();
-        user.receiveBadRate();
-        assertEquals(user.getPoints(), -1000);
-    }
+  @Test
+  public void itShouldDecreaseItsPointsWhenReceivingABadRateForTheSecondTime() {
+      user.receiveBadRate(user.getDriverRole());
+      user.receiveBadRate(user.getDriverRole());
+      assertEquals(user.getPoints(), -1000);
+  }
 
 
-    @Test
-    public void itShouldExchangePointsForAProduct() {
-        int initialRate = user.getPoints();
-        Product product = mock(Product.class);
-        when(product.getCost()).thenReturn(100);
-        user.exchangeProduct(product, 1);
-        assertEquals(user.getPoints(), initialRate - 100);
+  @Test
+  public void itShouldExchangePointsForAProduct() {
+      int initialRate = user.getPoints();
+      Product product = mock(Product.class);
+      when(product.getCost()).thenReturn(100);
+      user.exchangeProduct(product, 1);
+      assertEquals(user.getPoints(), initialRate - 100);
 
-    }
+  }
 
 	@Test
 	public void itShouldSendAPrivateMessageToAnotherUser() {
