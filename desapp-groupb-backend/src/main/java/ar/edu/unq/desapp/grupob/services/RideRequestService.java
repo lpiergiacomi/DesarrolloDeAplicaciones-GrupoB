@@ -21,8 +21,7 @@ public class RideRequestService extends GenericService<RideRequest> {
     private UserRepository userRepository;
     @Autowired
     private RideRequestRepository repository;
-
-  @Autowired
+    @Autowired
     private RideDateRepository rideDateRepository;
 
 
@@ -37,6 +36,18 @@ public class RideRequestService extends GenericService<RideRequest> {
       rideDateRepository.save(rideDate);
       RideRequest rideRequest = new RideRequest(user, ride, rideDate);
       getRepository().save(rideRequest);
+      return rideRequest;
+    }
+
+    @POST
+    @Path("/{rideRequestId}/acceptRideRequest")
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Transactional
+    public RideRequest acceptRideRequest(@PathParam("rideRequestId") Integer rideRequestId){
+      RideRequest rideRequest = repository.find(rideRequestId);
+      rideRequest.accept();
+      repository.update(rideRequest);
       return rideRequest;
     }
 
@@ -87,7 +98,5 @@ public class RideRequestService extends GenericService<RideRequest> {
     public void setRideDateRepository(RideDateRepository repository) {
     this.rideDateRepository = repository;
   }
-
-
 }
 

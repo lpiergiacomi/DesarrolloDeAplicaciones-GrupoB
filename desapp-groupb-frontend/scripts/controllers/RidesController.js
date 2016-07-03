@@ -13,6 +13,7 @@ angular.module("subiQueTeLlevoApp")
     $scope.currentPageRideRequest = 1;
     $scope.currentPageAllRide = 1;
     $scope.itemsPerPage = 10;
+    $scope.isDriver = false;
 
     $scope.getDriverRides = function(){
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
@@ -28,6 +29,7 @@ angular.module("subiQueTeLlevoApp")
         // ARREGLAR EL PEDIDO PORQUE NO FUNCIONA
         $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides")
         .success(function(data){
+            debugger
             $scope.userRides = data;
             $scope.totalRideItems = $scope.userRides.length;
             $scope.pageRideChanged();
@@ -40,6 +42,7 @@ angular.module("subiQueTeLlevoApp")
             $scope.userRideRequests = data;
             $scope.totalRideRequestItems = $scope.userRideRequests.length;
             $scope.pageRideRequestChanged();
+            $scope.isDriver = true;
         });
     };
 
@@ -50,6 +53,15 @@ angular.module("subiQueTeLlevoApp")
             $scope.totalRideRequestItems = $scope.userRideRequests.length;
             $scope.pageRideRequestChanged();
         });
+    };
+
+    $scope.acceptRideRequests = function(rideRequest){
+      $http.post($scope.baseUrl + "rideRequests/" + rideRequest.id + "/acceptRideRequest")
+              .success(function(data){
+                  $scope.userRideRequests.pop(rideRequest);
+                  $scope.totalRideRequestItems = $scope.userRideRequests.length;
+                  $scope.pageRideRequestChanged();
+              });
     };
 
     $scope.joinRide = function(ride){
@@ -93,5 +105,8 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getAllRides();
-
+    /*
+    $scope.$on('$viewContentLoaded', function(){
+        $scope.getDriverRides();
+    });*/
 });

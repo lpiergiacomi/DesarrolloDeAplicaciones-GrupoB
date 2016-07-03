@@ -63,20 +63,20 @@ public class User {
       }
 
     public void acceptRequest(RideRequest rideRequest) throws RideRequestException{
-        this.handleRequest(rideRequest);
+        //this.handleRequest(rideRequest);
         rideRequest.accept();
     }
 
     public void rejectRequest(RideRequest rideRequest) throws RideRequestException {
-        this.handleRequest(rideRequest);
+        //this.handleRequest(rideRequest);
         rideRequest.reject();
     }
 
-    private void handleRequest(RideRequest rideRequest) throws RideRequestException {
+    /*private void handleRequest(RideRequest rideRequest) throws RideRequestException {
         if(!getRideRequests().contains(rideRequest)){
           throw new RideRequestException("This ride request does not belong to this user");
         }
-    }
+    }*/
 
     public void giveGoodRate(User user) {
       user.receiveGoodRate();
@@ -179,13 +179,18 @@ public class User {
       return driverRole.getRoutes();
     }
 
-      public void setRoutes(List<Route> routes){
+    public void setRoutes(List<Route> routes){
           driverRole.setRoutes(routes);
       }
 
     @Transient
-    public List<RideRequest> getRideRequests(){
-      return currentRole.getRideRequests();
+    public List<RideRequest> getPassengerRideRequests(){
+      return passengerRole.getRideRequests();
+    }
+
+    @Transient
+    public List<RideRequest> getDriverRideRequests(){
+      return driverRole.getRideRequests();
     }
 
     @Transient
@@ -203,8 +208,22 @@ public class User {
         return currentRole.getRides();
     }
 
-    public void addRide(Ride ride){
-        currentRole.addRide(ride);
+    @Transient
+    public List<Ride> getDriverRides(){
+      return driverRole.getRides();
+    }
+
+    @Transient
+    public List<Ride> getPassengerRides(){
+      return passengerRole.getRides();
+    }
+
+    public void addPassengerRide(Ride ride){
+        passengerRole.addRide(ride);
+    }
+
+    public void addDriverRide(Ride ride){
+        driverRole.addRide(ride);
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
