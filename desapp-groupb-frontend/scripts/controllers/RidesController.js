@@ -65,7 +65,9 @@ angular.module("subiQueTeLlevoApp")
         $http.post($scope.baseUrl + 'rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
         .success(function(data){
              $scope.userRideRequests.push(data);
+             $scope.filteredAllRides.pop(data);
              $scope.pageRideRequestChanged();
+             $rootScope.addAlert('success', 'Te uniste al viaje');
          });
     };
 
