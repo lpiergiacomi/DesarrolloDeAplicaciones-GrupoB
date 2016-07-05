@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <button class="btn btn-info addProductBtn" ng-click="showProductForm()">
+            <button class="btn btn-info addProductBtn"  ng-show='isAdmin' ng-click="showProductForm()">
                 {{'ADD_PRODUCT' | translate}}
             </button>
         </div>
@@ -33,8 +33,8 @@
                     <td>{{product.name}}</td>
                     <td>{{product.stock}}</td>
                     <td>$ {{product.cost}}</td>
-                    <td><button type="button" class="btn glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn glyphicon glyphicon-trash"></button>
+                    <td><button ng-show='isAdmin' type="button" class="btn glyphicon glyphicon-edit"></button>
+                        <button ng-show='isAdmin' type="button" class="btn glyphicon glyphicon-trash"></button>
                     </td>
                 </tr>
             </table>

@@ -5,6 +5,7 @@ var app = angular.module('subiQueTeLlevoApp', ['pascalprecht.translate','auth0',
 app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.user;
     $rootScope.isLogin = false;
+    $rootScope.isAdmin = false;
     $rootScope.baseUrl = "http://localhost:8080/sqtl";
     $rootScope.alerts = [];
 
@@ -15,6 +16,10 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
         profile = store.get('profile'),
         user = store.get('currentUser');
     $rootScope.isLogin = user !== null && profile !== null;
+
+    if (profile !== null){
+       $rootScope.isAdmin = profile.roles.includes("admin");
+    }
 
     if($rootScope.isLogin) {
       $rootScope.user = user;

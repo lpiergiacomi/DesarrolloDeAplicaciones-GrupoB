@@ -29,6 +29,7 @@ angular.module("subiQueTeLlevoApp")
         store.set('profile', profile);
         store.set('token', token);
         $location.path('/home');
+        $rootScope.isAdmin = profile.roles.includes("admin");
         $scope.loading = false;
     }
 
