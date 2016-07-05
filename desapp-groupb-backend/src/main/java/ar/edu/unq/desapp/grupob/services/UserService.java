@@ -44,8 +44,7 @@ public class UserService extends GenericService<User> {
     @Transactional
     public List<Ride> getDriverRides(@PathParam("id") Integer id){
         User user = getRepository().find(id);
-        user.switchToDriver();
-        return user.getRides();
+        return user.getDriverRides();
     }
 
     @GET
@@ -54,8 +53,7 @@ public class UserService extends GenericService<User> {
     @Transactional
     public List<Ride> getPassengerRides(@PathParam("id") Integer id){
         User user = getRepository().find(id);
-        user.switchToPassenger();
-        return user.getRides();
+        return user.getPassengerRides();
     }
 
     @GET
@@ -64,8 +62,7 @@ public class UserService extends GenericService<User> {
     @Transactional
     public List<RideRequest> getDriverRideRequests(@PathParam("id") Integer id){
         User user = getRepository().find(id);
-        user.switchToDriver();
-        return user.getRideRequests();
+        return user.getDriverRideRequests();
     }
 
     @GET
@@ -74,8 +71,7 @@ public class UserService extends GenericService<User> {
     @Transactional
     public List<RideRequest> getPassengerRideRequests(@PathParam("id") Integer id){
         User user = getRepository().find(id);
-        user.switchToPassenger();
-        return user.getRideRequests();
+        return user.getPassengerRideRequests();
     }
 
     public UserRepository getRepository() {

@@ -10,16 +10,6 @@ public class Passenger extends Role {
 
     public Passenger(){}
 
-    @Transient
-    public boolean passenger(){
-        return true;
-    }
-
-    @Transient
-    public boolean driver(){
-        return false;
-    }
-
     public void addRoute(Route route) throws RouteException {
         throw new RouteException("You can't add a route as a passenger, switch to driver mode instead");
     }

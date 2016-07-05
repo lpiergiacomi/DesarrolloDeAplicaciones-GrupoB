@@ -64,7 +64,11 @@
         </ul>
     </nav>
     <span ng-view></span>
-
+    <div class="container">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+          {{alert.msg}}
+        </uib-alert>
+    </div>
     <script>
         // Closes the sidebar menu
         $("#menu-close").click(function(e) {
