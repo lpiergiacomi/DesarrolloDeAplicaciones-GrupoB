@@ -34,10 +34,6 @@ public abstract class Role {
     public void setId(Integer id) {
         this.id = id;
     }
-    @Transient
-    public abstract boolean passenger();
-    @Transient
-    public abstract boolean driver();
 
     public int getGoodRate(){
         return goodRate;

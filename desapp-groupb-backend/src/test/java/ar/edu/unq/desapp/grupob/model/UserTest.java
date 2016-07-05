@@ -36,7 +36,7 @@ public class UserTest {
 	@Test
 	public void itShouldSendARequestForJoiningADriversRide() {
 		user.addDriverRideRequest(rideRequest);
-		//assertEquals(user.getRideRequests().size(), 1);
+		assertEquals(user.getDriverRideRequests().size(), 1);
 	}
 
 	@Test

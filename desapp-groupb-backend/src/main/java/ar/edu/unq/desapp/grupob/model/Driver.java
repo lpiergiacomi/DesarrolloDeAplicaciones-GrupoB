@@ -15,15 +15,6 @@ public class Driver extends Role {
 
     public Driver(){}
 
-    @Transient
-    public boolean passenger(){
-        return false;
-    }
-    @Transient
-    public boolean driver(){
-        return true;
-    }
-
     public void addRoute(Route route){
         routes.add(route);
     }
