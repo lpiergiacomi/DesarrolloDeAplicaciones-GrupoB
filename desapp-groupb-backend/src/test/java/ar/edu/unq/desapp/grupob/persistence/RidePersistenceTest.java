@@ -42,7 +42,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     @Before
     public void setUp() {
         user =  new User();
-        route = new Route(new Coordinate(2.0, 2.3), new Coordinate(3.0, 4.3));
+        route = new Route(new Coordinate("Quilmes", 2.0, 2.3), new Coordinate("Bernal", 3.0, 4.3));
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
         Vehicle vehicle = new Vehicle(1, 2);

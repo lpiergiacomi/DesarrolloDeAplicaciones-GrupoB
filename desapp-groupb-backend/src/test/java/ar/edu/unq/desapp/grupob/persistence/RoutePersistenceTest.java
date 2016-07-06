@@ -30,8 +30,8 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
 
     @Before
     public void setUp() {
-        Coordinate beginning = new Coordinate(2.123, -3.456);
-        Coordinate end = new Coordinate(-4.123, 5.342);
+        Coordinate beginning = new Coordinate("Caballito", 2.123, -3.456);
+        Coordinate end = new Coordinate("Lomas", -4.123, 5.342);
         coordinateRepository.save(beginning);
         coordinateRepository.save(end);
 
@@ -51,7 +51,7 @@ public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringConte
         assertEquals(route.getBegin().getLatitude(), 2.123, 0);
         assertEquals(route.getBegin().getLongitude(), -3.456, 0);
 
-        Coordinate newBeginning = new Coordinate(-3.456, 8.907);
+        Coordinate newBeginning = new Coordinate("Lanus", -3.456, 8.907);
         route.setBegin(newBeginning);
         routeRepository.update(route);
 

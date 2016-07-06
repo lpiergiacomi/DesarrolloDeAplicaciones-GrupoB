@@ -28,8 +28,8 @@ public class InitializationService {
     }
 
     private void initializeCoordinates() {
-        coordinateRepository.save(new Coordinate(-123.4, 4.567));
-        coordinateRepository.save(new Coordinate(5.432, -7.543));
+        coordinateRepository.save(new Coordinate("Bernal", -123.4, 4.567));
+        coordinateRepository.save(new Coordinate("Docksud", 5.432, -7.543));
     }
 
     private void initializeProducts() {

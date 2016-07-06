@@ -11,13 +11,23 @@ public class Coordinate {
 
     private double latitude;
     private double longitude;
+    private String name;
     private Integer id;
 
     public Coordinate() {}
 
-    public Coordinate(double latitude, double longitude) {
+    public Coordinate(String name, double latitude, double longitude) {
+        this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getLatitude() {

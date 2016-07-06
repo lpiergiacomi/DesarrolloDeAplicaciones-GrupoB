@@ -10,7 +10,8 @@ public class CoordinateTest {
 
     @Test
     public void itShouldCreateANewCoordinateWithItsLatitudeAndLongitude() {
-        coordinate = new Coordinate(-2.3456, 7.89034);
+        coordinate = new Coordinate("Quilmes city", -2.3456, 7.89034);
+        assertEquals(coordinate.getName(), "Quilmes city");
         assertEquals(coordinate.getLatitude(), -2.3456, 0);
         assertEquals(coordinate.getLongitude(), 7.89034, 0);
     }

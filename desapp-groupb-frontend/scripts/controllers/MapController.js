@@ -1,30 +1,51 @@
 angular.module("subiQueTeLlevoApp")
 .controller("MapController", function ($scope, $http, $rootScope) {
 
-    $scope.routeUrl = $rootScope.baseUrl +"/routes/saveRoute"
+    $scope.routeUrl = $rootScope.baseUrl +"/routes/"
     
     $scope.fetchDrawnRoute = function() {
+        // $scope.originName = localStorage.getItem("originName");
         $scope.originLatitude = localStorage.getItem("originLatitude");
         $scope.originLongitude = localStorage.getItem("originLongitude");
+        // $scope.destinationName = localStorage.getItem("destinationName");
         $scope.destinationLatitude = localStorage.getItem("destinationLatitude");
         $scope.destinationLongitude = localStorage.getItem("destinationLongitude");
     };
 
+    $scope.clearLocalStorage = function() {
+        // localStorage.removeItem("originName");
+        localStorage.removeItem("originLatitude");
+        localStorage.removeItem("originLongitude");
+        // localStorage.removeItem("destinationName");
+        localStorage.removeItem("destinationLatitude");
+        localStorage.removeItem("destinationLongitude");
+    }
+
     $scope.fetchDrawnRoute();
 
+    $scope.clearInputs = function() {
+        document.getElementById("origin-input").value = "";
+        document.getElementById("destination-input").value = "";
+    };
+
     $scope.saveRoute = function() {
-        $http.post($scope.routeUrl, 
+        var saveRouteUrl = $scope.routeUrl + "saveRoute";
+        $http.post(saveRouteUrl, 
             {
-                "begin": {"latitude": $scope.originLatitude, "longitude": $scope.originLongitude },
-                "end": {"latitude": $scope.destinationLatitude, "longitude": $scope.destinationLongitude }
+                "begin": {"latitude": $scope.originLatitude, "longitude": $scope.originLongitude},
+                "end": {"latitude": $scope.destinationLatitude, "longitude": $scope.destinationLongitude}
             }).success(function(data) {
                 console.log("Route saved successfully");
             });
+        $scope.clearLocalStorage();
+        $scope.clearInputs();
     };
 
-    // $scope.searchRoute = function() {
-
-    // };
+    $scope.searchRoute = function() {
+        $http.get($scope.routeUrl + "all").success(function(data){
+                $scope.routes = data;
+            });
+    };
 }); 
 
 function initMap() {
@@ -119,6 +140,7 @@ function initMap() {
     function geocodeAddressOrigin() {
         geocoder.geocode({'placeId': directionsDisplay.getDirections().geocoded_waypoints[0].place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
+                //localStorage.setItem("originName", results[0].formatted_address);
                 localStorage.setItem("originLatitude", results[0].geometry.location.lat());
                 localStorage.setItem("originLongitude", results[0].geometry.location.lng());
             }
@@ -128,6 +150,7 @@ function initMap() {
     function geocodeAddressDestination() {
         geocoder.geocode({'placeId': directionsDisplay.getDirections().geocoded_waypoints[1].place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
+                //localStorage.setItem("destinationName", results[0].formatted_address);
                 localStorage.setItem("destinationLatitude", results[0].geometry.location.lat());
                 localStorage.setItem("destinationLongitude", results[0].geometry.location.lng());
             }

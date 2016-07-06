@@ -26,7 +26,7 @@ public class CoordinatePersistenceTest {
 
     @Before
     public void setUp() {
-        coordinate = new Coordinate(3.123, -4.567);
+        coordinate = new Coordinate("La Plata", 3.123, -4.567);
         coordinateRepository.save(coordinate);
     }
 
