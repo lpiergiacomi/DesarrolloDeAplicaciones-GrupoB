@@ -18,7 +18,6 @@ public class User {
     private String email;
     private String password;
     private Vehicle vehicle;
-    private Role currentRole;
     private Driver driverRole;
     private Passenger passengerRole;
     private int points;
@@ -28,7 +27,6 @@ public class User {
     public User(){
         driverRole = new Driver();
         passengerRole = new Passenger();
-        currentRole = passengerRole;
         points = 0;
         messages = new ArrayList<>();
         vehicle = new Vehicle(4, 0); // FIXME
@@ -44,8 +42,12 @@ public class User {
       driverRole.addRoute(route);
     }
 
-    public void addRideRequest(RideRequest rideRequest){
-      currentRole.addRideRequest(rideRequest);
+    public void addDriverRideRequest(RideRequest rideRequest){
+      driverRole.addRideRequest(rideRequest);
+    }
+
+    public void addPassengerRideRequest(RideRequest rideRequest){
+      passengerRole.addRideRequest(rideRequest);
     }
 
     public void sendPublicMessageTo(User receiver, String message) {
@@ -73,48 +75,38 @@ public class User {
     }
 
     private void handleRequest(RideRequest rideRequest) throws RideRequestException {
-        if(!getRideRequests().contains(rideRequest)){
+        if(!getDriverRideRequests().contains(rideRequest)){
           throw new RideRequestException("This ride request does not belong to this user");
         }
     }
 
-    public void giveGoodRate(User user) {
-      user.receiveGoodRate();
+    public void giveDriverGoodRate(User user) {
+      user.receiveGoodRate(user.getDriverRole());
     }
 
-    public void giveBadRate(User user) {
-      user.receiveBadRate();
+    public void givePassengerGoodRate(User user) {
+      user.receiveGoodRate(user.getPassengerRole());
     }
 
-    public void receiveGoodRate() {
+    public void giveDriverBadRate(User user) {
+      user.receiveBadRate(user.getDriverRole());
+    }
+
+    public void givePassengerBadRate(User user) {
+      user.receiveBadRate(user.getPassengerRole());
+    }
+
+    public void receiveGoodRate(Role currentRole) {
       points += currentRole.receiveGoodRate();
     }
 
-    public void receiveBadRate(){
+    public void receiveBadRate(Role currentRole){
       points -= currentRole.receiveBadRate();
-    }
-
-    public void switchToDriver(){
-      currentRole = driverRole;
-    }
-
-    public void switchToPassenger(){
-      currentRole = passengerRole;
     }
 
     public void exchangeProduct(Product product, int quantity) {
         points -= product.getCost() * quantity;
         product.subtractStock(quantity);
-    }
-
-    @Transient
-    public boolean isPassengerRoleActivated() {
-      return currentRole.passenger();
-    }
-
-    @Transient
-    public boolean isDriverRoleActivated() {
-      return currentRole.driver();
     }
 
     @OneToOne
@@ -146,15 +138,6 @@ public class User {
       this.passengerRole = passengerRole;
     }
 
-    @Transient
-    public Role getCurrentRole() {
-      return currentRole;
-    }
-
-    public void setCurrentRole(Role currentRole) {
-      this.currentRole = currentRole;
-    }
-
     @Id @GeneratedValue
     public Integer getId() {
       return id;
@@ -179,32 +162,56 @@ public class User {
       return driverRole.getRoutes();
     }
 
-      public void setRoutes(List<Route> routes){
+    public void setRoutes(List<Route> routes){
           driverRole.setRoutes(routes);
       }
 
     @Transient
-    public List<RideRequest> getRideRequests(){
-      return currentRole.getRideRequests();
+    public List<RideRequest> getPassengerRideRequests(){
+      return passengerRole.getRideRequests();
     }
 
     @Transient
-    public int getGoodRate(){
-      return currentRole.getGoodRate();
+    public List<RideRequest> getDriverRideRequests(){
+      return driverRole.getRideRequests();
     }
 
     @Transient
-    public int getBadRate(){
-      return currentRole.getBadRate();
+    public int getPassengerGoodRate(){
+      return passengerRole.getGoodRate();
     }
 
     @Transient
-    public List<Ride> getRides(){
-        return currentRole.getRides();
+    public int getPassengerBadRate(){
+      return passengerRole.getBadRate();
     }
 
-    public void addRide(Ride ride){
-        currentRole.addRide(ride);
+    @Transient
+    public int getDriverGoodRate(){
+      return driverRole.getGoodRate();
+    }
+
+    @Transient
+    public int getDriverBadRate(){
+      return driverRole.getBadRate();
+    }
+
+    @Transient
+    public List<Ride> getDriverRides(){
+      return driverRole.getRides();
+    }
+
+    @Transient
+    public List<Ride> getPassengerRides(){
+      return passengerRole.getRides();
+    }
+
+    public void addPassengerRide(Ride ride){
+        passengerRole.addRide(ride);
+    }
+
+    public void addDriverRide(Ride ride){
+        driverRole.addRide(ride);
     }
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -19,16 +19,6 @@ public class PassengerTest {
     }
 
     @Test
-    public void itShouldDenyItIsADriver(){
-        assertFalse(passenger.driver());
-    }
-
-    @Test
-    public void itShouldAssertItIsAPassenger(){
-        assertTrue(passenger.passenger());
-    }
-
-    @Test
     public void itShouldBeAbleToAddARideRequestMadeByIt() {
         passenger.addRideRequest(rideRequest);
         assertEquals(passenger.getRideRequests().size(), 1);

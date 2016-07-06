@@ -72,6 +72,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNTAVH_1zEZBZUNBA6dGcVchluktaaaBU&libraries=places&callback=initMap"
     async defer></script>
 
+    <div class="container">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout='3000' close="closeAlert($index)">
+          {{alert.msg}}
+        </uib-alert>
+    </div>
+
     <script>
         // Closes the sidebar menu
         $("#menu-close").click(function(e) {

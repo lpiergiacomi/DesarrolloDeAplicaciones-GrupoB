@@ -19,16 +19,6 @@ public class DriverTest {
     }
 
     @Test
-    public void itShouldAssertItIsADriver(){
-        assertTrue(driver.driver());
-    }
-
-    @Test
-    public void itShouldDenyItIsAPassenger(){
-        assertFalse(driver.passenger());
-    }
-
-    @Test
     public void itShouldBeAbleToAddARoute(){
         driver.addRoute(route);
         assertEquals(driver.getRoutes().size(), 1);

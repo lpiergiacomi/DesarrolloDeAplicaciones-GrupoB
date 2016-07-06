@@ -18,14 +18,12 @@ angular.module("subiQueTeLlevoApp")
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
         .success(function(data){
             $scope.userRides = data;
-            debugger
             $scope.totalRideItems = $scope.userRides.length;
             $scope.pageRideChanged();
         });
     };
 
     $scope.getPassengerRides = function(){
-        // ARREGLAR EL PEDIDO PORQUE NO FUNCIONA
         $http.get($scope.baseUrl + "users/" + $rootScope.user.id + "/passengerRides")
         .success(function(data){
             $scope.userRides = data;
@@ -40,6 +38,7 @@ angular.module("subiQueTeLlevoApp")
             $scope.userRideRequests = data;
             $scope.totalRideRequestItems = $scope.userRideRequests.length;
             $scope.pageRideRequestChanged();
+            $scope.isDriver = true;
         });
     };
 
@@ -52,11 +51,23 @@ angular.module("subiQueTeLlevoApp")
         });
     };
 
+    $scope.acceptRideRequests = function(rideRequest){
+      $http.post($scope.baseUrl + "rideRequests/" + rideRequest.id + "/acceptRideRequest")
+              .success(function(data){
+                  $scope.userRideRequests.pop(rideRequest);
+                  $scope.totalRideRequestItems = $scope.userRideRequests.length;
+                  $scope.pageRideRequestChanged();
+                  $rootScope.addAlert('success', 'Aceptaste una solicitud de viaje');
+              });
+    };
+
     $scope.joinRide = function(ride){
         $http.post($scope.baseUrl + 'rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
         .success(function(data){
              $scope.userRideRequests.push(data);
+             $scope.filteredAllRides.pop(data);
              $scope.pageRideRequestChanged();
+             $rootScope.addAlert('success', 'Te uniste al viaje');
          });
     };
 
@@ -94,4 +105,7 @@ angular.module("subiQueTeLlevoApp")
 
     $scope.getAllRides();
 
+    $scope.$on('isLogged', function(){
+        $scope.getDriverRides();
+    });
 });

@@ -1,5 +1,7 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Calendar;
@@ -40,6 +42,7 @@ public class RideRequest {
     }
 
     @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public User getUser(){
         return user;
     }
@@ -74,6 +77,7 @@ public class RideRequest {
     }
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public Ride getRide() {
         return ride;
     }
@@ -85,7 +89,7 @@ public class RideRequest {
     public void accept() {
         status = ACCEPTED;
         ride.addPassenger(user);
-        user.addRide(ride);
+        user.addPassengerRide(ride);
     }
 
     public void reject() {

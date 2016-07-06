@@ -59,7 +59,6 @@ angular.module("subiQueTeLlevoApp")
         $location.path('/');
     });
 
-
     authProvider.on('loginFailure', function() {
         console.log("Error logging in");
         $location.path('/login');

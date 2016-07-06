@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
@@ -65,6 +66,7 @@ public class Ride {
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonBackReference
     public List<User> getPassengers() {
         return passengers;
     }
