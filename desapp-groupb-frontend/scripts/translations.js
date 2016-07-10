@@ -34,6 +34,7 @@ angular.module("subiQueTeLlevoApp")
         "PASSENGERS" : "Passengers",
         "SAVE" : "Save",
         "PROFILE" : "Profile",
+        "SEARCH_ROUTE": "Search a route",
         "EDIT" : "Edit",
         "EMPTY_TABLE": "There are no elements in the table"
     });
@@ -71,6 +72,7 @@ angular.module("subiQueTeLlevoApp")
         "PASSENGERS" : "Pasajeros",
         "SAVE" : "Guardar",
         "PROFILE" : "Perfil",
+        "SEARCH_ROUTE": "Busca una ruta",
         "EDIT" : "Editar",
         "EMPTY_TABLE": "No hay elementos en la tabla"
     });

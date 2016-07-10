@@ -5,6 +5,7 @@ var app = angular.module('subiQueTeLlevoApp', ['pascalprecht.translate','auth0',
 app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.user;
     $rootScope.isLogin = false;
+    $rootScope.isHomePage = false;
     $rootScope.isAdmin = false;
     $rootScope.baseUrl = "http://localhost:8080/sqtl";
     $rootScope.alerts = [];
@@ -15,27 +16,29 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
         var token = store.get('token'),
         profile = store.get('profile'),
         user = store.get('currentUser');
-    $rootScope.isLogin = user !== null && profile !== null;
+        $rootScope.isLogin = user !== null && profile !== null;
 
-    if (profile !== null){
-       $rootScope.isAdmin = profile.roles.includes("admin");
-    }
-
-    if($rootScope.isLogin) {
-      $rootScope.user = user;
-    }
-
-    if (token) {
-        if (!jwtHelper.isTokenExpired(token)) {
-            if (!auth.isAuthenticated) {
-                //Re-authenticate user if token is valid
-                auth.authenticate(store.get('profile'), token);
-            }
-        } else {
-            // Either show the login page or use the refresh token to get a new idToken
-            $location.path('/');
+        if($rootScope.isLogin) {
+            $rootScope.user = user;
         }
-    }
+
+        $rootScope.isHomePage = location.href.indexOf("home") > 1
+    
+        if (profile !== null){
+           $rootScope.isAdmin = profile.roles.includes("admin");
+        }
+
+        if (token) {
+            if (!jwtHelper.isTokenExpired(token)) {
+                if (!auth.isAuthenticated) {
+                    //Re-authenticate user if token is valid
+                    auth.authenticate(store.get('profile'), token);
+                }
+            } else {
+                // Either show the login page or use the refresh token to get a new idToken
+                $location.path('/');
+            }
+        }
     });
 
     $rootScope.addAlert = function(type, msg) {
@@ -45,4 +48,5 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.closeAlert = function(index) {
         $rootScope.alerts.splice(index, 1);
     };
+
 });

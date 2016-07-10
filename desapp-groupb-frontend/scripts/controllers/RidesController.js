@@ -61,35 +61,10 @@ angular.module("subiQueTeLlevoApp")
               });
     };
 
-    $scope.joinRide = function(ride){
-        $http.post($scope.baseUrl + 'rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
-        .success(function(data){
-             $scope.userRideRequests.push(data);
-             $scope.filteredAllRides.pop(data);
-             $scope.pageRideRequestChanged();
-             $rootScope.addAlert('success', 'Te uniste al viaje');
-         });
-    };
-
-    $scope.getAllRides = function(){
-        $http.get($scope.baseUrl + "rides/all")
-        .success(function(data){
-            $scope.rides = data;
-            $scope.totalAllRidesItems = $scope.rides.length;
-            $scope.pageAllRidesChanged();
-        })
-    }
-
     $scope.pageRideChanged = function() {
         $scope.pageChanged(function(begin, end){
                                    $scope.filteredUserRides = $scope.userRides.slice(begin, end);}
                                   ,$scope.currentPageAllRide);
-    };
-
-    $scope.pageRideRequestChanged = function() {
-        $scope.pageChanged(function(begin, end){
-                           $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);}
-                          ,$scope.currentPageAllRide);
     };
 
     $scope.pageAllRidesChanged = function(){
@@ -102,8 +77,6 @@ angular.module("subiQueTeLlevoApp")
             begin = (currentPage-1)* $scope.itemsPerPage;
         changeFilter(begin, end);
     };
-
-    $scope.getAllRides();
 
     $rootScope.$on('isLogged', function(){
         $scope.getDriverRides();

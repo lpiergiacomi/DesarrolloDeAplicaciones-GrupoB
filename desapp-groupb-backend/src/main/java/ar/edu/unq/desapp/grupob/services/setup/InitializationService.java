@@ -6,88 +6,107 @@ import org.joda.time.DateTimeConstants;
 
 public class InitializationService {
 
-  ProductsRepository productsRepository;
-  UserRepository userRepository;
-  RideDateRepository rideDateRepository;
-  RouteRepository routeRepository;
-  RideRepository rideRepository;
-  RideRequestRepository rideRequestRepository;
-  User passenger;
-  User driver;
-  Ride driverRide;
+    ProductsRepository productsRepository;
+    UserRepository userRepository;
+    RideDateRepository rideDateRepository;
+    RouteRepository routeRepository;
+    RideRepository rideRepository;
+    RideRequestRepository rideRequestRepository;
+    CoordinateRepository coordinateRepository;
+    User passenger;
+    User driver;
+    Ride driverRide;
 
-  public void setUp(){
-    initializeProducts();
-    initializeUsers();
-    initializeRideDates();
-    initializeRoutes();
-    initializeRides();
-    initializeRideRequests();
-  }
-
-  private void initializeProducts() {
-    for ( int i = 1; i <= 50; i ++ ) {
-      productsRepository.save(new Product("Cubierta"+ i, 10, 200));
+    public void setUp() {
+        initializeProducts();
+        initializeUsers();
+        initializeRideDates();
+        initializeCoordinates();
+        initializeRoutes();
+        initializeRides();
+        initializeRideRequests();
     }
-  }
 
-  private void initializeUsers() {
-    driver = new User();
-    driver.setEmail("driver@domain.com");
-    driver.setPassword("123456");
-    userRepository.save(driver);
+    private void initializeCoordinates() {
+        coordinateRepository.save(new Coordinate("Quilmes, Buenos Aires, Argentina", -34.7206336, -58.25460510000005));
+        coordinateRepository.save(new Coordinate("Wilde, Buenos Aires, Argentina", -34.7040787, -58.32059859999998));
+    }
 
-    passenger = new User();
-    passenger.setEmail("passenger@domain.com");
-    passenger.setPassword("123456");
-    userRepository.save(passenger);
+    private void initializeProducts() {
+        for (int i = 1; i <= 50; i++) {
+            productsRepository.save(new Product("Cubierta" + i, 10, 200));
+        }
+    }
 
-    User javier = new User();
-    javier.setEmail("javierperini90@gmail.com ");
-    userRepository.save(javier);
-  }
+    private void initializeUsers() {
+        driver = new User();
+        driver.setEmail("driver@domain.com");
+        driver.setPassword("123456");
+        userRepository.save(driver);
 
-  public void initializeRideDates() {
-    rideDateRepository.save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
-  }
+        passenger = new User();
+        passenger.setEmail("passenger@domain.com");
+        passenger.setPassword("123456");
+        userRepository.save(passenger);
 
-  public void initializeRoutes() {
-    routeRepository.save(new Route(0, 0));
-  }
+        User javier = new User();
+        javier.setEmail("javierperini90@gmail.com ");
+        userRepository.save(javier);
 
-  public void initializeRides() {
-    driverRide = new Ride(userRepository.find(driver.getId()), routeRepository.find(1),
-                          rideDateRepository.find(1));
-    rideRepository.save(driverRide);
-  }
+        User camila = new User();
+        camila.setEmail("camilagarcia.113@gmail.com ");
+        userRepository.save(camila);
+    }
 
-  public void initializeRideRequests() {
-    RideRequest rideRequest = new RideRequest(userRepository.find(passenger.getId()), rideRepository.find(1),
-                                              rideDateRepository.find(1));
-    rideRequestRepository.save(rideRequest);
-  }
+    public void initializeRideDates() {
+        rideDateRepository
+                .save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
+    }
 
-  public void setProductsRepository(ProductsRepository productsRepository) {
-    this.productsRepository = productsRepository;
-  }
+    public void initializeRoutes() {
+        routeRepository.save(new Route(coordinateRepository.find(1), coordinateRepository.find(2)));
+      }
 
-  public void setUserRepository(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+    public void initializeRides() {
+        driverRide = new Ride(userRepository.find(driver.getId()),
+                routeRepository.find(1), rideDateRepository.find(1));
+        rideRepository.save(driverRide);
+    }
 
-  public void setRideDateRepository(RideDateRepository rideDateRepository) {
-    this.rideDateRepository = rideDateRepository;
-  }
+    public void initializeRideRequests() {
+        RideRequest rideRequest = new RideRequest(
+                userRepository.find(passenger.getId()), rideRepository.find(1),
+                rideDateRepository.find(1));
+        rideRequestRepository.save(rideRequest);
+    }
 
-  public void setRouteRepository(RouteRepository routeRepository) {
-    this.routeRepository = routeRepository;
-  }
+    public void setProductsRepository(ProductsRepository productsRepository) {
+        this.productsRepository = productsRepository;
+    }
 
-  public void setRideRepository(RideRepository rideRepository) {
-    this.rideRepository = rideRepository;
-  }
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-  public void setRideRequestRepository(RideRequestRepository rideRequestRepository) {
-    this.rideRequestRepository = rideRequestRepository;
-  }
+    public void setRideDateRepository(RideDateRepository rideDateRepository) {
+        this.rideDateRepository = rideDateRepository;
+    }
+
+    public void setRouteRepository(RouteRepository routeRepository) {
+        this.routeRepository = routeRepository;
+    }
+
+    public void setRideRepository(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
+
+    public void setRideRequestRepository(
+            RideRequestRepository rideRequestRepository) {
+        this.rideRequestRepository = rideRequestRepository;
+    }
+
+    public void setCoordinateRepository(
+            CoordinateRepository coordinateRepository) {
+        this.coordinateRepository = coordinateRepository;
+    }
 }
