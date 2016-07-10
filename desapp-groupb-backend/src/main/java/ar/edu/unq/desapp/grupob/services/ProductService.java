@@ -24,7 +24,7 @@ public class ProductService extends GenericService<Product> {
   @Path("/{name}/find")
   @Produces("application/json")
   @Transactional
-  public Product loginUser(@PathParam("name") String productName){
+  public Product findProductByName(@PathParam("name") String productName){
     return  getRepository().findByName(productName);
   }
 
