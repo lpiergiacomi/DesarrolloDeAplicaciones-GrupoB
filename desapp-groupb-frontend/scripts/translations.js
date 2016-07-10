@@ -35,6 +35,7 @@ angular.module("subiQueTeLlevoApp")
         "SAVE" : "Save",
         "PROFILE" : "Profile",
         "EDIT" : "Edit",
+        "EMPTY_TABLE": "There are no elements in the table"
     });
 
     $translateProvider.translations("es", {
@@ -71,6 +72,7 @@ angular.module("subiQueTeLlevoApp")
         "SAVE" : "Guardar",
         "PROFILE" : "Perfil",
         "EDIT" : "Editar",
+        "EMPTY_TABLE": "No hay elementos en la tabla"
     });
 
     $translateProvider.preferredLanguage("en");

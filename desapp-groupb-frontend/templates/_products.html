@@ -45,7 +45,11 @@
             </table>
             <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
             class="pagination-sm" items-per-page="itemsPerPage" ng-hide="isEmptyTable"></uib-pagination>
+          <div class="alert alert-danger" ng-show="isEmptyTable">
+            {{'EMPTY_TABLE' | translate}}
+          </div>
         </div>
+
         <div class="col-lg-6">
             <div ng-hide="hideProductForm" class="form-group">
                 <form class="addProduct" name="productForm">
