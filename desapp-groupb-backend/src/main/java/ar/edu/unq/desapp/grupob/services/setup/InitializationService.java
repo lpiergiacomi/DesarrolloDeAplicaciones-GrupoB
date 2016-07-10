@@ -16,6 +16,7 @@ public class InitializationService {
     User passenger;
     User driver;
     Ride driverRide;
+    MessagesRepository messagesRepository;
 
     public void setUp() {
         initializeProducts();
@@ -77,7 +78,7 @@ public class InitializationService {
 
     public void initializeRideDates() {
         rideDateRepository
-                .save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
+          .save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
     }
 
     public void initializeRoutes() {
@@ -126,4 +127,13 @@ public class InitializationService {
             CoordinateRepository coordinateRepository) {
         this.coordinateRepository = coordinateRepository;
     }
+
+    public MessagesRepository getMessagesRepository() {
+      return messagesRepository;
+    }
+
+    public void setMessagesRepository(MessagesRepository messagesRepository) {
+      this.messagesRepository = messagesRepository;
+    }
+
 }
