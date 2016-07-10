@@ -13,6 +13,7 @@ angular.module("subiQueTeLlevoApp")
 
     $scope.showProductForm = function(){
         $scope.hideProductForm = false;
+        $scope.editProduct = false;
     };
 
     $scope.resetProductForm = function(){
@@ -27,22 +28,25 @@ angular.module("subiQueTeLlevoApp")
     }
 
     $scope.saveProductForm = function(product){
-        $http.post($scope.productUrl,
-                {"name": product.name, "stock": product.stock, "cost": product.cost})
-        .success(function(data){
-            $scope.productNew = {"name": "", "stock":"","cost":""};
-            $scope.hideProductForm = true;
-            $scope.getAllProducts();
-        });
+      if ($scope.productForm.$valid) {
+          $http.post($scope.productUrl,
+                  {"name": product.name, "stock": product.stock, "cost": product.cost})
+          .success(function(data){
+              $scope.resetProductForm();
+              $scope.getAllProducts();
+              $rootScope.addAlert('success', 'Agregaste un producto');
+          });
+       }
     };
 
     $scope.editProductForm = function(product){
-        $http.put($scope.productUrl, product)
-        .success(function(data){
-            $scope.productNew = {"name": "", "stock":"","cost":""};
-            $scope.hideProductForm = true;
-            $scope.getAllProducts();
-        });
+      if ($scope.productForm.$valid) {
+          $http.put($scope.productUrl, product)
+          .success(function(data){
+              $scope.resetProductForm();
+              $rootScope.addAlert('success', 'Has Editado el producto '+ product.name);
+          });
+       }
     };
 
     $scope.deleteProduct = function(product){
@@ -51,6 +55,7 @@ angular.module("subiQueTeLlevoApp")
             removeProduct(product);
             $scope.totalItems = $scope.allProducts.length;
             $scope.pageChanged();
+            $rootScope.addAlert('success', 'Borraste  el producto '+ product.name);
         });
     };
 
@@ -71,9 +76,11 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.findProduct = function(productName){
-        $http.get($scope.productUrl + productName)
+        $http.get($scope.productUrl + productName + "/find")
             .success(function(data){
                 $scope.allProducts = [data];
+                $scope.totalItems = $scope.allProducts.length;
+                $scope.pageChanged();
             });
     };
 

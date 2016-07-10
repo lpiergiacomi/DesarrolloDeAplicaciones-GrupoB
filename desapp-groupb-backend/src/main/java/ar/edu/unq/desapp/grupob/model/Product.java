@@ -32,7 +32,7 @@ public class Product {
       this.id = id;
     }
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     public String getName() {
           return name;
     }

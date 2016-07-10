@@ -48,14 +48,33 @@
         </div>
         <div class="col-lg-6">
             <div ng-hide="hideProductForm" class="form-group">
-                <form class="addProduct">
+                <form class="addProduct" name="productForm">
                     <h4>{{'ADD_PRODUCT' | translate}}</h4>
-                    <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre"><br>
-                    <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
-                    <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
-                    <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
-                    <button ng-hide='editProduct' class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
-                   <button ng-show='editProduct'  class="btn btn-success productBtn" ng-click="editProductForm(productNew)"> {{'EDIT' | translate}}</button>
+                    <div class="form-group" ng-class="{ 'has-error': productForm.productName.$invalid && productForm.productName.$dirty }" >
+                      <input type="text" class="controls" name="productName" ng-model="productNew.name"
+                             placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.productStock.$invalid && productForm.productStock.$dirty }">
+                      <input type="number" class="controls" name="productStock" placeholder="Cantidad"
+                             ng-model="productNew.stock" required>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.productCost.$invalid && productForm.productCost.$dirty }" >
+                      <input type="number" class="controls" name="productCost" placeholder="Precio"
+                             ng-model="productNew.cost" required>
+                    </div>
+                    <button class="btn btn-danger productBtn" ng-click="resetProductForm()">
+                      {{'CANCEL' | translate}}
+                    </button>
+                    <button ng-show='!editProduct' class="btn btn-success productBtn"
+                            ng-click="saveProductForm(productNew)">
+                      {{'SAVE' | translate}}
+                    </button>
+                    <button ng-show='editProduct' class="btn btn-success productBtn"
+                            ng-click="editProductForm(productNew)">
+                      {{'EDIT' | translate}}
+                    </button>
                 </form>
             </div>
         </div>
