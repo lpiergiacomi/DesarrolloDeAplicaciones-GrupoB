@@ -23,6 +23,7 @@ angular.module("subiQueTeLlevoApp")
         "DRIVER": "Driver",
         "DAY": "Day",
         "FROM": "From",
+        "FROM_ROUTE": "From",
         "TO": "To",
         "JOIN": "Join",
         "PASSENGER": "Passenger",
