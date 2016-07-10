@@ -9,24 +9,48 @@ angular.module("subiQueTeLlevoApp")
     $scope.filteredAllProducts = [];
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
+    $scope.editProduct = false;
 
-
-    $scope.showProductForm= function(){
+    $scope.showProductForm = function(){
         $scope.hideProductForm = false;
     };
 
-    $scope.resetProductForm=function(){
+    $scope.resetProductForm = function(){
         $scope.productNew = {"name": "", "stock":"","cost":""};
         $scope.hideProductForm = true;
     };
 
-    $scope.saveProductForm= function(product){
+    $scope.showEditForm = function(product){
+        $scope.productNew = product;
+        $scope.hideProductForm = false;
+        $scope.editProduct = true;
+    }
+
+    $scope.saveProductForm = function(product){
         $http.post($scope.productUrl,
                 {"name": product.name, "stock": product.stock, "cost": product.cost})
         .success(function(data){
             $scope.productNew = {"name": "", "stock":"","cost":""};
             $scope.hideProductForm = true;
             $scope.getAllProducts();
+        });
+    };
+
+    $scope.editProductForm = function(product){
+        $http.put($scope.productUrl, product)
+        .success(function(data){
+            $scope.productNew = {"name": "", "stock":"","cost":""};
+            $scope.hideProductForm = true;
+            $scope.getAllProducts();
+        });
+    };
+
+    $scope.deleteProduct = function(product){
+        $http.delete($scope.productUrl + 'delete/' + product.id)
+        .success(function(data){
+            removeProduct(product);
+            $scope.totalItems = $scope.allProducts.length;
+            $scope.pageChanged();
         });
     };
 
@@ -54,4 +78,9 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.getAllProducts();
+
+    function removeProduct(product){
+      var index = $scope.allProducts.indexOf(product);
+      $scope.allProducts.splice(index, 1);
+    }
 });

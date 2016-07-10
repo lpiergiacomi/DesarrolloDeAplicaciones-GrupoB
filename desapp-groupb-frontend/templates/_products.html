@@ -33,8 +33,13 @@
                     <td>{{product.name}}</td>
                     <td>{{product.stock}}</td>
                     <td>$ {{product.cost}}</td>
-                    <td><button ng-show='isAdmin' type="button" class="btn glyphicon glyphicon-edit"></button>
-                        <button ng-show='isAdmin' type="button" class="btn glyphicon glyphicon-trash"></button>
+                    <td>
+                      <button ng-show='isAdmin' ng-click="showEditForm(product)"
+                              type="button" class="btn glyphicon glyphicon-edit">
+                      </button>
+                      <button ng-show='isAdmin' ng-click="deleteProduct(product)"
+                              type="button" class="btn glyphicon glyphicon-trash">
+                      </button>
                     </td>
                 </tr>
             </table>
@@ -49,7 +54,8 @@
                     <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
                     <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
                     <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
-                    <button class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
+                    <button ng-hide='editProduct' class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
+                   <button ng-show='editProduct'  class="btn btn-success productBtn" ng-click="editProductForm(productNew)"> {{'EDIT' | translate}}</button>
                 </form>
             </div>
         </div>

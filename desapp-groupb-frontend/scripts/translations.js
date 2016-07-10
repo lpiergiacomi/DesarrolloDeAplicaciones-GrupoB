@@ -34,6 +34,7 @@ angular.module("subiQueTeLlevoApp")
         "PASSENGERS" : "Passengers",
         "SAVE" : "Save",
         "PROFILE" : "Profile",
+        "EDIT" : "Edit",
     });
 
     $translateProvider.translations("es", {
@@ -69,6 +70,7 @@ angular.module("subiQueTeLlevoApp")
         "PASSENGERS" : "Pasajeros",
         "SAVE" : "Guardar",
         "PROFILE" : "Perfil",
+        "EDIT" : "Editar",
     });
 
     $translateProvider.preferredLanguage("en");
