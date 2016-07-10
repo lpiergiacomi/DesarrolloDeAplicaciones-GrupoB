@@ -7,19 +7,19 @@ angular.module("subiQueTeLlevoApp")
         "HOME": "Home",
         "MY_RIDES": "My rides",
         "PRODUCTS": "Products",
-        "EMAIL": "Email",
-        "PASSWORD": "Contraseña",
-        "CHECKBOX_DRIVER": "Do you have a car and want to be a driver? Select if you do!",
-        "CANCEL": "Cancel",
+        "EMAIL":"Mail",
+        "PASSWORD":"Password",
+        "CHECKBOX_DRIVER":"Do you have a car and want to be a driver? Select if you do!",
+        "CANCEL":"Cancel",
         "VEHICLE": "Vehicle",
-        "VEHICLE_CAPACITY": "Vehicle capacity",
+        "VEHICLE_CAPACITY":"Vehicle capacity",
         "TYPE_VEHICLE": "Select your vehicle type",
         "CAR": "Car",
         "VAN": "Van",
         "AVAILABLE_ROUTES": "Available routes",
         "MY_ROUTES": "My routes",
         "MY_RIDE_REQUESTS": "My ride requests",
-        "ROUTES": "Routes",
+        "ROUTES" : "Routes",
         "DRIVER": "Driver",
         "DAY": "Day",
         "FROM": "From",
@@ -41,7 +41,9 @@ angular.module("subiQueTeLlevoApp")
         "MESSAGES": "Messages",
         "EDIT": "Edit",
         "AND_YOU": "and you",
-        "LEAVE_YOUR_MESSAGE": "Leave your message..."
+        "LEAVE_YOUR_MESSAGE": "Leave your message...",
+        "SEARCH_ROUTE": "Search a route",
+        "EMPTY_TABLE": "There are no elements in the table"
     });
 
     $translateProvider.translations("es", {
@@ -62,10 +64,11 @@ angular.module("subiQueTeLlevoApp")
         "AVAILABLE_ROUTES": "Rutas disponibles",
         "MY_ROUTES": "Mis rutas",
         "MY_RIDE_REQUESTS": "Mis solicitudes de viaje",
-        "ROUTES": "Recorridos",
+        "ROUTES" : "Recorridos",
         "DRIVER": "Conductor",
         "DAY": "Dia",
         "FROM": "De",
+        "FROM_ROUTE": "Desde",
         "TO": "Hasta",
         "JOIN": "Unirse",
         "PASSENGER": "Pasajero",
@@ -84,7 +87,9 @@ angular.module("subiQueTeLlevoApp")
         "MESSAGES": "Mensajes",
         "EDIT": "Editar",
         "AND_YOU": "y tú",
-        "LEAVE_YOU_MESSAGE": "Deja tu mensaje..."
+        "LEAVE_YOU_MESSAGE": "Deja tu mensaje...",
+        "SEARCH_ROUTE": "Busca una ruta",
+        "EMPTY_TABLE": "No hay elementos en la tabla"
     });
 
     $translateProvider.preferredLanguage("en");

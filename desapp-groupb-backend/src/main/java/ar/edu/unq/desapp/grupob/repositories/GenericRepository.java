@@ -21,7 +21,7 @@ public abstract class GenericRepository<T> extends HibernateDaoSupport {
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public List<T> getAll() {
-        return (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName() + " o");
+        return (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName());
     }
 
     public T find(Integer id) {

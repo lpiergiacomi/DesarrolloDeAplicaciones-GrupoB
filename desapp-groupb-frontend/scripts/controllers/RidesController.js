@@ -54,42 +54,17 @@ angular.module("subiQueTeLlevoApp")
     $scope.acceptRideRequests = function(rideRequest){
       $http.post($scope.baseUrl + "rideRequests/" + rideRequest.id + "/acceptRideRequest")
               .success(function(data){
-                  $scope.userRideRequests.pop(rideRequest);
+                  removeUserRideRequest(rideRequest);
                   $scope.totalRideRequestItems = $scope.userRideRequests.length;
                   $scope.pageRideRequestChanged();
                   $rootScope.addAlert('success', 'Aceptaste una solicitud de viaje');
               });
     };
 
-    $scope.joinRide = function(ride){
-        $http.post($scope.baseUrl + 'rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
-        .success(function(data){
-             $scope.userRideRequests.push(data);
-             $scope.filteredAllRides.pop(data);
-             $scope.pageRideRequestChanged();
-             $rootScope.addAlert('success', 'Te uniste al viaje');
-         });
-    };
-
-    $scope.getAllRides = function(){
-        $http.get($scope.baseUrl + "rides/all")
-        .success(function(data){
-            $scope.rides = data;
-            $scope.totalAllRidesItems = $scope.rides.length;
-            $scope.pageAllRidesChanged();
-        })
-    }
-
     $scope.pageRideChanged = function() {
         $scope.pageChanged(function(begin, end){
                                    $scope.filteredUserRides = $scope.userRides.slice(begin, end);}
                                   ,$scope.currentPageAllRide);
-    };
-
-    $scope.pageRideRequestChanged = function() {
-        $scope.pageChanged(function(begin, end){
-                           $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);}
-                          ,$scope.currentPageAllRide);
     };
 
     $scope.pageAllRidesChanged = function(){
@@ -103,9 +78,12 @@ angular.module("subiQueTeLlevoApp")
         changeFilter(begin, end);
     };
 
-    $scope.getAllRides();
-
-    $scope.$on('isLogged', function(){
+    $rootScope.$on('isLogged', function(){
         $scope.getDriverRides();
     });
+
+    function removeUserRideRequest(rideRequest){
+      var index = $scope.userRideRequests.indexOf(rideRequest);
+      $scope.userRideRequests.splice(index, 1);
+    }
 });

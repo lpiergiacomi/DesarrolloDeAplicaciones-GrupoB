@@ -3,21 +3,24 @@ package ar.edu.unq.desapp.grupob.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table
 public class Route {
 
-    private double latitude;
-    private double longitude;
+    private Coordinate begin;
+    private Coordinate end;
     private Integer id;
 
     public Route(){}
 
-    public Route(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Route(Coordinate begin, Coordinate end) {
+        this.begin = begin;
+        this.end = end;
     }
 
     @Id
@@ -30,19 +33,23 @@ public class Route {
         this.id = id;
     }
 
-    public double getLatitude() {
-        return latitude;
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    public Coordinate getBegin() {
+        return begin;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setBegin(Coordinate begin) {
+        this.begin = begin;
     }
 
-    public double getLongitude() {
-        return longitude;
+    @OneToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    public Coordinate getEnd() {
+        return end;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setEnd(Coordinate end) {
+        this.end = end;
     }
 }

@@ -1,7 +1,8 @@
 angular.module("subiQueTeLlevoApp")
-.controller("NavBarCtrl", function ($scope, $translate, auth, $rootScope, store, $location) {
+.controller("NavBarController", function ($scope, $translate, auth, $rootScope, store, $location) {
     'use strict';
     $scope.goTo = function(elementId) {
+        $rootScope.isHomePage = elementId === "#home";
         window.location.hash = elementId;
         $("#sidebar-wrapper").toggleClass("active");
     };
