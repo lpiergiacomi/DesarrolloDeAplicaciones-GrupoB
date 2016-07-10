@@ -19,11 +19,6 @@ public class RideService extends GenericService<Ride> {
 
   @Autowired
   private RideRepository repository;
-  /*
-  session.createCriteria(Employee.class)
-    .createAlias("address", "a")
-  .add(Restrictions.eq("a.postalCode", post)
-*/
 
   @GET
   @Path("/{id}/driverRides")

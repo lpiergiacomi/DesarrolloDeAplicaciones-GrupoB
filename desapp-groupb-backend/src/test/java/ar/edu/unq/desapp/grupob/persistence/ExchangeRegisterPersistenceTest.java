@@ -54,7 +54,7 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
     @Test
     public void itShouldUpdateAExchangeRegister() {
         assertEquals(exchangeRegister.getProduct(), product);
-        Product productUpdate = new Product("a Product", 3, 1);
+        Product productUpdate = new Product("another Product", 3, 1);
         productsRepository.save(productUpdate);
         exchangeRegister.setProduct(productUpdate);
         exchangerRegisterRepository.update(exchangeRegister);
