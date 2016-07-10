@@ -10,7 +10,7 @@ public class VehicleRepositoryTest {
 
     @Before
     public void setUp() {
-        vehicle = new Vehicle(4, 2.50);
+        vehicle = new Vehicle(4, 2.50, "Honda Civic");
     }
 
     @Test

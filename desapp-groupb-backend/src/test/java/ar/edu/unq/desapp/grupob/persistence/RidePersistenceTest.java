@@ -46,7 +46,7 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         route = new Route(2.0, 2.3);
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
-        Vehicle vehicle = new Vehicle(1, 2);
+        Vehicle vehicle = new Vehicle(1, 2, "Honda Civic");
         user.setVehicle(vehicle);
 
         vehicleRepository.save(vehicle);

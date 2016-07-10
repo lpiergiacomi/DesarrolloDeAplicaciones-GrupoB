@@ -40,6 +40,7 @@
     <script src="scripts/controllers/NavBarCtrl.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
     <script src="scripts/controllers/RidesController.js"></script>
+    <script src="scripts/controllers/UserController.js"></script>
 
 </head>
 
@@ -56,10 +57,10 @@
                 <a ng-click="goTo('#rideRequests')">{{'MY_RIDE_REQUESTS' | translate}}</a>
                 <a ng-click="goTo('#myRides')">{{'MY_RIDES' | translate}}</a>
                 <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
-                <a ng-click="goTo('#profile')">{{'PROFILE' | translate}}</a>
+                <a ng-click="goTo('#profile/'+user.id+'/')">{{'PROFILE' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
-                <a ng-if="isLogin" ng-click="logout()">Logout </a>
+                <a ng-click="logout()">Logout </a>
             </li>
         </ul>
     </nav>

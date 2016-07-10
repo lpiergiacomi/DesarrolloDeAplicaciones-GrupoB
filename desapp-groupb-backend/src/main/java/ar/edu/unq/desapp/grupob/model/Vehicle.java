@@ -8,13 +8,15 @@ public class Vehicle {
 
     private int capacity, rate, id;
     private double costPerKm;
+    private String model;
 
     public Vehicle(){}
 
-    public Vehicle(int capacity, double costPerKm) {
+    public Vehicle(int capacity, double costPerKm, String model) {
         this.capacity = capacity;
         this.rate = 0;
         this.costPerKm = costPerKm;
+        this.model = model;
     }
 
     @Id
@@ -34,6 +36,7 @@ public class Vehicle {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
     public void receiveGoodRate() {
         rate += 1;
     }
@@ -63,4 +66,11 @@ public class Vehicle {
         this.costPerKm = costPerKm;
     }
 
+    public String getModel() {
+      return model;
+    }
+
+    public void setModel(String model) {
+      this.model = model;
+    }
 }

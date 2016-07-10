@@ -12,6 +12,7 @@ public class InitializationService {
   RouteRepository routeRepository;
   RideRepository rideRepository;
   RideRequestRepository rideRequestRepository;
+  MessagesRepository messagesRepository;
   User passenger;
   User driver;
   Ride driverRide;
@@ -42,9 +43,27 @@ public class InitializationService {
     passenger.setPassword("123456");
     userRepository.save(passenger);
 
+    User angeles = new User();
+    angeles.setEmail("angeles.tellaarena@gmail.com ");
+    angeles.setName("Angeles");
+    angeles.setCity("Wilde");
+    userRepository.save(angeles);
     User javier = new User();
     javier.setEmail("javierperini90@gmail.com ");
+    javier.setName("Javier");
+    javier.setCity("Don Bosco");
     userRepository.save(javier);
+
+    javier.sendPublicMessageTo(angeles, "holis de javier a angeles");
+    angeles.sendPrivateMessageTo(javier, "Este es privado");
+
+//    Message privado = new PrivateMessage(angeles, javier, "este es privado");
+//    angeles.receiveMessage(privado);
+    userRepository.update(javier);
+
+    angeles.sendPublicMessageTo(javier, "holis de angeles a javier");
+    userRepository.update(angeles);
+
   }
 
   public void initializeRideDates() {
@@ -89,5 +108,9 @@ public class InitializationService {
 
   public void setRideRequestRepository(RideRequestRepository rideRequestRepository) {
     this.rideRequestRepository = rideRequestRepository;
+  }
+
+  public void setMessagesRepository(MessagesRepository messagesRepository) {
+    this.messagesRepository = messagesRepository;
   }
 }

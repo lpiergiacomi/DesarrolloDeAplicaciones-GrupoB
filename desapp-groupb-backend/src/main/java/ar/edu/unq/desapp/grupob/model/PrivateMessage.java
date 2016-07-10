@@ -9,4 +9,9 @@ public class PrivateMessage extends Message {
         super(sender, receiver, content);
     }
 
+    public PrivateMessage(){}
+
+    public boolean isPrivate(){
+        return true;
+    }
 }

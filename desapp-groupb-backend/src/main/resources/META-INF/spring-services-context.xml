@@ -66,5 +66,6 @@
         <property name="routeRepository" ref="persistence.routeRepository" />
         <property name="rideRepository" ref="persistence.rideRepository" />
         <property name="rideRequestRepository" ref="persistence.rideRequestRepository" />
+        <property name="messagesRepository" ref="persistence.messagesRepository" />
     </bean>
 </beans>
