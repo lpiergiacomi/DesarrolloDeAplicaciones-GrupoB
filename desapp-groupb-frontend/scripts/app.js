@@ -6,6 +6,7 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
     $rootScope.user;
     $rootScope.isLogin = false;
     $rootScope.isHomePage = false;
+    $rootScope.isAdmin = false;
     $rootScope.baseUrl = "http://localhost:8080/sqtl";
     $rootScope.alerts = [];
 
@@ -22,6 +23,10 @@ app.run(function($rootScope, auth, store, jwtHelper, $location) {
         }
 
         $rootScope.isHomePage = location.href.indexOf("home") > 1
+    
+        if (profile !== null){
+           $rootScope.isAdmin = profile.roles.includes("admin");
+        }
 
         if (token) {
             if (!jwtHelper.isTokenExpired(token)) {

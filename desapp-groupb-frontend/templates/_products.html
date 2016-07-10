@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <button class="btn btn-info addProductBtn" ng-click="showProductForm()">
+            <button class="btn btn-info addProductBtn"  ng-show='isAdmin' ng-click="showProductForm()">
                 {{'ADD_PRODUCT' | translate}}
             </button>
         </div>
@@ -20,7 +20,7 @@
     </br>
     <div class="row">
         <div class="col-lg-6">
-            <table class="table">
+            <table class="table" ng-hide="isEmptyTable">
                 <thead>
                     <tr>
                         <th>{{'NAME' | translate}}</th>
@@ -33,23 +33,52 @@
                     <td>{{product.name}}</td>
                     <td>{{product.stock}}</td>
                     <td>$ {{product.cost}}</td>
-                    <td><button type="button" class="btn glyphicon glyphicon-edit"></button>
-                        <button type="button" class="btn glyphicon glyphicon-trash"></button>
+                    <td>
+                      <button ng-show='isAdmin' ng-click="showEditForm(product)"
+                              type="button" class="btn glyphicon glyphicon-edit">
+                      </button>
+                      <button ng-show='isAdmin' ng-click="deleteProduct(product)"
+                              type="button" class="btn glyphicon glyphicon-trash">
+                      </button>
                     </td>
                 </tr>
             </table>
             <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-            class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
+            class="pagination-sm" items-per-page="itemsPerPage" ng-hide="isEmptyTable"></uib-pagination>
+          <div class="alert alert-danger" ng-show="isEmptyTable">
+            {{'EMPTY_TABLE' | translate}}
+          </div>
         </div>
+
         <div class="col-lg-6">
             <div ng-hide="hideProductForm" class="form-group">
-                <form class="addProduct">
+                <form class="addProduct" name="productForm">
                     <h4>{{'ADD_PRODUCT' | translate}}</h4>
-                    <input type="text" class="controls" name="productName" ng-model="productNew.name" placeholder="Nombre"><br>
-                    <input type="number" class="controls" name="productStock" placeholder="Cantidad" ng-model="productNew.stock"><br>
-                    <input type="number" class="controls" name="productCost" placeholder="Precio" ng-model="productNew.cost"><br>
-                    <button class="btn btn-danger productBtn" ng-click="resetProductForm()"> {{'CANCEL' | translate}} </button>
-                    <button class="btn btn-success productBtn" ng-click="saveProductForm(productNew)"> {{'SAVE' | translate}}</button>
+                    <div class="form-group" ng-class="{ 'has-error': productForm.productName.$invalid && productForm.productName.$dirty }" >
+                      <input type="text" class="controls" name="productName" ng-model="productNew.name"
+                             placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.productStock.$invalid && productForm.productStock.$dirty }">
+                      <input type="number" class="controls" name="productStock" placeholder="Cantidad"
+                             ng-model="productNew.stock" required>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error': productForm.productCost.$invalid && productForm.productCost.$dirty }" >
+                      <input type="number" class="controls" name="productCost" placeholder="Precio"
+                             ng-model="productNew.cost" required>
+                    </div>
+                    <button class="btn btn-danger productBtn" ng-click="resetProductForm()">
+                      {{'CANCEL' | translate}}
+                    </button>
+                    <button ng-show='!editProduct' class="btn btn-success productBtn"
+                            ng-click="saveProductForm(productNew)">
+                      {{'SAVE' | translate}}
+                    </button>
+                    <button ng-show='editProduct' class="btn btn-success productBtn"
+                            ng-click="editProductForm(productNew)">
+                      {{'EDIT' | translate}}
+                    </button>
                 </form>
             </div>
         </div>

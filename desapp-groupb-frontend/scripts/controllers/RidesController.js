@@ -54,7 +54,7 @@ angular.module("subiQueTeLlevoApp")
     $scope.acceptRideRequests = function(rideRequest){
       $http.post($scope.baseUrl + "rideRequests/" + rideRequest.id + "/acceptRideRequest")
               .success(function(data){
-                  $scope.userRideRequests.pop(rideRequest);
+                  removeUserRideRequest(rideRequest);
                   $scope.totalRideRequestItems = $scope.userRideRequests.length;
                   $scope.pageRideRequestChanged();
                   $rootScope.addAlert('success', 'Aceptaste una solicitud de viaje');
@@ -78,7 +78,12 @@ angular.module("subiQueTeLlevoApp")
         changeFilter(begin, end);
     };
 
-    $scope.$on('isLogged', function(){
+    $rootScope.$on('isLogged', function(){
         $scope.getDriverRides();
     });
+
+    function removeUserRideRequest(rideRequest){
+      var index = $scope.userRideRequests.indexOf(rideRequest);
+      $scope.userRideRequests.splice(index, 1);
+    }
 });

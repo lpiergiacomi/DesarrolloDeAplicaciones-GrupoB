@@ -9,24 +9,53 @@ angular.module("subiQueTeLlevoApp")
     $scope.filteredAllProducts = [];
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
+    $scope.editProduct = false;
 
-
-    $scope.showProductForm= function(){
+    $scope.showProductForm = function(){
         $scope.hideProductForm = false;
+        $scope.editProduct = false;
     };
 
-    $scope.resetProductForm=function(){
+    $scope.resetProductForm = function(){
         $scope.productNew = {"name": "", "stock":"","cost":""};
         $scope.hideProductForm = true;
     };
 
-    $scope.saveProductForm= function(product){
-        $http.post($scope.productUrl,
-                {"name": product.name, "stock": product.stock, "cost": product.cost})
+    $scope.showEditForm = function(product){
+        $scope.productNew = product;
+        $scope.hideProductForm = false;
+        $scope.editProduct = true;
+    }
+
+    $scope.saveProductForm = function(product){
+      if ($scope.productForm.$valid) {
+          $http.post($scope.productUrl,
+                  {"name": product.name, "stock": product.stock, "cost": product.cost})
+          .success(function(data){
+              $scope.resetProductForm();
+              $scope.getAllProducts();
+              $rootScope.addAlert('success', 'Agregaste un producto');
+          });
+       }
+    };
+
+    $scope.editProductForm = function(product){
+      if ($scope.productForm.$valid) {
+          $http.put($scope.productUrl, product)
+          .success(function(data){
+              $scope.resetProductForm();
+              $rootScope.addAlert('success', 'Has Editado el producto '+ product.name);
+          });
+       }
+    };
+
+    $scope.deleteProduct = function(product){
+        $http.delete($scope.productUrl + 'delete/' + product.id)
         .success(function(data){
-            $scope.productNew = {"name": "", "stock":"","cost":""};
-            $scope.hideProductForm = true;
-            $scope.getAllProducts();
+            removeProduct(product);
+            $scope.totalItems = $scope.allProducts.length;
+            $scope.pageChanged();
+            $rootScope.addAlert('success', 'Borraste  el producto '+ product.name);
         });
     };
 
@@ -34,9 +63,8 @@ angular.module("subiQueTeLlevoApp")
         $scope.allProducts = [];
         $http.get($scope.productUrl + "all")
             .success(function(data){
-                $scope.allProducts = data;
-                $scope.totalItems = $scope.allProducts.length;
-                $scope.pageChanged();
+                $scope.isEmptyTable = data == "";
+                $scope.setTableData(data);
             });
     };
 
@@ -47,11 +75,27 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.findProduct = function(productName){
-        $http.get($scope.productUrl + productName)
-            .success(function(data){
-                $scope.allProducts = [data];
-            });
+      productName? $scope.findProductName(productName): $scope.getAllProducts();
     };
 
+    $scope.findProductName = function(productName){
+      $http.get($scope.productUrl + productName + "/find")
+        .success(function(data){
+          $scope.isEmptyTable = data == "";
+          $scope.setTableData([data]);
+        });
+    };
+
+    $scope.setTableData = function (data){
+      $scope.allProducts = data;
+      $scope.totalItems = $scope.allProducts.length;
+      $scope.pageChanged();
+    }
+
     $scope.getAllProducts();
+
+    function removeProduct(product){
+      var index = $scope.allProducts.indexOf(product);
+      $scope.allProducts.splice(index, 1);
+    }
 });
