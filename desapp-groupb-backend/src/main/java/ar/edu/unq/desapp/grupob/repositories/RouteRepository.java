@@ -1,5 +1,6 @@
 package ar.edu.unq.desapp.grupob.repositories;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -15,13 +16,5 @@ public class RouteRepository extends GenericRepository<Route>{
     @Override
     protected Class<Route> getDomainClass() {
         return Route.class;
-    }
-
-    @Transactional
-    public List<RideRequest> findEqualRoute(Coordinate begin, Coordinate end){
-      return this.getHibernateTemplate()
-        .findByCriteria(DetachedCriteria.forClass(Route.class)
-          .createAlias("route.begin", "begin").createAlias("route.end", "end")
-          .add(Restrictions.eq("begin.latitude", begin.getLatitude())));
     }
 }

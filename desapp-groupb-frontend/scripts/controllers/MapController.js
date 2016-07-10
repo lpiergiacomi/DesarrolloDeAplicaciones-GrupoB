@@ -1,52 +1,83 @@
 angular.module("subiQueTeLlevoApp")
 .controller("MapController", function ($scope, $http, $rootScope) {
 
-    $scope.routeUrl = $rootScope.baseUrl +"/routes/"
+    $scope.ridesUrl = $rootScope.baseUrl +"/rides/";
+    $scope.foundRides = [];
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
+    $scope.hasSearchResult = false;
     
     $scope.fetchDrawnRoute = function() {
-        // $scope.originName = localStorage.getItem("originName");
+        $scope.originName = localStorage.getItem("originName");
         $scope.originLatitude = localStorage.getItem("originLatitude");
         $scope.originLongitude = localStorage.getItem("originLongitude");
-        // $scope.destinationName = localStorage.getItem("destinationName");
+        $scope.destinationName = localStorage.getItem("destinationName");
         $scope.destinationLatitude = localStorage.getItem("destinationLatitude");
         $scope.destinationLongitude = localStorage.getItem("destinationLongitude");
     };
 
     $scope.clearLocalStorage = function() {
-        // localStorage.removeItem("originName");
+        localStorage.removeItem("originName");
         localStorage.removeItem("originLatitude");
         localStorage.removeItem("originLongitude");
-        // localStorage.removeItem("destinationName");
+        localStorage.removeItem("destinationName");
         localStorage.removeItem("destinationLatitude");
         localStorage.removeItem("destinationLongitude");
     }
-
-    $scope.fetchDrawnRoute();
 
     $scope.clearInputs = function() {
         document.getElementById("origin-input").value = "";
         document.getElementById("destination-input").value = "";
     };
 
-    $scope.saveRoute = function() {
-        var saveRouteUrl = $scope.routeUrl + "saveRoute";
-        $http.post(saveRouteUrl, 
+    $scope.saveRide = function() {
+        $scope.fetchDrawnRoute();
+        var saveRideUrl = $scope.ridesUrl + $rootScope.user.id + "/saveRide";
+        $http.post(saveRideUrl, 
             {
-                "begin": {"latitude": $scope.originLatitude, "longitude": $scope.originLongitude},
-                "end": {"latitude": $scope.destinationLatitude, "longitude": $scope.destinationLongitude}
+                "begin": {"name": $scope.originName, "latitude": $scope.originLatitude, "longitude": $scope.originLongitude},
+                "end": {"name": $scope.destinationName, "latitude": $scope.destinationLatitude, "longitude": $scope.destinationLongitude}
             }).success(function(data) {
-                console.log("Route saved successfully");
+                $rootScope.addAlert("success", "Route saved successfully");
             });
         $scope.clearLocalStorage();
         $scope.clearInputs();
     };
 
-    $scope.searchRoute = function() {
-        $http.get($scope.routeUrl + "all").success(function(data){
-                $scope.routes = data;
-            });
+    $scope.searchSimilarRide = function() {
+        $scope.fetchDrawnRoute();
+        $http.post($scope.ridesUrl + "searchSimilarRide",
+            {   "begin": {"name": $scope.originName, "latitude": $scope.originLatitude, "longitude": $scope.originLongitude},
+                "end": {"name": $scope.destinationName, "latitude": $scope.destinationLatitude, "longitude": $scope.destinationLongitude}
+            }).success(function(data){
+                $scope.foundRides = data;
+                $scope.totalItems = $scope.foundRides.length;
+                $scope.pageChanged();
+                $scope.hasSearchResult = true;
+        });
+        $scope.clearLocalStorage();
+        $scope.clearInputs();
     };
-}); 
+
+    $scope.joinRide = function(ride){
+    $http.post($scope.baseUrl + '/rideRequests/'+ ride.id +'/'+ $rootScope.user.id +'/joinRide/')
+        .success(function(data){
+            $scope.foundRides.pop(data);
+            $scope.pageChanged();
+            $rootScope.addAlert('success', 'Te uniste al viaje');
+        });
+    };
+
+    $scope.pageChanged = function() {
+        var end = $scope.currentPage * $scope.itemsPerPage,
+            begin = ($scope.currentPage-1)* $scope.itemsPerPage;
+        $scope.filteredRides = $scope.foundRides.slice(begin, end);
+    };
+
+    if(google) {
+        window.initMap();
+    };
+});
 
 function initMap() {
 
@@ -140,7 +171,7 @@ function initMap() {
     function geocodeAddressOrigin() {
         geocoder.geocode({'placeId': directionsDisplay.getDirections().geocoded_waypoints[0].place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-                //localStorage.setItem("originName", results[0].formatted_address);
+                localStorage.setItem("originName", results[0].formatted_address);
                 localStorage.setItem("originLatitude", results[0].geometry.location.lat());
                 localStorage.setItem("originLongitude", results[0].geometry.location.lng());
             }
@@ -150,7 +181,7 @@ function initMap() {
     function geocodeAddressDestination() {
         geocoder.geocode({'placeId': directionsDisplay.getDirections().geocoded_waypoints[1].place_id}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-                //localStorage.setItem("destinationName", results[0].formatted_address);
+                localStorage.setItem("destinationName", results[0].formatted_address);
                 localStorage.setItem("destinationLatitude", results[0].geometry.location.lat());
                 localStorage.setItem("destinationLongitude", results[0].geometry.location.lng());
             }

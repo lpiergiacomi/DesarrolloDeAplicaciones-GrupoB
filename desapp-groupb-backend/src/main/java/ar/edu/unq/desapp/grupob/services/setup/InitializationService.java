@@ -28,8 +28,8 @@ public class InitializationService {
     }
 
     private void initializeCoordinates() {
-        coordinateRepository.save(new Coordinate("Bernal", -123.4, 4.567));
-        coordinateRepository.save(new Coordinate("Docksud", 5.432, -7.543));
+        coordinateRepository.save(new Coordinate("Quilmes, Buenos Aires, Argentina", -34.7206336, -58.25460510000005));
+        coordinateRepository.save(new Coordinate("Wilde, Buenos Aires, Argentina", -34.7040787, -58.32059859999998));
     }
 
     private void initializeProducts() {
@@ -52,6 +52,10 @@ public class InitializationService {
         User javier = new User();
         javier.setEmail("javierperini90@gmail.com ");
         userRepository.save(javier);
+
+        User camila = new User();
+        camila.setEmail("camilagarcia.113@gmail.com ");
+        userRepository.save(camila);
     }
 
     public void initializeRideDates() {

@@ -9,9 +9,9 @@ import javax.persistence.Table;
 @Table
 public class Coordinate {
 
+    private String name;
     private double latitude;
     private double longitude;
-    private String name;
     private Integer id;
 
     public Coordinate() {}
@@ -55,4 +55,11 @@ public class Coordinate {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public static double calculateDistanceBetween(Coordinate firstCoordinate, Coordinate secondCoordinate) {
+        double latitudesDifference = firstCoordinate.getLatitude() - secondCoordinate.getLatitude();
+        double longitudesDifference = firstCoordinate.getLongitude() - secondCoordinate.getLongitude();
+        return Math.sqrt(latitudesDifference * latitudesDifference + longitudesDifference * longitudesDifference);
+    }
+
 }

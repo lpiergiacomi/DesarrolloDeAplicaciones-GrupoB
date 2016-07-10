@@ -22,7 +22,6 @@
             <ref bean="services.usersService" />
             <ref bean="services.rideRequestsService" />
             <ref bean="services.ridesService" />
-            <ref bean="services.routeService" />
             <ref bean="initializationService" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
@@ -51,15 +50,15 @@
 
     <bean id="services.ridesService" class="ar.edu.unq.desapp.grupob.services.RideService">
         <property name="repository" ref="persistence.rideRepository" />
+        <property name="userRepository" ref="persistence.userRepository" />
+        <property name="routeRepository" ref="persistence.routeRepository" />
+        <property name="rideDateRepository" ref="persistence.rideDateRepository" />
     </bean>
     <bean id="services.rideRequestsService" class="ar.edu.unq.desapp.grupob.services.RideRequestService">
       <property name="repository" ref="persistence.rideRequestRepository" />
       <property name="userRepository" ref="persistence.userRepository" />
       <property name="rideRepository" ref="persistence.rideRepository" />
       <property name="rideDateRepository" ref="persistence.rideDateRepository" />
-    </bean>
-        <bean id="services.routeService" class="ar.edu.unq.desapp.grupob.services.RouteService">
-        <property name="repository" ref="persistence.routeRepository" />
     </bean>
     <bean id="initializationService"
           class="ar.edu.unq.desapp.grupob.services.setup.InitializationService"

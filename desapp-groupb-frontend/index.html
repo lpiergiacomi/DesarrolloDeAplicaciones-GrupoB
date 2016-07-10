@@ -30,7 +30,7 @@
     <script src="scripts/config.js"></script>
     <script src="scripts/translations.js"></script>
     <script src="scripts/controllers/HomeController.js"></script>
-    <script src="scripts/controllers/NavBarCtrl.js"></script>
+    <script src="scripts/controllers/NavBarController.js"></script>
     <script src="scripts/controllers/ProductController.js"></script>
     <script src="scripts/controllers/RidesController.js"></script>
     <script src="scripts/controllers/MapController.js"></script>
@@ -40,7 +40,7 @@
 <body ng-app="subiQueTeLlevoApp">
 
     <button id="menu-toggle" class="btn btn-dark glyphicon glyphicon-menu-hamburger" ng-show="isLogin"></button>
-    <nav id="sidebar-wrapper" data-ng-controller="NavBarCtrl">
+    <nav id="sidebar-wrapper" data-ng-controller="NavBarController">
         <ul class="sidebar-nav">
             <button id="menu-close" class="btn btn-dark glyphicon glyphicon-menu-hamburger pull-right"></button>
             <li class="sidebar-brand"> Subi que te llevo! </li>
@@ -58,25 +58,54 @@
         </ul>
     </nav>
 
+    <div class="container">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout='3000' close="closeAlert($index)">
+        </uib-alert>
+    </div>
+    
     <span ng-view></span>
 
-    <span class="col-md-6" data-ng-controller="MapController">
-        <h3>{{'SEARCH_ROUTE' | translate}}</h3>
-        <input type="text" id="origin-input" class="controls" type="text" placeholder="Desde">
-        <input type="text" id="destination-input" class="controls" type="text" placeholder="Hasta">
-        <button class="btn btn-info" ng-click="saveRoute()">{{'SAVE' | translate}}</button>
-        <button class="btn btn-success" ng-click="searchRoute()">{{'SEARCH_ROUTE' | translate}}</button>
-        <div id="map"></div>
-    </span>
+    <div class="row" ng-if="isLogin && isHomePage" data-ng-controller="MapController">
+        <span class="col-md-6">
+            <h3>{{'SEARCH_ROUTE' | translate}}</h3>
+            <input type="text" id="origin-input" class="controls" type="text" placeholder="Desde">
+            <input type="text" id="destination-input" class="controls" type="text" placeholder="Hasta">
+            <button class="btn btn-info" ng-click="saveRide()">{{'SAVE' | translate}}</button>
+            <button class="btn btn-success" ng-click="searchSimilarRide()">{{'SEARCH_ROUTE' | translate}}</button>
+            <div id="map"></div>
+        </span>
+
+        <span class="col-md-6" ng-if="hasSearchResult">
+            <h3 id="myRoutes">{{'AVAILABLE_ROUTES' | translate}}</h3>
+            <table class="table table-hover">
+                <thead>
+                    <th>{{'DRIVER' | translate}}</th>
+                    <th>{{'FROM' | translate}}</th>
+                    <th>{{'TO' | translate}}</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                  <tr data-ng-repeat="ride in filteredRides">
+                    <td>{{ride.driver.email}}</td>
+                    <td>{{ride.route.begin.name}}</td>
+                    <td>{{ride.route.end.name}}</td>
+                    <td>
+                      <button class="btn btn-dark" ng-click="joinRide(ride)">{{'JOIN' | translate}}</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <uib-pagination total-items="totalItems" ng-model="currentPage"
+                            ng-change="pageChanged()"
+                            class="pagination-sm" items-per-page="itemsPerPage">
+            </uib-pagination>
+        </span>
+    </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNTAVH_1zEZBZUNBA6dGcVchluktaaaBU&libraries=places&callback=initMap"
     async defer></script>
 
-    <div class="container">
-        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout='3000' close="closeAlert($index)">
-          {{alert.msg}}
-        </uib-alert>
-    </div>
+
 
     <script>
         // Closes the sidebar menu

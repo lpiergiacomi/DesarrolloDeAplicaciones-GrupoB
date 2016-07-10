@@ -8,6 +8,7 @@ angular.module("subiQueTeLlevoApp")
       store.set("currentUser", data);
       $rootScope.user = data;
       $rootScope.$broadcast('isLogged');
+      $rootScope.isHomePage = true;
     }
 
     $scope.loginUser = function(user){
