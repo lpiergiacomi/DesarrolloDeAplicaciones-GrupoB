@@ -6,10 +6,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class MessageTest {
-    User sender;
-    User receiver;
-    PublicMessage publicMessage;
-    String message;
+
+    private User sender;
+    private User receiver;
+    private PublicMessage publicMessage;
+    private String message;
 
     @Before
     public void setUp() {
@@ -20,17 +21,12 @@ public class MessageTest {
     }
 
     @Test
-    public void itShouldGetItSender(){
+    public void itShouldGetItSender() {
         assertEquals(publicMessage.getSender(), sender);
     }
 
-   /* @Test
-    public void itShouldGetItReceiver(){
-        assertEquals(publicMessage.getReceiver(), receiver);
-    }*/
-
     @Test
-    public void itShouldGetItContent(){
+    public void itShouldGetItContent() {
         assertEquals(publicMessage.getContent(), message);
     }
 

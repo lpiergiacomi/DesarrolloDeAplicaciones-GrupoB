@@ -9,8 +9,9 @@ import javax.persistence.DiscriminatorValue;
 @DiscriminatorValue("range_dayofmonth")
 public class RangeWithDayOfMonthRideDate extends RangeRideDate {
 
-    public RangeWithDayOfMonthRideDate(DateTime from, DateTime to, DayOfMonthRideDate rideDate) {
-        this.fromm= from;
+    public RangeWithDayOfMonthRideDate(DateTime from, DateTime to,
+            DayOfMonthRideDate rideDate) {
+        this.fromm = from;
         this.too = to;
         this.rideDate = rideDate;
     }

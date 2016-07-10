@@ -14,7 +14,8 @@ public class Coordinate {
     private double longitude;
     private Integer id;
 
-    public Coordinate() {}
+    public Coordinate() {
+    }
 
     public Coordinate(String name, double latitude, double longitude) {
         this.name = name;
@@ -56,10 +57,14 @@ public class Coordinate {
         this.id = id;
     }
 
-    public static double calculateDistanceBetween(Coordinate firstCoordinate, Coordinate secondCoordinate) {
-        double latitudesDifference = firstCoordinate.getLatitude() - secondCoordinate.getLatitude();
-        double longitudesDifference = firstCoordinate.getLongitude() - secondCoordinate.getLongitude();
-        return Math.sqrt(latitudesDifference * latitudesDifference + longitudesDifference * longitudesDifference);
+    public static double calculateDistanceBetween(Coordinate firstCoordinate,
+            Coordinate secondCoordinate) {
+        double latitudesDifference = firstCoordinate.getLatitude()
+                - secondCoordinate.getLatitude();
+        double longitudesDifference = firstCoordinate.getLongitude()
+                - secondCoordinate.getLongitude();
+        return Math.sqrt(latitudesDifference * latitudesDifference
+                + longitudesDifference * longitudesDifference);
     }
 
 }

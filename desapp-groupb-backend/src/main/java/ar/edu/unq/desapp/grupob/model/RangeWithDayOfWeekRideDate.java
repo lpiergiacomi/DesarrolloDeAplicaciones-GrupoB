@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 @DiscriminatorValue("range_dayofweek")
 public class RangeWithDayOfWeekRideDate extends RangeRideDate {
 
-    public RangeWithDayOfWeekRideDate(DateTime from, DateTime to, DayOfWeekRideDate rideDate) {
-        this.fromm= from;
+    public RangeWithDayOfWeekRideDate(DateTime from, DateTime to,
+            DayOfWeekRideDate rideDate) {
+        this.fromm = from;
         this.too = to;
         this.rideDate = rideDate;
     }
 
 }
-

@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Table
 public class Shop {
-    private List<ExchangeRegister> exchangeRegisters= new ArrayList<ExchangeRegister>();
+    private List<ExchangeRegister> exchangeRegisters = new ArrayList<ExchangeRegister>();
     private int id;
 
     public void registerExchange(User user, Product product) {
@@ -26,7 +25,7 @@ public class Shop {
     }
 
     @OneToMany
-    @JoinColumn(name ="Shop")
+    @JoinColumn(name = "Shop")
     public List<ExchangeRegister> getExchangeRegisters() {
         return exchangeRegisters;
     }

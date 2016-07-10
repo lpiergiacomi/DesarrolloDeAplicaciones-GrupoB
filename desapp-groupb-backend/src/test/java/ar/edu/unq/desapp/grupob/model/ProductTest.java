@@ -6,9 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 public class ProductTest {
 
-    int stock;
-    int cost;
-    Product product;
+    private int stock;
+    private int cost;
+    private Product product;
 
     @Before
     public void setUp() {
@@ -18,12 +18,12 @@ public class ProductTest {
     }
 
     @Test
-    public void itShouldGetProductsCost(){
+    public void itShouldGetProductsCost() {
         assertEquals(product.getCost(), cost);
     }
 
     @Test
-    public void itShouldGetProductStock(){
+    public void itShouldGetProductStock() {
         assertEquals(product.getStock(), stock);
     }
 

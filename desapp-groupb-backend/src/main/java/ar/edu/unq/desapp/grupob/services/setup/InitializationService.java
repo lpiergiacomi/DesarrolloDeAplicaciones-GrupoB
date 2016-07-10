@@ -6,16 +6,15 @@ import org.joda.time.DateTimeConstants;
 
 public class InitializationService {
 
-    ProductsRepository productsRepository;
-    UserRepository userRepository;
-    RideDateRepository rideDateRepository;
-    RouteRepository routeRepository;
-    RideRepository rideRepository;
-    RideRequestRepository rideRequestRepository;
-    CoordinateRepository coordinateRepository;
-    User passenger;
-    User driver;
-    Ride driverRide;
+    private ProductsRepository productsRepository;
+    private UserRepository userRepository;
+    private RideDateRepository rideDateRepository;
+    private RouteRepository routeRepository;
+    private RideRepository rideRepository;
+    private RideRequestRepository rideRequestRepository;
+    private CoordinateRepository coordinateRepository;
+    private User passenger;
+    private User driver;
 
     public void setUp() {
         initializeProducts();
@@ -28,8 +27,12 @@ public class InitializationService {
     }
 
     private void initializeCoordinates() {
-        coordinateRepository.save(new Coordinate("Quilmes, Buenos Aires, Argentina", -34.7206336, -58.25460510000005));
-        coordinateRepository.save(new Coordinate("Wilde, Buenos Aires, Argentina", -34.7040787, -58.32059859999998));
+        coordinateRepository
+                .save(new Coordinate("Quilmes, Buenos Aires, Argentina",
+                        -34.7206336, -58.25460510000005));
+        coordinateRepository
+                .save(new Coordinate("Wilde, Buenos Aires, Argentina",
+                        -34.7040787, -58.32059859999998));
     }
 
     private void initializeProducts() {
@@ -64,11 +67,12 @@ public class InitializationService {
     }
 
     public void initializeRoutes() {
-        routeRepository.save(new Route(coordinateRepository.find(1), coordinateRepository.find(2)));
-      }
+        routeRepository.save(new Route(coordinateRepository.find(1),
+                coordinateRepository.find(2)));
+    }
 
     public void initializeRides() {
-        driverRide = new Ride(userRepository.find(driver.getId()),
+        Ride driverRide = new Ride(userRepository.find(driver.getId()),
                 routeRepository.find(1), rideDateRepository.find(1));
         rideRepository.save(driverRide);
     }

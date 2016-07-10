@@ -6,10 +6,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class RideTest {
-    User drive;
-    Route route;
-    RideDate date;
-    Ride ride;
+
+    private User drive;
+    private Route route;
+    private RideDate date;
+    private Ride ride;
 
     @Before
     public void setUp() {

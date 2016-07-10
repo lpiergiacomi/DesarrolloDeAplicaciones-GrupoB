@@ -1,6 +1,5 @@
 package ar.edu.unq.desapp.grupob.repositories;
 
-
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,8 @@ public abstract class GenericRepository<T> extends HibernateDaoSupport {
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public List<T> getAll() {
-        return (List<T>) this.getHibernateTemplate().find("from " + this.persistentClass.getName());
+        return (List<T>) this.getHibernateTemplate()
+                .find("from " + this.persistentClass.getName());
     }
 
     public T find(Integer id) {

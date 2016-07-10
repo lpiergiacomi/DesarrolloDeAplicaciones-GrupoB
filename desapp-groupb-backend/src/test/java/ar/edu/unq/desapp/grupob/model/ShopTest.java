@@ -6,10 +6,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class ShopTest {
-    Shop shop;
+
+    private Shop shop;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         shop = new Shop();
     }
 

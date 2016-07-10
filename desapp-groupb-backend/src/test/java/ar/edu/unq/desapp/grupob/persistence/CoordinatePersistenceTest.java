@@ -16,7 +16,8 @@ import ar.edu.unq.desapp.grupob.model.Coordinate;
 import ar.edu.unq.desapp.grupob.repositories.CoordinateRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
 public class CoordinatePersistenceTest {
 
     @Autowired

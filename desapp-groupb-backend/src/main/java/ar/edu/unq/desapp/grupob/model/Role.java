@@ -1,13 +1,19 @@
 package ar.edu.unq.desapp.grupob.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
-import java.beans.Transient;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,11 +26,12 @@ public abstract class Role {
     private List<Ride> rides = new ArrayList<Ride>();
     private Integer id;
 
-    public Role(){
+    public Role() {
         goodRate = 0;
         badRate = 0;
         hasOneBadRate = false;
     }
+
     @Id
     @GeneratedValue
     public Integer getId() {
@@ -35,7 +42,7 @@ public abstract class Role {
         this.id = id;
     }
 
-    public int getGoodRate(){
+    public int getGoodRate() {
         return goodRate;
     }
 
@@ -43,7 +50,7 @@ public abstract class Role {
         this.goodRate = goodRate;
     }
 
-    public int getBadRate(){
+    public int getBadRate() {
         return badRate;
     }
 
@@ -53,7 +60,7 @@ public abstract class Role {
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    public List<RideRequest> getRideRequests(){
+    public List<RideRequest> getRideRequests() {
         return rideRequests;
     }
 
@@ -61,14 +68,14 @@ public abstract class Role {
         this.rideRequests = rideRequests;
     }
 
-    public void addRideRequest(RideRequest rideRequest){
+    public void addRideRequest(RideRequest rideRequest) {
         rideRequests.add(rideRequest);
     }
 
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonBackReference
-    public List<Ride> getRides(){
+    public List<Ride> getRides() {
         return rides;
     }
 
@@ -76,7 +83,7 @@ public abstract class Role {
         this.rides = rides;
     }
 
-    public void addRide(Ride ride){
+    public void addRide(Ride ride) {
         rides.add(ride);
     }
 

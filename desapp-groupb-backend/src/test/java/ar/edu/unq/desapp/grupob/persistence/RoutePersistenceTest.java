@@ -17,8 +17,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class RoutePersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class RoutePersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private RouteRepository routeRepository;

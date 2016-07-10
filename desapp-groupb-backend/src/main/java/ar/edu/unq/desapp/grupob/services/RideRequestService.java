@@ -24,19 +24,19 @@ public class RideRequestService extends GenericService<RideRequest> {
     @Autowired
     private RideDateRepository rideDateRepository;
 
-
     @POST
     @Path("/{rideId}/{userId}/joinRide")
     @Consumes("application/json")
     @Transactional
-    public RideRequest joinRide(@PathParam("rideId") Integer rideId,@PathParam("userId") Integer userId){
-      Ride ride = rideRepository.find(rideId);
-      User user = userRepository.find(userId);
-      RideDate rideDate = new DayOfWeekRideDate(DateTimeConstants.TUESDAY);
-      rideDateRepository.save(rideDate);
-      RideRequest rideRequest = new RideRequest(user, ride, rideDate);
-      getRepository().save(rideRequest);
-      return rideRequest;
+    public RideRequest joinRide(@PathParam("rideId") Integer rideId,
+            @PathParam("userId") Integer userId) {
+        Ride ride = rideRepository.find(rideId);
+        User user = userRepository.find(userId);
+        RideDate rideDate = new DayOfWeekRideDate(DateTimeConstants.TUESDAY);
+        rideDateRepository.save(rideDate);
+        RideRequest rideRequest = new RideRequest(user, ride, rideDate);
+        getRepository().save(rideRequest);
+        return rideRequest;
     }
 
     @POST
@@ -44,59 +44,61 @@ public class RideRequestService extends GenericService<RideRequest> {
     @Consumes("application/json")
     @Produces("application/json")
     @Transactional
-    public RideRequest acceptRideRequest(@PathParam("rideRequestId") Integer rideRequestId){
-      RideRequest rideRequest = repository.find(rideRequestId);
-      rideRequest.accept();
-      repository.update(rideRequest);
-      return rideRequest;
+    public RideRequest acceptRideRequest(
+            @PathParam("rideRequestId") Integer rideRequestId) {
+        RideRequest rideRequest = repository.find(rideRequestId);
+        rideRequest.accept();
+        repository.update(rideRequest);
+        return rideRequest;
     }
 
     @GET
     @Path("/{id}/passengerRideRequests")
     @Produces("application/json")
     @Transactional
-    public List<RideRequest> getPassengerRidesRequest(@PathParam("id") Integer id){
-      return getRepository().findByPassengerId(id);
+    public List<RideRequest> getPassengerRidesRequest(
+            @PathParam("id") Integer id) {
+        return getRepository().findByPassengerId(id);
     }
 
     @GET
     @Path("/{id}/driverRideRequests")
     @Produces("application/json")
     @Transactional
-    public List<RideRequest> getDriverRidesRequest(@PathParam("id") Integer id){
-      return getRepository().findByDriverId(id);
+    public List<RideRequest> getDriverRidesRequest(
+            @PathParam("id") Integer id) {
+        return getRepository().findByDriverId(id);
     }
 
     public RideRequestRepository getRepository() {
-      return repository;
+        return repository;
     }
 
     public void setRepository(RideRequestRepository repository) {
-      this.repository = repository;
+        this.repository = repository;
     }
 
     public RideRepository getRideRepository() {
-    return rideRepository;
-  }
+        return rideRepository;
+    }
 
     public void setRideRepository(RideRepository repository) {
-    this.rideRepository = repository;
-  }
+        this.rideRepository = repository;
+    }
 
     public UserRepository getUserRepository() {
-      return userRepository;
+        return userRepository;
     }
 
     public void setUserRepository(UserRepository repository) {
-      this.userRepository = repository;
+        this.userRepository = repository;
     }
 
     public RideDateRepository getRideDateRepository() {
-    return rideDateRepository;
-  }
+        return rideDateRepository;
+    }
 
     public void setRideDateRepository(RideDateRepository repository) {
-    this.rideDateRepository = repository;
-  }
+        this.rideDateRepository = repository;
+    }
 }
-
