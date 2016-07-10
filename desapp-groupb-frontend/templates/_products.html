@@ -20,7 +20,7 @@
     </br>
     <div class="row">
         <div class="col-lg-6">
-            <table class="table">
+            <table class="table" ng-hide="isEmptyTable">
                 <thead>
                     <tr>
                         <th>{{'NAME' | translate}}</th>
@@ -44,7 +44,7 @@
                 </tr>
             </table>
             <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-            class="pagination-sm" items-per-page="itemsPerPage"></uib-pagination>
+            class="pagination-sm" items-per-page="itemsPerPage" ng-hide="isEmptyTable"></uib-pagination>
         </div>
         <div class="col-lg-6">
             <div ng-hide="hideProductForm" class="form-group">

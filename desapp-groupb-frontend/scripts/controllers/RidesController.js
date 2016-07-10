@@ -106,7 +106,6 @@ angular.module("subiQueTeLlevoApp")
     $scope.getAllRides();
 
     $rootScope.$on('isLogged', function(){
-        debugger
         $scope.getDriverRides();
     });
 

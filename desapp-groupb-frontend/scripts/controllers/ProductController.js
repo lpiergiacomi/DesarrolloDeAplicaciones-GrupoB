@@ -63,9 +63,8 @@ angular.module("subiQueTeLlevoApp")
         $scope.allProducts = [];
         $http.get($scope.productUrl + "all")
             .success(function(data){
-                $scope.allProducts = data;
-                $scope.totalItems = $scope.allProducts.length;
-                $scope.pageChanged();
+                $scope.isEmptyTable = data == "";
+                $scope.setTableData(data);
             });
     };
 
@@ -76,13 +75,22 @@ angular.module("subiQueTeLlevoApp")
     };
 
     $scope.findProduct = function(productName){
-        $http.get($scope.productUrl + productName + "/find")
-            .success(function(data){
-                $scope.allProducts = [data];
-                $scope.totalItems = $scope.allProducts.length;
-                $scope.pageChanged();
-            });
+      productName? $scope.findProductName(productName): $scope.getAllProducts();
     };
+
+    $scope.findProductName = function(productName){
+      $http.get($scope.productUrl + productName + "/find")
+        .success(function(data){
+          $scope.isEmptyTable = data == "";
+          $scope.setTableData([data]);
+        });
+    };
+
+    $scope.setTableData = function (data){
+      $scope.allProducts = data;
+      $scope.totalItems = $scope.allProducts.length;
+      $scope.pageChanged();
+    }
 
     $scope.getAllProducts();
 
