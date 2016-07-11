@@ -8,10 +8,8 @@ angular.module("subiQueTeLlevoApp")
     $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.filteredUserRides = [];
     $scope.filteredUserRidesRequest = [];
-    $scope.filteredAllRides = [];
     $scope.currentPageRide = 1;
     $scope.currentPageRideRequest = 1;
-    $scope.currentPageAllRide = 1;
     $scope.itemsPerPage = 10;
 
     $scope.getDriverRides = function(){
@@ -64,12 +62,13 @@ angular.module("subiQueTeLlevoApp")
     $scope.pageRideChanged = function() {
         $scope.pageChanged(function(begin, end){
                                    $scope.filteredUserRides = $scope.userRides.slice(begin, end);}
-                                  ,$scope.currentPageAllRide);
+                                  ,$scope.currentPageRide);
     };
 
-    $scope.pageAllRidesChanged = function(){
-        $scope.pageChanged(function(begin, end){$scope.filteredAllRides = $scope.rides.slice(begin, end);}
-                     ,$scope.currentPageAllRide);
+    $scope.pageRideRequestChanged = function() {
+        $scope.pageChanged(function(begin, end){
+                                   $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);}
+                                  ,$scope.currentPageRideRequest);
     };
 
     $scope.pageChanged = function(changeFilter, currentPage) {
@@ -82,7 +81,6 @@ angular.module("subiQueTeLlevoApp")
         $scope.getDriverRides();
         $scope.getDriverRideRequests();
     };
-
 
     function removeUserRideRequest(rideRequest){
       var index = $scope.userRideRequests.indexOf(rideRequest);

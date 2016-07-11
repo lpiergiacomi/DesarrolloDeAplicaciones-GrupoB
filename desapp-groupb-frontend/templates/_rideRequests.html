@@ -21,8 +21,8 @@
                                         <th></th>
                                     </thead>
                                     <tbody data-ng-repeat="rideRequest in filteredUserRidesRequest">
-                                        <td>{{rideRequest.ride.route.longitude}}</td>
-                                        <td>{{rideRequest.ride.route.latitude}}</td>
+                                        <td>{{rideRequest.ride.route.begin.name}}</td>
+                                        <td>{{rideRequest.ride.route.end.name}}</td>
                                         <td>{{rideRequest.status}}</td>
                                         <td ng-if="rideRequest.status == 'pending'">
                                           <button class="btn btn-primary" ng-click="acceptRideRequests(rideRequest)">Aceptar solicitud</button>
