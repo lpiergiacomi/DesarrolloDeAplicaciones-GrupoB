@@ -11,6 +11,7 @@ angular.module("subiQueTeLlevoApp")
     $scope.currentPageRide = 1;
     $scope.currentPageRideRequest = 1;
     $scope.itemsPerPage = 10;
+    $scope.isDriver = false;
 
     $scope.getDriverRides = function(){
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
@@ -46,6 +47,7 @@ angular.module("subiQueTeLlevoApp")
             $scope.userRideRequests = data;
             $scope.totalRideRequestItems = $scope.userRideRequests.length;
             $scope.pageRideRequestChanged();
+            $scope.isDriver = false;
         });
     };
 

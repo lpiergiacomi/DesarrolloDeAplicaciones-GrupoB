@@ -22,7 +22,7 @@
                           <tbody data-ng-repeat="ride in filteredUserRides">
                               <td>{{ride.route.begin.name}}</td>
                               <td>{{ride.route.end.name}}</td>
-                              <td>{{ride.driver.email}}</td>
+                              <td><a href="#/profile/{{ride.driver.id}}">{{ride.driver.email}}</a></td>
                           </tbody>
                       </table>
                     <uib-pagination total-items="totalRideItems" ng-model="currentPageRide" ng-change="pageRideChanged()"
