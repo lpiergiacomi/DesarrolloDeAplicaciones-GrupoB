@@ -30,7 +30,7 @@
               </tr>
             </tbody>
           </table>
-          <a class="btn btn-primary" data-toggle="modal" data-target="#privateMessages" ng-click="getPrivateMessages()">
+          <a class="btn btn-primary"  data-toggle="modal" data-target="#privateMessages" ng-click="getPrivateMessages()">
             {{'SEND_PRIVATE_MESSAGE' | translate }} <i class="glyphicon glyphicon-envelope"></i>
           </a>
         </div>
@@ -43,7 +43,6 @@
         <div id="profile-tab" class="tab-pane active">
           <div class="pd-20">
             <h3>{{'PROFILE' | translate}}
-              <a class="btn btn-xs" ng-click="editUser()"><i class="glyphicon glyphicon-pencil"></i> {{'EDIT' | translate}}</a>
             </h3>
             <div class="row">
               <div class="col-sm-6">
@@ -78,9 +77,12 @@
     </div>
     <div class="col-sm-9">
       <h3>{{'MESSAGES' | translate}}</h3>
-      <textarea class="col-sm-9" rows="2" ng-model="newPublicMessage" placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
+      <textarea class="col-sm-9" rows="2"  ng-model="newPublicMessage" ng-show="!isMyProfile"
+                placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
       <div style="padding-top: 28px;">
-        <button type="button" class="btn btn-default" ng-click="sendPublicMessage()">Send</button>
+        <button type="button" ng-show="!isMyProfile" class="btn btn-default" ng-click="sendPublicMessage()">
+          {{ 'SEND' | translate }}
+        </button>
       </div>
       <hr class="col-sm-9"/>
         <div data-ng-repeat="message in currentPublicMessages">
@@ -118,13 +120,14 @@
                           ng-change="privateMessagesPageChanged()"
                           class="pagination-sm" items-per-page="itemsPerPage">
           </uib-pagination>
-          <textarea class="col-sm-9" rows="2" ng-model="newPrivateMessage" placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
+          <textarea class="col-sm-9" ng-show="!isMyProfile" rows="2" ng-model="newPrivateMessage" placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
           <div style="padding-top: 28px;">
-            <button type="button" class="btn btn-default" ng-click="sendPrivateMessage()">Send</button>
+            <button type="button" ng-show="!isMyProfile" class="btn btn-default" ng-click="sendPrivateMessage()">Send</button>
           </div>
         </div>
         <br/>
       </div>
     </div>
+  </div>
   </div>
 </section>

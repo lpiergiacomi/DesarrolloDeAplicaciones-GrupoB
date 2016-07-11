@@ -1,5 +1,6 @@
 angular.module("subiQueTeLlevoApp")
-.controller("UserController", function ($scope, $http, $translate, $rootScope, auth, $routeParams, store, $location) {
+.controller("UserController", function ($scope, $http, $translate, $rootScope, auth,
+                                        $routeParams, store, $location, $uibModal) {
     'use strict';
 
     $scope.userUrl = $rootScope.baseUrl + "/users/"
@@ -12,10 +13,13 @@ angular.module("subiQueTeLlevoApp")
     $scope.currentPrivateMessagesPage = 1;
     $scope.currentPrivateMessages;
     $scope.itemsPerPage = 10;
+    $scope.isMyProfile = true;
+    $scope.isEmptyMessage = true;
 
     function getUser(id){
         $http.get($scope.userUrl + id)
             .success(function(data){
+                $scope.isMyProfile = $rootScope.user.id ==  data.id;
                 $scope.user = data;
         });
     };
@@ -83,7 +87,7 @@ angular.module("subiQueTeLlevoApp")
                     $scope.newPublicMessage)
             .success(function(data){
                 $scope.newPublicMessage = "";
-                $scope.getPublicMessages();
+                getPublicMessages();
             });
     };
 
@@ -97,7 +101,8 @@ angular.module("subiQueTeLlevoApp")
             });
     };
 
-    $scope.editUser = function(){
-        // TODO
+    $scope.hasWrittenMessage = function(){
+      $scope.isEmptyMessage = newPublicMessage == undefined;
     }
+
 })

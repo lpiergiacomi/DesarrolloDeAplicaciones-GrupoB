@@ -78,9 +78,11 @@ angular.module("subiQueTeLlevoApp")
         changeFilter(begin, end);
     };
 
-    $rootScope.$on('isLogged', function(){
+    if($rootScope.user){
         $scope.getDriverRides();
-    });
+        $scope.getDriverRideRequests();
+    };
+
 
     function removeUserRideRequest(rideRequest){
       var index = $scope.userRideRequests.indexOf(rideRequest);
