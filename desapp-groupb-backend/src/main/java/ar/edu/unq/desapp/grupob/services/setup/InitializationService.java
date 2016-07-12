@@ -16,6 +16,7 @@ public class InitializationService {
     User passenger;
     User driver;
     Ride driverRide;
+    MessagesRepository messagesRepository;
 
     public void setUp() {
         initializeProducts();
@@ -49,18 +50,35 @@ public class InitializationService {
         passenger.setPassword("123456");
         userRepository.save(passenger);
 
+        User angeles = new User();
+        angeles.setEmail("angeles.tellaarena@gmail.com ");
+        angeles.setName("Angeles");
+        angeles.setCity("Wilde");
+        userRepository.save(angeles);
         User javier = new User();
         javier.setEmail("javierperini90@gmail.com ");
+        javier.setName("Javier");
+        javier.setCity("Don Bosco");
         userRepository.save(javier);
 
         User camila = new User();
         camila.setEmail("camilagarcia.113@gmail.com ");
         userRepository.save(camila);
+
+        javier.sendPublicMessageTo(angeles, "holis de javier a angeles");
+        angeles.sendPrivateMessageTo(javier, "Este es privado");
+
+  //    Message privado = new PrivateMessage(angeles, javier, "este es privado");
+  //    angeles.receiveMessage(privado);
+        userRepository.update(javier);
+
+        angeles.sendPublicMessageTo(javier, "holis de angeles a javier");
+        userRepository.update(angeles);
     }
 
     public void initializeRideDates() {
         rideDateRepository
-                .save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
+          .save(new DayOfWeekRideDate(DateTimeConstants.TUESDAY));
     }
 
     public void initializeRoutes() {
@@ -109,4 +127,13 @@ public class InitializationService {
             CoordinateRepository coordinateRepository) {
         this.coordinateRepository = coordinateRepository;
     }
+
+    public MessagesRepository getMessagesRepository() {
+      return messagesRepository;
+    }
+
+    public void setMessagesRepository(MessagesRepository messagesRepository) {
+      this.messagesRepository = messagesRepository;
+    }
+
 }

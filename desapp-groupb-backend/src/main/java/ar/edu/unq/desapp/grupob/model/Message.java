@@ -1,5 +1,9 @@
 package ar.edu.unq.desapp.grupob.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,6 +42,8 @@ public abstract class Message {
     }
 
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonBackReference
     public User getReceiver() {
         return receiver;
     }
@@ -46,11 +52,18 @@ public abstract class Message {
         this.receiver = receiver;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonBackReference
     public User getSender() {
         return sender;
     }
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public abstract boolean isPrivate();
+
+    public void setPrivate(boolean isPrivate){
+
     }
 }

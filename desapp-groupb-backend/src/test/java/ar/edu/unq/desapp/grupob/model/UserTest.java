@@ -64,39 +64,24 @@ public class UserTest {
 		verify(anotherRideRequest, never()).reject();
 	}
 
-	@Test
-	public void itShouldGiveAGoodRateToAnotherUser() {
-		User anotherUser = new User();
-		user.giveDriverGoodRate(anotherUser);
-		assertEquals(anotherUser.getDriverGoodRate(), 1);
-	}
-
-	@Test
-	public void itShouldGiveABadRateToAnotherUserAndItsScoreShouldChange() {
-		User anotherUser = new User();
-		user.giveDriverBadRate(anotherUser);
-		assertEquals(anotherUser.getDriverBadRate(), 1);
-	}
-
   @Test
   public void itShouldIncreaseItsPointsWhenReceivingAGoodRate() {
-      user.receiveGoodRate(user.getDriverRole());
+      user.receiveDriverGoodRate();
       assertEquals(user.getPoints(), 500);
   }
 
   @Test
   public void itShouldNotChangeItsPointsWhenReceivingABadRateForTheFirstTime() {
-      user.receiveBadRate(user.getDriverRole());
+      user.receiveDriverBadRate();
       assertEquals(user.getPoints(), 0);
   }
 
   @Test
   public void itShouldDecreaseItsPointsWhenReceivingABadRateForTheSecondTime() {
-      user.receiveBadRate(user.getDriverRole());
-      user.receiveBadRate(user.getDriverRole());
+      user.receiveDriverBadRate();
+      user.receiveDriverBadRate();
       assertEquals(user.getPoints(), -1000);
   }
-
 
   @Test
   public void itShouldExchangePointsForAProduct() {

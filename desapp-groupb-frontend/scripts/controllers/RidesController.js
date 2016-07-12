@@ -8,11 +8,10 @@ angular.module("subiQueTeLlevoApp")
     $scope.baseUrl = "http://localhost:8080/sqtl/";
     $scope.filteredUserRides = [];
     $scope.filteredUserRidesRequest = [];
-    $scope.filteredAllRides = [];
     $scope.currentPageRide = 1;
     $scope.currentPageRideRequest = 1;
-    $scope.currentPageAllRide = 1;
     $scope.itemsPerPage = 10;
+    $scope.isDriver = false;
 
     $scope.getDriverRides = function(){
         $http.get($scope.baseUrl + "rides/" + $rootScope.user.id + "/driverRides")
@@ -48,6 +47,7 @@ angular.module("subiQueTeLlevoApp")
             $scope.userRideRequests = data;
             $scope.totalRideRequestItems = $scope.userRideRequests.length;
             $scope.pageRideRequestChanged();
+            $scope.isDriver = false;
         });
     };
 
@@ -64,12 +64,13 @@ angular.module("subiQueTeLlevoApp")
     $scope.pageRideChanged = function() {
         $scope.pageChanged(function(begin, end){
                                    $scope.filteredUserRides = $scope.userRides.slice(begin, end);}
-                                  ,$scope.currentPageAllRide);
+                                  ,$scope.currentPageRide);
     };
 
-    $scope.pageAllRidesChanged = function(){
-        $scope.pageChanged(function(begin, end){$scope.filteredAllRides = $scope.rides.slice(begin, end);}
-                     ,$scope.currentPageAllRide);
+    $scope.pageRideRequestChanged = function() {
+        $scope.pageChanged(function(begin, end){
+                                   $scope.filteredUserRidesRequest = $scope.userRideRequests.slice(begin, end);}
+                                  ,$scope.currentPageRideRequest);
     };
 
     $scope.pageChanged = function(changeFilter, currentPage) {
@@ -78,9 +79,10 @@ angular.module("subiQueTeLlevoApp")
         changeFilter(begin, end);
     };
 
-    $rootScope.$on('isLogged', function(){
+    if($rootScope.user){
         $scope.getDriverRides();
-    });
+        $scope.getDriverRideRequests();
+    };
 
     function removeUserRideRequest(rideRequest){
       var index = $scope.userRideRequests.indexOf(rideRequest);

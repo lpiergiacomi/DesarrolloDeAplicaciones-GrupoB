@@ -34,6 +34,7 @@
     <script src="scripts/controllers/ProductController.js"></script>
     <script src="scripts/controllers/RidesController.js"></script>
     <script src="scripts/controllers/MapController.js"></script>
+    <script src="scripts/controllers/UserController.js"></script>
 
 </head>
 
@@ -50,19 +51,20 @@
                 <a ng-click="goTo('#rideRequests')">{{'MY_RIDE_REQUESTS' | translate}}</a>
                 <a ng-click="goTo('#myRides')">{{'MY_RIDES' | translate}}</a>
                 <a ng-click="goTo('#products')">{{'PRODUCTS' | translate}}</a>
-                <a ng-click="goTo('#profile')">{{'PROFILE' | translate}}</a>
+                <a ng-click="goTo('#profile/'+user.id+'/')">{{'PROFILE' | translate}}</a>
                 <a ng-click="setLanguage('es')">Español <img class="flag" src="images/argentinaFlag.png"></a>
                 <a ng-click="setLanguage('en')">English <img class="flag" src="images/ukFlag.png"></a>
-                <a ng-if="isLogin" ng-click="logout()">Logout </a>
+                <a ng-click="logout()">Logout </a>
             </li>
         </ul>
     </nav>
 
     <div class="container">
         <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout='3000' close="closeAlert($index)">
+          {{alert.msg}}
         </uib-alert>
     </div>
-    
+
     <span ng-view></span>
 
     <div class="row" ng-if="isLogin && isHomePage" data-ng-controller="MapController">
@@ -80,7 +82,7 @@
             <table class="table table-hover">
                 <thead>
                     <th>{{'DRIVER' | translate}}</th>
-                    <th>{{'FROM' | translate}}</th>
+                    <th>{{'FROM_ROUTE' | translate}}</th>
                     <th>{{'TO' | translate}}</th>
                     <th></th>
                 </thead>

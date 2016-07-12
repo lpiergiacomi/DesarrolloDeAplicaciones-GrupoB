@@ -18,13 +18,19 @@
                                         <th>{{'FROM' | translate}}</th>
                                         <th>{{'TO' | translate}}</th>
                                         <th>{{'STATUS' | translate}}</th>
+                                        <th>{{'DRIVER' | translate}}</th>
                                         <th></th>
                                     </thead>
                                     <tbody data-ng-repeat="rideRequest in filteredUserRidesRequest">
-                                        <td>{{rideRequest.ride.route.longitude}}</td>
-                                        <td>{{rideRequest.ride.route.latitude}}</td>
+                                        <td>{{rideRequest.ride.route.begin.name}}</td>
+                                        <td>{{rideRequest.ride.route.end.name}}</td>
                                         <td>{{rideRequest.status}}</td>
-                                        <td ng-if="rideRequest.status == 'pending'">
+                                        <td>
+                                          <a href="#/profile/{{rideRequest.ride.driver.id}}">
+                                          {{rideRequest.ride.driver.email}}
+                                          </a>
+                                        </td>
+                                        <td ng-if="rideRequest.status == 'pending' && isDriver">
                                           <button class="btn btn-primary" ng-click="acceptRideRequests(rideRequest)">Aceptar solicitud</button>
                                         </td>
                                     </tbody>

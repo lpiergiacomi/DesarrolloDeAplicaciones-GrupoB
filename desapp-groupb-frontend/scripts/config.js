@@ -9,10 +9,6 @@ angular.module("subiQueTeLlevoApp")
     });
 
     $routeProvider
-    .when('/logout',  {
-        templateUrl: 'views/logout.html',
-        controller: 'LogoutCtrl'
-    })
     .when('/login',   {
         templateUrl: 'templates/_home.html',
         controller: 'HomeController'
@@ -32,9 +28,10 @@ angular.module("subiQueTeLlevoApp")
             controller: 'RidesController',
             requiresLogin: true
     })
-    .when('/profile',   {
+    .when('/profile/:id',   {
         templateUrl: 'templates/_profile.html',
-        controller: 'ProfileController',
+        controller: 'UserController',
+//        params: {id: 'id'},
         requiresLogin: true
     })
     .when('/products',   {
