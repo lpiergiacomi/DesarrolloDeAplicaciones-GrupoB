@@ -1,10 +1,12 @@
 package ar.edu.unq.desapp.grupob.repositories;
 
-import ar.edu.unq.desapp.grupob.model.User;
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
+
+import ar.edu.unq.desapp.grupob.model.User;
 
 public class UserRepository extends GenericRepository<User> {
 
@@ -24,4 +26,16 @@ public class UserRepository extends GenericRepository<User> {
             return null;
         }
     }
+//
+//    @Transactional
+//    public List<Message> getPrivateMessages(Integer rootUserId, Integer otherUserId) {
+//
+//      List<Message> messages = this.getHibernateTemplate()
+//                                 .findByCriteria(DetachedCriteria.forClass(Message.class)
+//                                                   .add(Restrictions.eq("isPrivate", true))
+//                                                   .createAlias("sender", "s")
+//                                                   .createAlias("receiver", "r")
+//                                                   .add(Restrictions.or(Restrictions.eq("s.id", otherUserId), Restrictions.eq("r.id", otherUserId))));
+//      return users.get(0);
+//    }
 }

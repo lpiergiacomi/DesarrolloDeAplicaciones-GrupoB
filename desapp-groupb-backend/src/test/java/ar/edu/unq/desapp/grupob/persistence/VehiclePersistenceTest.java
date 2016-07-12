@@ -27,7 +27,7 @@ public class VehiclePersistenceTest
 
     @Before
     public void setUp() {
-        vehicle = new Vehicle(1, 2);
+        vehicle = new Vehicle(1, 2, "Honda Civic");
         vehicleRepository.save(vehicle);
     }
 

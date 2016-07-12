@@ -46,7 +46,7 @@ public class RidePersistenceTest
                 new Coordinate("Bernal", 3.0, 4.3));
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
-        Vehicle vehicle = new Vehicle(1, 2);
+        Vehicle vehicle = new Vehicle(1, 2, "Honda Civic");
         user.setVehicle(vehicle);
 
         vehicleRepository.save(vehicle);

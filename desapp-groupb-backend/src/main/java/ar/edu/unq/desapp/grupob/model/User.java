@@ -24,6 +24,8 @@ import ar.edu.unq.desapp.grupob.model.exceptions.RideRequestException;
 public class User {
 
     private String email;
+    private String name;
+    private String city;
     private String password;
     private Vehicle vehicle;
     private Driver driverRole;
@@ -37,7 +39,7 @@ public class User {
         passengerRole = new Passenger();
         points = 0;
         messages = new ArrayList<>();
-        vehicle = new Vehicle(4, 0); // FIXME
+        vehicle = new Vehicle(4, 0, "Honda Civic"); // FIXME
         email = "example@holis.com";
         password = "123456";
     }
@@ -67,6 +69,7 @@ public class User {
     public void sendPrivateMessageTo(User receiver, String message) {
         PrivateMessage privateMessage = new PrivateMessage(this, receiver,
                 message);
+        this.messages.add(privateMessage);
         receiver.receiveMessage(privateMessage);
     }
 
@@ -116,6 +119,23 @@ public class User {
 
     public void receiveBadRate(Role currentRole) {
         points -= currentRole.receiveBadRate();
+    }
+
+        public void receiveDriverGoodRate() {
+      points += driverRole.receiveGoodRate();
+
+    }
+
+    public void receivePassengerGoodRate() {
+      points += passengerRole.receiveGoodRate();
+    }
+
+    public void receiveDriverBadRate(){
+      points -= driverRole.receiveBadRate();
+    }
+
+    public void receivePassengerBadRate(){
+      points -= passengerRole.receiveBadRate();
     }
 
     public void exchangeProduct(Product product, int quantity) {
@@ -260,4 +280,21 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getCity() {
+      return city;
+    }
+
+    public void setCity(String city) {
+      this.city = city;
+    }
+
 }

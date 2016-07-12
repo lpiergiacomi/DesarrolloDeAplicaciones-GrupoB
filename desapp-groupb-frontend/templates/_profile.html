@@ -1,1 +1,133 @@
-<h1> Under Construction </h1>
+<section id="profile" data-ng-controller="UserController"> <!--class="rides container"-->
+  <div class="row">
+    <div class="col-sm-3">
+    <div class="panel widget light-widget panel-bd-top">
+      <div class="panel-heading no-title"> </div>
+      <div class="panel-body">
+        <div class="text-center vd_info-parent"> <img alt="Profile picture" src="https://lh6.googleusercontent.com/-w8N1cF25Qe8/AAAAAAAAAAI/AAAAAAAAMzk/oeCTIYO_9PM/photo.jpg"> </div>
+        <h2 class="font-semibold mgbt-xs-5">{{user.username}}</h2>
+        <div class="mgtp-20">
+          <span>{{'USER_RATING' | translate}}</span>
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <span>{{'DRIVER' | translate }}</span>
+                </td>
+                <td>
+                  <a class="btn btn-xs"><i class="glyphicon glyphicon-thumbs-up" ng-click="giveDriverGoodRate()"></i></a>{{user.driverRole.goodRate}}
+                  <a class="btn btn-xs"><i class="glyphicon glyphicon-thumbs-down" ng-click="giveDriverBadRate()"></i></a>{{user.driverRole.badRate}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span>{{'PASSENGER' | translate }}</span>
+                </td>
+                <td>
+                  <a class="btn btn-xs"><i class="glyphicon glyphicon-thumbs-up" ng-click="givePassengerGoodRate()"></i></a>{{user.passengerRole.goodRate}}
+                    <a class="btn btn-xs"><i class="glyphicon glyphicon-thumbs-down" ng-click="givePassengerBadRate()"></i></a>{{user.passengerRole.badRate}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="btn btn-primary"  data-toggle="modal" data-target="#privateMessages" ng-click="getPrivateMessages()">
+            {{'SEND_PRIVATE_MESSAGE' | translate }} <i class="glyphicon glyphicon-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-9">
+    <div class="tabs widget">
+      <div class="tab-content">
+        <div id="profile-tab" class="tab-pane active">
+          <div class="pd-20">
+            <h3>{{'PROFILE' | translate}}
+            </h3>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row mgbt-xs-0">
+                  <label class="col-xs-5 control-label">{{'NAME' | translate}}</label>
+                  <div class="col-xs-5 controls">{{user.name}}</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row mgbt-xs-0">
+                  <label class="col-xs-5 control-label">{{'EMAIL' | translate}}</label>
+                  <div class="col-xs-5 controls">{{user.email}}</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row mgbt-xs-0">
+                  <label class="col-xs-5 control-label">{{'CITY' | translate}}</label>
+                  <div class="col-xs-5 controls">{{user.city}}</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row mgbt-xs-0">
+                  <label class="col-xs-5 control-label">{{'VEHICLE' | translate}}</label>
+                  <div class="col-xs-5 controls">{{user.vehicle.model}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-9">
+      <h3>{{'MESSAGES' | translate}}</h3>
+      <textarea class="col-sm-9" rows="2"  ng-model="newPublicMessage" ng-show="!isMyProfile"
+                placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
+      <div style="padding-top: 28px;">
+        <button type="button" ng-show="!isMyProfile" class="btn btn-default" ng-click="sendPublicMessage()">
+          {{ 'SEND' | translate }}
+        </button>
+      </div>
+      <hr class="col-sm-9"/>
+        <div data-ng-repeat="message in currentPublicMessages">
+          <div class="col-sm-9 well">
+            {{message.content}}
+            <br/>
+            <span style="float:right;font-weight:bold;">{{message.sender.name}}</span>
+          </div>
+        </div>
+    </br>
+    <div class="col-sm-9">
+      <uib-pagination total-items="totalItems" ng-model="currentMessagesPage"
+                      ng-change=publicMessagesPageChanged()"
+                      class="pagination-sm" items-per-page="itemsPerPage">
+      </uib-pagination>
+    </div>
+  </div>
+
+  <div class="modal fade" id="privateMessages" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">{{user.name}} {{'AND_YOU' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+          <div data-ng-repeat="message in currentPrivateMessages">
+            <div class="col-sm-9 well">
+              {{message.content}}
+              <br/>
+              <span style="float:right;font-weight:bold;">{{message.sender.name}}</span>
+            </div>
+          </div>
+          <uib-pagination total-items="totalItems" ng-model="currentPrivateMessagesPage"
+                          ng-change="privateMessagesPageChanged()"
+                          class="pagination-sm" items-per-page="itemsPerPage">
+          </uib-pagination>
+          <textarea class="col-sm-9" ng-show="!isMyProfile" rows="2" ng-model="newPrivateMessage" placeholder="{{'LEAVE_YOUR_MESSAGE' | translate}}"></textarea>
+          <div style="padding-top: 28px;">
+            <button type="button" ng-show="!isMyProfile" class="btn btn-default" ng-click="sendPrivateMessage()">Send</button>
+          </div>
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
