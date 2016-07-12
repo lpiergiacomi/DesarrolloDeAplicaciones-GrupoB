@@ -1,22 +1,35 @@
 package ar.edu.unq.desapp.grupob.services.setup;
 
-import ar.edu.unq.desapp.grupob.model.*;
-import ar.edu.unq.desapp.grupob.repositories.*;
 import org.joda.time.DateTimeConstants;
+
+import ar.edu.unq.desapp.grupob.model.Coordinate;
+import ar.edu.unq.desapp.grupob.model.DayOfWeekRideDate;
+import ar.edu.unq.desapp.grupob.model.Product;
+import ar.edu.unq.desapp.grupob.model.Ride;
+import ar.edu.unq.desapp.grupob.model.RideRequest;
+import ar.edu.unq.desapp.grupob.model.Route;
+import ar.edu.unq.desapp.grupob.model.User;
+import ar.edu.unq.desapp.grupob.repositories.CoordinateRepository;
+import ar.edu.unq.desapp.grupob.repositories.MessagesRepository;
+import ar.edu.unq.desapp.grupob.repositories.ProductsRepository;
+import ar.edu.unq.desapp.grupob.repositories.RideDateRepository;
+import ar.edu.unq.desapp.grupob.repositories.RideRepository;
+import ar.edu.unq.desapp.grupob.repositories.RideRequestRepository;
+import ar.edu.unq.desapp.grupob.repositories.RouteRepository;
+import ar.edu.unq.desapp.grupob.repositories.UserRepository;
 
 public class InitializationService {
 
-    ProductsRepository productsRepository;
-    UserRepository userRepository;
-    RideDateRepository rideDateRepository;
-    RouteRepository routeRepository;
-    RideRepository rideRepository;
-    RideRequestRepository rideRequestRepository;
-    CoordinateRepository coordinateRepository;
-    User passenger;
-    User driver;
-    Ride driverRide;
-    MessagesRepository messagesRepository;
+    private ProductsRepository productsRepository;
+    private UserRepository userRepository;
+    private RideDateRepository rideDateRepository;
+    private RouteRepository routeRepository;
+    private RideRepository rideRepository;
+    private RideRequestRepository rideRequestRepository;
+    private CoordinateRepository coordinateRepository;
+    private MessagesRepository messagesRepository;
+    private User passenger;
+    private User driver;
 
     public void setUp() {
         initializeProducts();
@@ -29,8 +42,12 @@ public class InitializationService {
     }
 
     private void initializeCoordinates() {
-        coordinateRepository.save(new Coordinate("Quilmes, Buenos Aires, Argentina", -34.7206336, -58.25460510000005));
-        coordinateRepository.save(new Coordinate("Wilde, Buenos Aires, Argentina", -34.7040787, -58.32059859999998));
+        coordinateRepository
+                .save(new Coordinate("Quilmes, Buenos Aires, Argentina",
+                        -34.7206336, -58.25460510000005));
+        coordinateRepository
+                .save(new Coordinate("Wilde, Buenos Aires, Argentina",
+                        -34.7040787, -58.32059859999998));
     }
 
     private void initializeProducts() {
@@ -82,11 +99,12 @@ public class InitializationService {
     }
 
     public void initializeRoutes() {
-        routeRepository.save(new Route(coordinateRepository.find(1), coordinateRepository.find(2)));
-      }
+        routeRepository.save(new Route(coordinateRepository.find(1),
+                coordinateRepository.find(2)));
+    }
 
     public void initializeRides() {
-        driverRide = new Ride(userRepository.find(driver.getId()),
+        Ride driverRide = new Ride(userRepository.find(driver.getId()),
                 routeRepository.find(1), rideDateRepository.find(1));
         rideRepository.save(driverRide);
     }

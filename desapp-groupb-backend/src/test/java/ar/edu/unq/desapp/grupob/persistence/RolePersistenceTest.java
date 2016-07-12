@@ -16,14 +16,15 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class RolePersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class RolePersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private RoleRepository roleRepository;
 
     private Passenger passenger;
-
 
     @Before
     public void setUp() {
@@ -53,4 +54,3 @@ public class RolePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         assertEquals(roleRepository.getAll().size(), 0);
     }
 }
-

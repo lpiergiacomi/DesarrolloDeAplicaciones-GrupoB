@@ -1,9 +1,5 @@
 package ar.edu.unq.desapp.grupob.persistence;
 
-/**
- * Created by javier on 03/05/16.
- */
-
 import ar.edu.unq.desapp.grupob.model.Product;
 import ar.edu.unq.desapp.grupob.model.Shop;
 import ar.edu.unq.desapp.grupob.model.User;
@@ -23,8 +19,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class ShopPersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private ShopRepository shopRepository;
@@ -61,7 +59,9 @@ public class ShopPersistenceTest extends AbstractTransactionalJUnit4SpringContex
         shop.registerExchange(user, product);
         shopRepository.update(shop);
 
-        assertEquals(shopRepository.find(shop.getId()).getExchangeRegisters().size(), 1);
+        assertEquals(
+                shopRepository.find(shop.getId()).getExchangeRegisters().size(),
+                1);
     }
 
     @Test

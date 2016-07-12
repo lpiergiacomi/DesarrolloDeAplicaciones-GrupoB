@@ -11,30 +11,32 @@ public class Product {
     private int stock;
     private int cost;
 
-    public Product(String name, int stock, int cost)  {
+    public Product(String name, int stock, int cost) {
         this.name = name;
         this.stock = stock;
         this.cost = cost;
     }
 
-    public Product(){}
+    public Product() {
+    }
 
     public void subtractStock(int subtractNumber) {
         stock -= subtractNumber;
     }
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
-      this.id = id;
+        this.id = id;
     }
 
     @Column(nullable = false, unique = true)
     public String getName() {
-          return name;
+        return name;
     }
 
     public void setName(String name) {

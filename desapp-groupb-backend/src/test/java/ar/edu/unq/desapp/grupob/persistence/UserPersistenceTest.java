@@ -17,8 +17,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class UserPersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class UserPersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private UserRepository userRepository;

@@ -18,8 +18,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class MessagePersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private MessagesRepository messagesRepository;
@@ -28,11 +30,10 @@ public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringCon
     private UserRepository userRepository;
 
     private PublicMessage publicMessage;
-    private User sender;
 
     @Before
     public void setUp() {
-        sender = new User();
+        User sender = new User();
         userRepository.save(sender);
         publicMessage = new PublicMessage(sender, sender, "a Message");
         messagesRepository.save(publicMessage);
@@ -52,7 +53,9 @@ public class MessagePersistenceTest extends AbstractTransactionalJUnit4SpringCon
         publicMessage.setContent("Messages");
         messagesRepository.update(publicMessage);
 
-        assertEquals(messagesRepository.find(publicMessage.getId()).getContent(), "Messages");
+        assertEquals(
+                messagesRepository.find(publicMessage.getId()).getContent(),
+                "Messages");
     }
 
     @Test

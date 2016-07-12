@@ -18,8 +18,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class RideDatePersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private RideDateRepository rideDateRepository;
@@ -35,13 +37,16 @@ public class RideDatePersistenceTest extends AbstractTransactionalJUnit4SpringCo
         dayOfWeekRideDate = new DayOfWeekRideDate(tuesday);
         rideDateRepository.save(dayOfWeekRideDate);
 
-        DayOfMonthRideDate dayOfMonthRideDate = new DayOfMonthRideDate(new MonthDay(12, 10));
+        DayOfMonthRideDate dayOfMonthRideDate = new DayOfMonthRideDate(
+                new MonthDay(12, 10));
         rideDateRepository.save(dayOfMonthRideDate);
 
-        RangeWithDayOfMonthRideDate rangeWithDayOfMonthRideDate = new RangeWithDayOfMonthRideDate(from, to, dayOfMonthRideDate);
+        RangeWithDayOfMonthRideDate rangeWithDayOfMonthRideDate = new RangeWithDayOfMonthRideDate(
+                from, to, dayOfMonthRideDate);
         rideDateRepository.save(rangeWithDayOfMonthRideDate);
 
-        RangeWithDayOfWeekRideDate rangeWithDayOfWeekRideDate = new RangeWithDayOfWeekRideDate(from, to, dayOfWeekRideDate);
+        RangeWithDayOfWeekRideDate rangeWithDayOfWeekRideDate = new RangeWithDayOfWeekRideDate(
+                from, to, dayOfWeekRideDate);
         rideDateRepository.save(rangeWithDayOfWeekRideDate);
     }
 

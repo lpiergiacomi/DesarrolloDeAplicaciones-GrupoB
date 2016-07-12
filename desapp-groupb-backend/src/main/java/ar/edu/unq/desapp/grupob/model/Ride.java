@@ -11,13 +11,14 @@ import java.util.List;
 @Table
 public class Ride {
 
-    RideDate date;
-    User driver;
-    Route route;
-    Integer id;
-    List<User> passengers;
+    private RideDate date;
+    private User driver;
+    private Route route;
+    private Integer id;
+    private List<User> passengers;
 
-    public Ride(){}
+    public Ride() {
+    }
 
     public Ride(User driver, Route route, RideDate date) {
         this.driver = driver;
@@ -81,6 +82,6 @@ public class Ride {
 
     @Transient
     public boolean isEfficient() {
-        return (this.passengers.size()  / driver.getCapacityVehicle()) >= 0.5;
+        return (this.passengers.size() / driver.getCapacityVehicle()) >= 0.5;
     }
 }

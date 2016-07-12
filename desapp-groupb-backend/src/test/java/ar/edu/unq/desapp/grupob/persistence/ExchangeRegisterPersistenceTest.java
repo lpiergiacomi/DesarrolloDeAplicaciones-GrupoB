@@ -17,8 +17,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class ExchangeRegisterPersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private ExchangerRegisterRepository exchangerRegisterRepository;
@@ -29,14 +31,12 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
     @Autowired
     private UserRepository userRepository;
 
-
     private ExchangeRegister exchangeRegister;
-    private User user;
     private Product product;
 
     @Before
     public void setUp() {
-        user = new User();
+        User user = new User();
         userRepository.save(user);
         product = new Product("a Product", 1, 2);
         productsRepository.save(product);
@@ -46,7 +46,8 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
 
     @Test
     public void itShouldSaveAExchangeRegister() {
-        List<ExchangeRegister> exchangeRegisters = exchangerRegisterRepository.getAll();
+        List<ExchangeRegister> exchangeRegisters = exchangerRegisterRepository
+                .getAll();
 
         assertEquals(exchangeRegisters.size(), 1);
     }
@@ -59,7 +60,8 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
         exchangeRegister.setProduct(productUpdate);
         exchangerRegisterRepository.update(exchangeRegister);
 
-        assertEquals(exchangerRegisterRepository.find(exchangeRegister.getId()).getProduct(), productUpdate);
+        assertEquals(exchangerRegisterRepository.find(exchangeRegister.getId())
+                .getProduct(), productUpdate);
     }
 
     @Test
@@ -70,4 +72,3 @@ public class ExchangeRegisterPersistenceTest extends AbstractTransactionalJUnit4
     }
 
 }
-

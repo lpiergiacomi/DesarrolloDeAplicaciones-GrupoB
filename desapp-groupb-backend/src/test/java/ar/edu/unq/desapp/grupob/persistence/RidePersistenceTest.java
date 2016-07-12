@@ -16,8 +16,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:test-spring-persistence-context.xml" })
-public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContextTests {
+@ContextConfiguration(locations = {
+        "classpath:test-spring-persistence-context.xml" })
+public class RidePersistenceTest
+        extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private RideRepository rideRepository;
@@ -35,14 +37,13 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
     private VehicleRepository vehicleRepository;
 
     private Ride ride;
-    private User user;
-    private Route route;
     private DayOfWeekRideDate rideDate;
 
     @Before
     public void setUp() {
-        user =  new User();
-        route = new Route(new Coordinate("Quilmes", 2.0, 2.3), new Coordinate("Bernal", 3.0, 4.3));
+        User user = new User();
+        Route route = new Route(new Coordinate("Quilmes", 2.0, 2.3),
+                new Coordinate("Bernal", 3.0, 4.3));
         int tuesday = DateTimeConstants.TUESDAY;
         rideDate = new DayOfWeekRideDate(tuesday);
         Vehicle vehicle = new Vehicle(1, 2, "Honda Civic");
@@ -73,7 +74,8 @@ public class RidePersistenceTest extends AbstractTransactionalJUnit4SpringContex
         ride.setDate(rideDateUpdate);
         rideRepository.update(ride);
 
-        assertEquals(rideRepository.find(ride.getId()).getDate(), rideDateUpdate);
+        assertEquals(rideRepository.find(ride.getId()).getDate(),
+                rideDateUpdate);
     }
 
     @Test

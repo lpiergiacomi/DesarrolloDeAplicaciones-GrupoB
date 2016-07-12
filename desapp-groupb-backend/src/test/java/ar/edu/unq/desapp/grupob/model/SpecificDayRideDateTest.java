@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 public class SpecificDayRideDateTest {
 
-    SpecificDayRideDate rideDate;
-    DateTime aDay = new DateTime(2016, 3, 29, 12, 0);
+    private SpecificDayRideDate rideDate;
+    private DateTime aDay = new DateTime(2016, 3, 29, 12, 0);
 
     @Test
     public void itShouldAssertASpecificDayIsARideDay() {
@@ -25,4 +25,3 @@ public class SpecificDayRideDateTest {
         assertFalse(rideDate.isRideDay(anotherDay));
     }
 }
-

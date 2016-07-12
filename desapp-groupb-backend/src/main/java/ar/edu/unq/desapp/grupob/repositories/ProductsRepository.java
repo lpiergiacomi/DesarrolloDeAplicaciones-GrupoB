@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class ProductsRepository  extends GenericRepository<Product> {
+public class ProductsRepository extends GenericRepository<Product> {
 
     @Override
     protected Class<Product> getDomainClass() {
@@ -15,14 +15,14 @@ public class ProductsRepository  extends GenericRepository<Product> {
     }
 
     @Transactional
-    public Product findByName(String productName){
-      try{
-        List<Product> products = this.getHibernateTemplate()
-          .findByCriteria(DetachedCriteria.forClass(Product.class)
-            .add(Restrictions.eq("name", productName)));
-        return products.get(0);
-      }catch(IndexOutOfBoundsException e){
-        return null;
-      }
+    public Product findByName(String productName) {
+        try {
+            List<Product> products = this.getHibernateTemplate()
+                    .findByCriteria(DetachedCriteria.forClass(Product.class)
+                            .add(Restrictions.eq("name", productName)));
+            return products.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }

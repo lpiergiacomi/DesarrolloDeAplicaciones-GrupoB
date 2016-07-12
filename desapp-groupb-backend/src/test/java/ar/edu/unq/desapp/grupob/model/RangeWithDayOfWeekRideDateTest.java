@@ -6,10 +6,10 @@ import static org.junit.Assert.*;
 
 public class RangeWithDayOfWeekRideDateTest {
 
-    RangeWithDayOfWeekRideDate rideDate;
-    DayOfWeekRideDate dayOfWeekRideDate;
-    DateTime from = new DateTime(2016, 3, 29, 12, 0);
-    DateTime to = new DateTime(2016, 4, 29, 12, 0);
+    private RangeWithDayOfWeekRideDate rideDate;
+    private DayOfWeekRideDate dayOfWeekRideDate;
+    private DateTime from = new DateTime(2016, 3, 29, 12, 0);
+    private DateTime to = new DateTime(2016, 4, 29, 12, 0);
 
     @Before
     public void setUp() {
